@@ -48,38 +48,57 @@ select { background:#1a1a24; border:1px solid #333; color:#fff;
 #statusDot { position:fixed; top:14px; left:50%; transform:translateX(-50%);
              z-index:60; font-size:12px; color:#4caf82; background:rgba(0,0,0,.6);
              padding:3px 12px; border-radius:100px; display:none; }
+#flashEl { position:fixed; inset:0; background:white; z-index:200;
+           opacity:0; pointer-events:none; transition:opacity 0.1s; }
+#photoModal { display:none; position:fixed; inset:0; background:rgba(0,0,0,.92);
+              z-index:300; flex-direction:column; align-items:center; justify-content:center;
+              padding:20px; }
+#photoResult { max-width:90vw; max-height:65vh; border-radius:12px; object-fit:contain; }
+.modal-hint { color:#aaa; font-size:13px; margin-top:14px; text-align:center; }
+.modal-btns { display:flex; gap:12px; margin-top:16px; }
+.modal-btns button { padding:10px 24px; border:none; border-radius:8px;
+                     font-size:14px; cursor:pointer; font-weight:600; }
+.btn-download { background:#e8607a; color:white; }
+.btn-close    { background:#333; color:white; }
 </style>
 </head>
 <body>
+
 <div id="loading">
   <div class="spinner"></div>
   <h2 style="margin-top:20px">⬡ OPSHE Beauty AR</h2>
   <p id="loadTxt">Memuat face detection...</p>
 </div>
+
 <div id="container">
   <video id="video" autoplay muted playsinline></video>
   <canvas id="canvas"></canvas>
 </div>
+
 <div id="infoBar">
   <div class="logo">⬡ OPSHE</div>
   <div id="selInfo">Pilih shade untuk mencoba</div>
 </div>
+
 <div id="statusDot">● Face detected</div>
-<button id="captureBtn" onclick="capturePhoto()" style="
+
+<button onclick="capturePhoto()" style="
   position:fixed; right:16px; top:50%; transform:translateY(-50%);
   z-index:60; width:56px; height:56px; border-radius:50%;
-  background:#e8607a; border:none; cursor:pointer;
-  display:flex; align-items:center; justify-content:center;
-  box-shadow:0 4px 16px rgba(232,96,122,.5); font-size:24px;">
-  📸
-</button>
+  background:#e8607a; border:3px solid rgba(255,255,255,.3); cursor:pointer;
+  font-size:24px; box-shadow:0 4px 16px rgba(232,96,122,.5);">📸</button>
 
-<div id="flashEl" style="
-  position:fixed; inset:0; background:white; z-index:200;
-  opacity:0; pointer-events:none; transition:opacity 0.1s;">
+<div id="flashEl"></div>
+
+<div id="photoModal">
+  <img id="photoResult" src="" alt="Foto">
+  <p class="modal-hint">📥 Tekan lama pada foto → <strong style="color:#fff">Save Image</strong></p>
+  <div class="modal-btns">
+    <button class="btn-download" onclick="downloadPhoto()">💾 Download</button>
+    <button class="btn-close" onclick="closePhoto()">✕ Tutup</button>
+  </div>
 </div>
 
-<a id="downloadLink" style="display:none"></a>
 <div id="ui">
   <div class="brand-scroll" id="brandRow"></div>
   <div class="shade-scroll" id="shadeRow"></div>
@@ -95,13 +114,15 @@ select { background:#1a1a24; border:1px solid #333; color:#fff;
     </select>
   </div>
 </div>
+
 <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@mediapipe/face_mesh/face_mesh.js"></script>
 <script>
-const API = window.location.origin + '/api/v1';
-const UPPER = [61,185,40,39,37,0,267,269,270,409,291,375,321,405,314,17,84,181,91,146,61];
-const LOWER = [78,95,88,178,87,14,317,402,318,324,308,415,310,311,312,13,82,81,80,191,78];
-const INNER = [78,191,80,81,82,13,312,311,310,415,308,324,318,402,317,14,87,178,88,95];
+const API     = window.location.origin + '/api/v1';
+const UPPER   = [61,185,40,39,37,0,267,269,270,409,291,375,321,405,314,17,84,181,91,146,61];
+const LOWER   = [78,95,88,178,87,14,317,402,318,324,308,415,310,311,312,13,82,81,80,191,78];
+const INNER   = [78,191,80,81,82,13,312,311,310,415,308,324,318,402,317,14,87,178,88,95];
+
 const video     = document.getElementById('video');
 const canvas    = document.getElementById('canvas');
 const ctx       = canvas.getContext('2d');
@@ -114,11 +135,13 @@ const opVal     = document.getElementById('opVal');
 const finSel    = document.getElementById('finSel');
 const selInfo   = document.getElementById('selInfo');
 const statusDot = document.getElementById('statusDot');
+
 let shade         = null;
 let opacity       = 0.60;
 let finish        = 'matte';
 let landmarks     = null;
 let prevLandmarks = null;
+let lastPhotoUrl  = null;
 const SMOOTH      = 0.55;
 
 function hexRgb(hex) {
@@ -142,57 +165,54 @@ function drawPath(c, points) {
   c.closePath();
 }
 
+function makeOffscreen() {
+  const off = document.createElement('canvas');
+  off.width  = canvas.width;
+  off.height = canvas.height;
+  return [off, off.getContext('2d')];
+}
+
 function drawLip() {
   if (!shade || !landmarks) return;
-  const rgb   = hexRgb(shade.hex);
-  const upAdj = pts(landmarks, UPPER).map(p => ({x: p.x, y: p.y - 1}));
-  const loAdj = pts(landmarks, LOWER).map(p => ({x: p.x, y: p.y - 1}));
-  const inner = pts(landmarks, INNER);
-  const topY  = landmarks[13].y * canvas.height;
-  const botY  = landmarks[14].y * canvas.height;
-  const mouthH= Math.abs(botY - topY);
 
-  // Offscreen canvas
-  const off    = document.createElement('canvas');
-  off.width    = canvas.width;
-  off.height   = canvas.height;
-  const oc     = off.getContext('2d');
+  const rgb    = hexRgb(shade.hex);
+  const upAdj  = pts(landmarks, UPPER).map(p => ({x:p.x, y:p.y-1}));
+  const loAdj  = pts(landmarks, LOWER).map(p => ({x:p.x, y:p.y-1}));
+  const inner  = pts(landmarks, INNER);
+  const mouthH = Math.abs(landmarks[14].y - landmarks[13].y) * canvas.height;
+
+  const [off, oc] = makeOffscreen();
 
   if (finish === 'gloss') {
-    // Layer 1: base color
+    // Base color
     oc.globalCompositeOperation = 'source-over';
     oc.globalAlpha = opacity * 0.75;
     oc.fillStyle = `rgb(${rgb.r},${rgb.g},${rgb.b})`;
     drawPath(oc, upAdj); oc.fill();
     drawPath(oc, loAdj); oc.fill();
-
-    // Potong gigi DULU sebelum highlight
+    // Potong gigi
     if (mouthH > 8) {
       oc.globalCompositeOperation = 'destination-out';
       oc.globalAlpha = 1;
       drawPath(oc, inner); oc.fill();
     }
-
-    // Layer 2: gloss highlight di offscreen kedua
-    const off2  = document.createElement('canvas');
-    off2.width  = canvas.width;
-    off2.height = canvas.height;
-    const oc2   = off2.getContext('2d');
-    oc2.globalAlpha = 0.28;
+    // Gloss highlight di offscreen terpisah
+    const [off2, oc2] = makeOffscreen();
     const ctr = loAdj.reduce((s,p)=>({x:s.x+p.x,y:s.y+p.y}),{x:0,y:0});
     ctr.x /= loAdj.length; ctr.y /= loAdj.length;
     const g = oc2.createRadialGradient(ctr.x,ctr.y-2,1,ctr.x,ctr.y,22);
     g.addColorStop(0,'rgba(255,255,255,0.9)');
     g.addColorStop(1,'rgba(255,255,255,0)');
+    oc2.globalAlpha = 0.28;
     drawPath(oc2, loAdj);
     oc2.fillStyle = g; oc2.fill();
-    // Potong gigi di highlight juga
+    // Potong gigi di highlight
     if (mouthH > 8) {
       oc2.globalCompositeOperation = 'destination-out';
       oc2.globalAlpha = 1;
       drawPath(oc2, inner); oc2.fill();
     }
-    // Merge highlight ke offscreen utama
+    // Merge highlight
     oc.globalCompositeOperation = 'source-over';
     oc.globalAlpha = 1;
     oc.drawImage(off2, 0, 0);
@@ -206,20 +226,25 @@ function drawLip() {
     oc.fillStyle = 'rgba(255,255,255,0.5)';
     drawPath(oc, upAdj); oc.fill();
     drawPath(oc, loAdj); oc.fill();
+    // Potong gigi
+    if (mouthH > 8) {
+      oc.globalCompositeOperation = 'destination-out';
+      oc.globalAlpha = 1;
+      drawPath(oc, inner); oc.fill();
+    }
 
   } else {
+    // Matte
     oc.globalAlpha = opacity * 0.80;
     oc.fillStyle = `rgb(${rgb.r},${rgb.g},${rgb.b})`;
     drawPath(oc, upAdj); oc.fill();
     drawPath(oc, loAdj); oc.fill();
-  }
-
-  // Potong gigi untuk satin dan matte
-  if (finish !== 'gloss' && mouthH > 8) {
-    oc.globalCompositeOperation = 'destination-out';
-    oc.globalAlpha = 1;
-    drawPath(oc, inner);
-    oc.fill();
+    // Potong gigi
+    if (mouthH > 8) {
+      oc.globalCompositeOperation = 'destination-out';
+      oc.globalAlpha = 1;
+      drawPath(oc, inner); oc.fill();
+    }
   }
 
   // Tempel ke canvas utama
@@ -235,6 +260,65 @@ function resize() {
 }
 window.addEventListener('resize', resize);
 resize();
+
+// ─── Capture Photo ─────────────────────────────────────────────────────────
+
+function capturePhoto() {
+  // Flash
+  const flash = document.getElementById('flashEl');
+  flash.style.opacity = '1';
+  setTimeout(() => flash.style.opacity = '0', 150);
+
+  // Buat canvas output
+  const out    = document.createElement('canvas');
+  out.width    = canvas.width;
+  out.height   = canvas.height;
+  const oc     = out.getContext('2d');
+
+  // Gambar video (flip balik karena video sudah mirror di CSS)
+  oc.save();
+  oc.scale(-1,1);
+  oc.drawImage(video, -out.width, 0, out.width, out.height);
+  oc.restore();
+
+  // Gambar AR overlay
+  oc.save();
+  oc.scale(-1,1);
+  oc.drawImage(canvas, -out.width, 0, out.width, out.height);
+  oc.restore();
+
+  // Watermark
+  oc.fillStyle = 'rgba(0,0,0,0.45)';
+  oc.fillRect(0, out.height-40, 172, 40);
+  oc.fillStyle = '#e8607a';
+  oc.font = 'bold 15px system-ui';
+  oc.fillText('⬡ OPSHE Beauty AR', 12, out.height-14);
+
+  // Tampilkan di modal
+  out.toBlob(blob => {
+    if (lastPhotoUrl) URL.revokeObjectURL(lastPhotoUrl);
+    lastPhotoUrl = URL.createObjectURL(blob);
+    document.getElementById('photoResult').src = lastPhotoUrl;
+    document.getElementById('photoModal').style.display = 'flex';
+  }, 'image/jpeg', 0.92);
+}
+
+function downloadPhoto() {
+  if (!lastPhotoUrl) return;
+  const link = document.createElement('a');
+  link.href  = lastPhotoUrl;
+  const name = shade ? shade.shade_name.replace(/\s+/g,'-') : 'look';
+  link.download = `OPSHE-${name}.jpg`;
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+}
+
+function closePhoto() {
+  document.getElementById('photoModal').style.display = 'none';
+}
+
+// ─── Brand & Shade ──────────────────────────────────────────────────────────
 
 async function loadBrands() {
   loadTxt.textContent = 'Memuat data brand...';
@@ -291,9 +375,9 @@ opSlider.addEventListener('input', e => {
   opVal.textContent = e.target.value + '%';
 });
 
-finSel.addEventListener('change', e => {
-  finish = e.target.value;
-});
+finSel.addEventListener('change', e => { finish = e.target.value; });
+
+// ─── Face Mesh ──────────────────────────────────────────────────────────────
 
 async function initFaceMesh() {
   loadTxt.textContent = 'Memuat AI face detection...';
@@ -301,10 +385,8 @@ async function initFaceMesh() {
     locateFile: f => `https://cdn.jsdelivr.net/npm/@mediapipe/face_mesh/${f}`
   });
   faceMesh.setOptions({
-    maxNumFaces: 1,
-    refineLandmarks: true,
-    minDetectionConfidence: 0.5,
-    minTrackingConfidence: 0.5
+    maxNumFaces: 1, refineLandmarks: true,
+    minDetectionConfidence: 0.5, minTrackingConfidence: 0.5
   });
   faceMesh.onResults(res => {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -338,57 +420,6 @@ async function initFaceMesh() {
     loadEl.style.opacity = '0';
     setTimeout(() => loadEl.style.display = 'none', 500);
   }, 600);
-}
-
-function capturePhoto() {
-  const flash = document.getElementById('flashEl');
-  flash.style.opacity = '1';
-  setTimeout(() => flash.style.opacity = '0', 150);
-
-  const out    = document.createElement('canvas');
-  out.width    = canvas.width;
-  out.height   = canvas.height;
-  const outCtx = out.getContext('2d');
-
-  outCtx.save();
-  outCtx.scale(-1, 1);
-  outCtx.drawImage(video, -out.width, 0, out.width, out.height);
-  outCtx.restore();
-
-  outCtx.save();
-  outCtx.scale(-1, 1);
-  outCtx.drawImage(canvas, -out.width, 0, out.width, out.height);
-  outCtx.restore();
-
-  outCtx.fillStyle = 'rgba(0,0,0,0.4)';
-  outCtx.fillRect(0, out.height - 40, 160, 40);
-  outCtx.fillStyle = '#e8607a';
-  outCtx.font = 'bold 16px system-ui';
-  outCtx.fillText('⬡ OPSHE Beauty AR', 12, out.height - 14);
-
-  out.toBlob(blob => {
-    const url  = URL.createObjectURL(blob);
-    const link = document.createElement('a');
-    link.href  = url;
-    const shadeName = shade ? shade.shade_name.replace(/\s+/g,'-') : 'look';
-    link.download = `OPSHE-${shadeName}.jpg`;
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-    setTimeout(() => URL.revokeObjectURL(url), 1000);
-
-    if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
-      const w = window.open('');
-      w.document.write(`
-        <html><body style="margin:0;background:#000;text-align:center">
-        <img src="${url}" style="width:100%;max-width:100vw">
-        <p style="color:white;font-family:system-ui;padding:16px;font-size:14px">
-          📥 Tekan lama pada gambar → Save Image / Simpan Foto
-        </p>
-        </body></html>
-      `);
-    }
-  }, 'image/jpeg', 0.92);
 }
 
 async function init() {
