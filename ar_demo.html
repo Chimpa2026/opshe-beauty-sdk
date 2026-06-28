@@ -13,7 +13,6 @@ body { background:#000; overflow:hidden; height:100vh; font-family:system-ui,san
 #loading { position:fixed; inset:0; background:#0f0f14; display:flex; flex-direction:column;
            align-items:center; justify-content:center; z-index:100; }
 #loading h2 { font-size:22px; margin-bottom:12px; color:#e8607a; }
-#loading p  { color:#7878a0; font-size:14px; margin-bottom:24px; }
 .spinner { width:48px; height:48px; border:3px solid #2e2e42;
            border-top-color:#e8607a; border-radius:50%;
            animation:spin 0.8s linear infinite; }
@@ -52,25 +51,20 @@ select { background:#1a1a24; border:1px solid #333; color:#fff;
 </style>
 </head>
 <body>
-
 <div id="loading">
   <div class="spinner"></div>
   <h2 style="margin-top:20px">⬡ OPSHE Beauty AR</h2>
   <p id="loadTxt">Memuat face detection...</p>
 </div>
-
 <div id="container">
   <video id="video" autoplay muted playsinline></video>
   <canvas id="canvas"></canvas>
 </div>
-
 <div id="infoBar">
   <div class="logo">⬡ OPSHE</div>
   <div id="selInfo">Pilih shade untuk mencoba</div>
 </div>
-
 <div id="statusDot">● Face detected</div>
-
 <div id="ui">
   <div class="brand-scroll" id="brandRow"></div>
   <div class="shade-scroll" id="shadeRow"></div>
@@ -86,16 +80,13 @@ select { background:#1a1a24; border:1px solid #333; color:#fff;
     </select>
   </div>
 </div>
-
 <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@mediapipe/face_mesh/face_mesh.js"></script>
 <script>
 const API = window.location.origin + '/api/v1';
-
 const UPPER = [61,185,40,39,37,0,267,269,270,409,291,375,321,405,314,17,84,181,91,146,61];
 const LOWER = [78,95,88,178,87,14,317,402,318,324,308,415,310,311,312,13,82,81,80,191,78];
 const INNER = [78,191,80,81,82,13,312,311,310,415,308,324,318,402,317,14,87,178,88,95];
-
 const video     = document.getElementById('video');
 const canvas    = document.getElementById('canvas');
 const ctx       = canvas.getContext('2d');
@@ -108,7 +99,6 @@ const opVal     = document.getElementById('opVal');
 const finSel    = document.getElementById('finSel');
 const selInfo   = document.getElementById('selInfo');
 const statusDot = document.getElementById('statusDot');
-
 let shade         = null;
 let opacity       = 0.60;
 let finish        = 'matte';
@@ -125,77 +115,77 @@ function pts(lm, idx) {
   return idx.map(i => ({ x: lm[i].x * canvas.width, y: lm[i].y * canvas.height }));
 }
 
-function path(points) {
-  ctx.beginPath();
-  ctx.moveTo(points[0].x, points[0].y);
+function drawPath(c, points) {
+  c.beginPath();
+  c.moveTo(points[0].x, points[0].y);
   for (let i=1; i<points.length-1; i++) {
     const xc = (points[i].x + points[i+1].x) / 2;
     const yc = (points[i].y + points[i+1].y) / 2;
-    ctx.quadraticCurveTo(points[i].x, points[i].y, xc, yc);
+    c.quadraticCurveTo(points[i].x, points[i].y, xc, yc);
   }
-  ctx.lineTo(points[0].x, points[0].y);
-  ctx.closePath();
+  c.lineTo(points[0].x, points[0].y);
+  c.closePath();
 }
 
 function drawLip() {
   if (!shade || !landmarks) return;
-
-  const rgb  = hexRgb(shade.hex);
+  const rgb   = hexRgb(shade.hex);
   const upAdj = pts(landmarks, UPPER).map(p => ({x: p.x, y: p.y - 1}));
   const loAdj = pts(landmarks, LOWER).map(p => ({x: p.x, y: p.y - 1}));
+  const inner = pts(landmarks, INNER);
+  const topY  = landmarks[13].y * canvas.height;
+  const botY  = landmarks[14].y * canvas.height;
+  const mouthH= Math.abs(botY - topY);
 
-  ctx.save();
+  // Offscreen canvas
+  const off    = document.createElement('canvas');
+  off.width    = canvas.width;
+  off.height   = canvas.height;
+  const oc     = off.getContext('2d');
 
   if (finish === 'gloss') {
-    ctx.globalCompositeOperation = 'multiply';
-    ctx.globalAlpha = opacity * 0.75;
-    ctx.fillStyle = `rgb(${rgb.r},${rgb.g},${rgb.b})`;
-    path(upAdj); ctx.fill();
-    path(loAdj); ctx.fill();
-    // Gloss highlight
-    ctx.globalCompositeOperation = 'screen';
-    ctx.globalAlpha = 0.28;
+    oc.globalAlpha = opacity * 0.75;
+    oc.fillStyle = `rgb(${rgb.r},${rgb.g},${rgb.b})`;
+    drawPath(oc, upAdj); oc.fill();
+    drawPath(oc, loAdj); oc.fill();
+    oc.globalAlpha = 0.28;
     const ctr = loAdj.reduce((s,p)=>({x:s.x+p.x,y:s.y+p.y}),{x:0,y:0});
     ctr.x /= loAdj.length; ctr.y /= loAdj.length;
-    const g = ctx.createRadialGradient(ctr.x, ctr.y-2, 1, ctr.x, ctr.y, 22);
-    g.addColorStop(0, 'rgba(255,255,255,0.9)');
-    g.addColorStop(1, 'rgba(255,255,255,0)');
-    path(loAdj);
-    ctx.fillStyle = g;
-    ctx.fill();
+    const g = oc.createRadialGradient(ctr.x,ctr.y-2,1,ctr.x,ctr.y,22);
+    g.addColorStop(0,'rgba(255,255,255,0.9)');
+    g.addColorStop(1,'rgba(255,255,255,0)');
+    drawPath(oc, loAdj);
+    oc.fillStyle = g; oc.fill();
 
   } else if (finish === 'satin') {
-    ctx.globalCompositeOperation = 'multiply';
-    ctx.globalAlpha = opacity * 0.72;
-    ctx.fillStyle = `rgb(${rgb.r},${rgb.g},${rgb.b})`;
-    path(upAdj); ctx.fill();
-    path(loAdj); ctx.fill();
-    ctx.globalCompositeOperation = 'screen';
-    ctx.globalAlpha = 0.08;
-    ctx.fillStyle = 'rgba(255,255,255,0.5)';
-    path(upAdj); ctx.fill();
-    path(loAdj); ctx.fill();
+    oc.globalAlpha = opacity * 0.72;
+    oc.fillStyle = `rgb(${rgb.r},${rgb.g},${rgb.b})`;
+    drawPath(oc, upAdj); oc.fill();
+    drawPath(oc, loAdj); oc.fill();
+    oc.globalAlpha = 0.08;
+    oc.fillStyle = 'rgba(255,255,255,0.5)';
+    drawPath(oc, upAdj); oc.fill();
+    drawPath(oc, loAdj); oc.fill();
 
   } else {
-    // Matte
-    ctx.globalCompositeOperation = 'multiply';
-    ctx.globalAlpha = opacity * 0.80;
-    ctx.fillStyle = `rgb(${rgb.r},${rgb.g},${rgb.b})`;
-    path(upAdj); ctx.fill();
-    path(loAdj); ctx.fill();
+    oc.globalAlpha = opacity * 0.80;
+    oc.fillStyle = `rgb(${rgb.r},${rgb.g},${rgb.b})`;
+    drawPath(oc, upAdj); oc.fill();
+    drawPath(oc, loAdj); oc.fill();
   }
 
-  // Masking gigi — hanya sekali
-  const topY   = landmarks[13].y * canvas.height;
-  const botY   = landmarks[14].y * canvas.height;
-  const mouthH = Math.abs(botY - topY);
+  // Potong gigi di offscreen
   if (mouthH > 8) {
-    ctx.globalCompositeOperation = 'destination-out';
-    ctx.globalAlpha = 1;
-    path(pts(landmarks, INNER));
-    ctx.fill();
+    oc.globalCompositeOperation = 'destination-out';
+    oc.globalAlpha = 1;
+    drawPath(oc, inner);
+    oc.fill();
   }
 
+  // Tempel ke canvas utama
+  ctx.save();
+  ctx.globalCompositeOperation = 'multiply';
+  ctx.drawImage(off, 0, 0);
   ctx.restore();
 }
 
@@ -276,16 +266,14 @@ async function initFaceMesh() {
     minDetectionConfidence: 0.5,
     minTrackingConfidence: 0.5
   });
-
   faceMesh.onResults(res => {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     if (res.multiFaceLandmarks && res.multiFaceLandmarks.length > 0) {
       const raw = res.multiFaceLandmarks[0];
-      // Smooth landmarks
       landmarks = prevLandmarks
-        ? raw.map((lm, i) => ({
-            x: lm.x * (1-SMOOTH) + prevLandmarks[i].x * SMOOTH,
-            y: lm.y * (1-SMOOTH) + prevLandmarks[i].y * SMOOTH,
+        ? raw.map((lm,i) => ({
+            x: lm.x*(1-SMOOTH) + prevLandmarks[i].x*SMOOTH,
+            y: lm.y*(1-SMOOTH) + prevLandmarks[i].y*SMOOTH,
             z: lm.z
           }))
         : raw;
@@ -293,19 +281,17 @@ async function initFaceMesh() {
       statusDot.style.display = 'block';
       drawLip();
     } else {
-      landmarks     = null;
+      landmarks = null;
       prevLandmarks = null;
       statusDot.style.display = 'none';
     }
   });
-
   loadTxt.textContent = 'Mengaktifkan kamera...';
   const cam = new Camera(video, {
     onFrame: async () => { await faceMesh.send({image: video}); },
     width: 1280, height: 720
   });
   await cam.start();
-
   loadTxt.textContent = 'Siap!';
   setTimeout(() => {
     loadEl.style.transition = 'opacity 0.5s';
