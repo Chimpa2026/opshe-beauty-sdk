@@ -1,11 +1,15 @@
 """
 OPSHE SDK — Database Layer
+Path otomatis — works di Windows maupun Railway
 """
 
 import sqlite3
+import os
 from pathlib import Path
 
-DB_PATH = Path("C:/opshe/opshe_db/opshe_test.db")
+# Path dinamis — sama folder dengan file ini
+BASE_DIR = Path(os.path.dirname(os.path.abspath(__file__))).parent
+DB_PATH  = BASE_DIR / "opshe.db"
 
 def get_conn():
     conn = sqlite3.connect(DB_PATH)

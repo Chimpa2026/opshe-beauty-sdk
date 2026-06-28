@@ -4,7 +4,9 @@ OPSHE SDK — Make Over Brand Injector (Brand ke-5)
 import sqlite3
 from pathlib import Path
 
-DB_PATH = Path("C:/opshe/opshe_db/opshe_test.db")
+import os
+BASE_DIR = Path(os.path.dirname(os.path.abspath(__file__))).parent
+DB_PATH  = BASE_DIR / "opshe.db"
 
 def rgb_to_lab(rgb):
     r,g,b = [x/255.0 for x in rgb]
