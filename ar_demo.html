@@ -123,10 +123,12 @@ const finSel   = document.getElementById('finSel');
 const selInfo  = document.getElementById('selInfo');
 const statusDot= document.getElementById('statusDot');
 
-let shade    = null;
-let opacity  = 0.60;
-let finish   = 'matte';
-let landmarks= null;
+let shade       = null;
+let opacity     = 0.60;
+let finish      = 'matte';
+let landmarks   = null;
+let prevLandmarks = null;
+const SMOOTH    = 0.65; // 0 = no smooth, 1 = full smooth
 
 function hexRgb(hex) {
   const h = hex.replace('#','');
@@ -158,6 +160,17 @@ function center(points) {
 
 function drawLip() {
   if (!shade || !landmarks) return;
+
+  // Smoothing — blend posisi sekarang dengan sebelumnya
+  if (prevLandmarks) {
+    landmarks = landmarks.map((lm, i) => ({
+      x: lm.x * (1 - SMOOTH) + prevLandmarks[i].x * SMOOTH,
+      y: lm.y * (1 - SMOOTH) + prevLandmarks[i].y * SMOOTH,
+      z: lm.z
+    }));
+  }
+  prevLandmarks = landmarks;
+
   const rgb = hexRgb(shade.hex);
   // Gunakan landmark bibir yang lebih presisi
   const up  = pts(landmarks, UPPER);
@@ -321,7 +334,18 @@ async function initFaceMesh() {
   faceMesh.onResults(res => {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     if (res.multiFaceLandmarks && res.multiFaceLandmarks.length > 0) {
-      landmarks = res.multiFaceLandmarks[0];
+      const raw = res.multiFaceLandmarks[0];
+      // Smooth landmarks
+      if (prevLandmarks) {
+        landmarks = raw.map((lm, i) => ({
+          x: lm.x * (1 - SMOOTH) + prevLandmarks[i].x * SMOOTH,
+          y: lm.y * (1 - SMOOTH) + prevLandmarks[i].y * SMOOTH,
+          z: lm.z
+        }));
+      } else {
+        landmarks = raw;
+      }
+      prevLandmarks = landmarks;
       statusDot.style.display = 'block';
       drawLip();
     } else {
