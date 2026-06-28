@@ -28,6 +28,9 @@ def root():
 
 @app.route("/ar")
 def ar_demo():
+@app.route("/logo")
+def serve_logo():
+    return send_from_directory(os.path.dirname(__file__), "logoopshe.png")
     return send_from_directory(os.path.dirname(__file__), "ar_demo.html")
 
 @app.route("/health")

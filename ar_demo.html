@@ -3,163 +3,198 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-<title>OPSHE Beauty AR</title>
+<title>Opshe Beauty AR</title>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap');
 * { margin:0; padding:0; box-sizing:border-box; }
 body { background:#000; overflow:hidden; height:100vh; font-family:'Nunito',system-ui,sans-serif; color:#fff; }
+
+/* Warna tema dari logo OPSHE */
+:root {
+  --pink:    #FF3D8F;
+  --pink2:   #FF6BB3;
+  --teal:    #1ECFC0;
+  --purple:  #B88FE0;
+  --dark:    #12050F;
+  --dark2:   #1A0818;
+  --surface: rgba(255,255,255,.07);
+}
+
 #container { position:relative; width:100vw; height:100vh; }
 #video  { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; transform:scaleX(-1); }
 #canvas { position:absolute; inset:0; width:100%; height:100%; transform:scaleX(-1); }
 
 /* ── Loading ── */
-#loading { position:fixed; inset:0; background:linear-gradient(135deg,#1a0a14,#0f0f1a);
-           display:flex; flex-direction:column; align-items:center; justify-content:center; z-index:100; }
-#loading h2 { font-size:24px; font-weight:800; margin-top:20px;
-              background:linear-gradient(135deg,#ff6b9d,#e8607a,#ff9a9e);
-              -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
-#loading p  { color:#9878a0; font-size:14px; margin-top:8px; }
-.spinner { width:52px; height:52px; border:3px solid rgba(232,96,122,.2);
-           border-top-color:#e8607a; border-radius:50%;
-           animation:spin 0.8s linear infinite; }
+#loading { position:fixed; inset:0;
+           background:linear-gradient(135deg, var(--dark), #0a0a18);
+           display:flex; flex-direction:column;
+           align-items:center; justify-content:center; z-index:100; }
+#loading img.logo-load { width:110px; height:110px; border-radius:50%;
+                          object-fit:cover; margin-bottom:16px;
+                          box-shadow:0 0 32px rgba(255,61,143,.4); }
+#loading h2 { font-size:22px; font-weight:900; color:#FF3D8F; letter-spacing:-.3px; }
+#loading p  { color:#9878a0; font-size:13px; margin-top:6px; font-weight:600; }
+.spinner { position:absolute; width:130px; height:130px;
+           border:3px solid rgba(255,61,143,.15);
+           border-top-color:#FF3D8F; border-right-color:#1ECFC0;
+           border-radius:50%; animation:spin .9s linear infinite; }
+.logo-wrap { position:relative; display:flex; align-items:center; justify-content:center;
+             width:130px; height:130px; margin-bottom:16px; }
 @keyframes spin { to { transform:rotate(360deg); } }
+
+/* ── Info Bar ── */
+#infoBar { position:fixed; top:0; left:0; right:0; z-index:50; padding:10px 14px;
+           background:linear-gradient(rgba(18,5,15,.75),transparent);
+           display:flex; justify-content:space-between; align-items:center; }
+.logo-bar { display:flex; align-items:center; gap:8px; }
+.logo-bar img { width:34px; height:34px; border-radius:50%; object-fit:cover;
+                box-shadow:0 2px 10px rgba(255,61,143,.4); }
+.logo-bar span { font-size:16px; font-weight:900; color:#FF3D8F; letter-spacing:-.3px; }
+#selInfo { font-size:10px; color:#ccc; text-align:right; line-height:1.6; font-weight:700; }
+#selInfo b { color:#FF3D8F; }
+
+/* ── Status ── */
+#statusDot { position:fixed; top:14px; left:50%; transform:translateX(-50%);
+             z-index:60; font-size:11px; color:#1ECFC0;
+             background:rgba(12,5,10,.7); padding:4px 14px;
+             border-radius:100px; display:none; font-weight:800;
+             border:1px solid rgba(30,207,192,.25); letter-spacing:.3px; }
+
+/* ── Capture Button ── */
+#captureBtn { position:fixed; right:16px; top:50%; transform:translateY(-50%);
+              z-index:60; width:62px; height:62px; border-radius:50%;
+              background:linear-gradient(135deg, #FF3D8F, #FF6BB3);
+              border:3px solid rgba(255,255,255,.25); cursor:pointer;
+              font-size:26px; display:flex; align-items:center; justify-content:center;
+              box-shadow:0 4px 20px rgba(255,61,143,.55);
+              animation:pulse 2.2s ease-in-out infinite; transition:transform .15s; }
+#captureBtn:active { transform:translateY(-50%) scale(.88); }
+@keyframes pulse {
+  0%,100% { box-shadow:0 4px 20px rgba(255,61,143,.55),0 0 0 0 rgba(255,61,143,.25); }
+  50%      { box-shadow:0 4px 24px rgba(255,61,143,.7),0 0 0 12px rgba(255,61,143,.0); }
+}
 
 /* ── UI Panel ── */
 #ui { position:fixed; bottom:0; left:0; right:0; z-index:50;
-      background:linear-gradient(transparent, rgba(10,5,12,.95));
-      padding:14px 14px 24px; }
+      background:linear-gradient(transparent, rgba(12,4,10,.95) 40%);
+      padding:14px 14px 26px; }
 .brand-scroll { display:flex; gap:8px; overflow-x:auto; padding-bottom:8px;
                 margin-bottom:10px; scrollbar-width:none; }
 .brand-scroll::-webkit-scrollbar { display:none; }
 .brand-btn { flex-shrink:0; padding:5px 16px; border-radius:100px;
              border:1.5px solid rgba(255,255,255,.1);
-             background:rgba(255,255,255,.06);
-             color:#888; font-size:12px; font-weight:700;
-             cursor:pointer; transition:all .25s; letter-spacing:.3px; }
-.brand-btn.active { border-color:#ff6b9d; color:#ff6b9d;
-                    background:rgba(255,107,157,.12);
-                    box-shadow:0 0 12px rgba(255,107,157,.2); }
-.shade-scroll { display:flex; gap:10px; overflow-x:auto; padding-bottom:8px; scrollbar-width:none; }
+             background:rgba(255,255,255,.05);
+             color:#888; font-size:12px; font-weight:800;
+             cursor:pointer; transition:all .22s; letter-spacing:.3px; }
+.brand-btn.active { border-color:#FF3D8F; color:#FF3D8F;
+                    background:rgba(255,61,143,.12);
+                    box-shadow:0 0 14px rgba(255,61,143,.2); }
+.shade-scroll { display:flex; gap:10px; overflow-x:auto;
+                padding-bottom:8px; scrollbar-width:none; }
 .shade-scroll::-webkit-scrollbar { display:none; }
-.shade-item { flex-shrink:0; display:flex; flex-direction:column; align-items:center; gap:5px; cursor:pointer; }
+.shade-item { flex-shrink:0; display:flex; flex-direction:column;
+              align-items:center; gap:5px; cursor:pointer; }
 .shade-circle { width:40px; height:40px; border-radius:50%;
-                border:2.5px solid transparent; transition:all .25s;
-                box-shadow:0 2px 8px rgba(0,0,0,.4); }
+                border:2.5px solid transparent; transition:all .22s;
+                box-shadow:0 2px 8px rgba(0,0,0,.45); }
 .shade-circle.active { border-color:#fff; transform:scale(1.22);
-                       box-shadow:0 0 16px rgba(255,255,255,.35); }
-.shade-label { font-size:9px; color:#777; text-align:center; max-width:46px;
-               line-height:1.2; font-weight:600; }
+                       box-shadow:0 0 16px rgba(255,255,255,.3); }
+.shade-label { font-size:9px; color:#777; text-align:center;
+               max-width:46px; line-height:1.2; font-weight:700; }
 .controls { display:flex; align-items:center; gap:10px; margin-top:10px; flex-wrap:wrap; }
-.controls label { font-size:11px; color:#888; white-space:nowrap; font-weight:700;
-                  text-transform:uppercase; letter-spacing:.5px; }
-input[type=range] { flex:1; accent-color:#ff6b9d; min-width:80px; }
-.oval { font-size:12px; color:#ff6b9d; width:32px; font-weight:700; }
-select { background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.12);
+.controls label { font-size:10px; color:#888; white-space:nowrap;
+                  font-weight:800; text-transform:uppercase; letter-spacing:.6px; }
+input[type=range] { flex:1; accent-color:#FF3D8F; min-width:80px; }
+.oval { font-size:12px; color:#FF3D8F; width:32px; font-weight:800; }
+select { background:rgba(255,255,255,.07); border:1px solid rgba(255,255,255,.1);
          color:#fff; border-radius:20px; padding:4px 10px;
-         font-size:12px; font-weight:700; font-family:'Nunito',sans-serif; }
-
-/* ── Info Bar ── */
-#infoBar { position:fixed; top:0; left:0; right:0; z-index:50; padding:12px 16px;
-           background:linear-gradient(rgba(0,0,0,.6),transparent);
-           display:flex; justify-content:space-between; align-items:center; }
-.logo { font-weight:800; font-size:17px;
-        background:linear-gradient(135deg,#ff6b9d,#ffb3c8);
-        -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
-#selInfo { font-size:11px; color:#ddd; text-align:right; line-height:1.6; font-weight:600; }
-#selInfo b { color:#ff6b9d; }
-
-/* ── Status Dot ── */
-#statusDot { position:fixed; top:14px; left:50%; transform:translateX(-50%);
-             z-index:60; font-size:11px; color:#4cef9a;
-             background:rgba(0,0,0,.55); padding:4px 14px;
-             border-radius:100px; display:none; font-weight:700;
-             border:1px solid rgba(76,239,154,.2); }
-
-/* ── Capture Button ── */
-#captureBtn { position:fixed; right:18px; top:50%; transform:translateY(-50%);
-              z-index:60; width:60px; height:60px; border-radius:50%;
-              background:linear-gradient(135deg,#ff6b9d,#e8607a);
-              border:3px solid rgba(255,255,255,.3); cursor:pointer;
-              font-size:26px; display:flex; align-items:center; justify-content:center;
-              box-shadow:0 4px 20px rgba(255,107,157,.5),0 0 0 0 rgba(255,107,157,.3);
-              animation:pulse 2s ease-in-out infinite; transition:transform .15s; }
-#captureBtn:active { transform:translateY(-50%) scale(.9); }
-@keyframes pulse {
-  0%,100% { box-shadow:0 4px 20px rgba(255,107,157,.5),0 0 0 0 rgba(255,107,157,.3); }
-  50%      { box-shadow:0 4px 20px rgba(255,107,157,.6),0 0 0 10px rgba(255,107,157,.0); }
-}
+         font-size:12px; font-weight:800; font-family:'Nunito',sans-serif; }
 
 /* ── Flash ── */
 #flashEl { position:fixed; inset:0; background:white; z-index:200;
-           opacity:0; pointer-events:none; transition:opacity 0.12s; }
+           opacity:0; pointer-events:none; transition:opacity .1s; }
 
 /* ── Photo Modal ── */
 #photoModal { display:none; position:fixed; inset:0; z-index:300;
               flex-direction:column; align-items:center; justify-content:center;
               padding:20px; }
 #modalBg { position:absolute; inset:0;
-           background:linear-gradient(135deg,rgba(20,5,18,.97),rgba(10,5,20,.97));
-           backdrop-filter:blur(12px); }
+           background:linear-gradient(160deg,rgba(18,5,15,.97),rgba(8,4,18,.97));
+           backdrop-filter:blur(16px); }
 .modal-inner { position:relative; z-index:1; display:flex; flex-direction:column;
-               align-items:center; width:100%; max-width:420px; }
+               align-items:center; width:100%; max-width:400px; }
 
-/* Header modal */
-.modal-header { display:flex; align-items:center; gap:8px; margin-bottom:16px; }
-.modal-header span { font-size:20px; }
-.modal-header h3 { font-size:18px; font-weight:800;
-                   background:linear-gradient(135deg,#ff6b9d,#ffb3c8);
-                   -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+/* Modal header dengan logo */
+.modal-header { display:flex; align-items:center; gap:10px; margin-bottom:14px; width:100%; }
+.modal-header img { width:40px; height:40px; border-radius:50%;
+                    box-shadow:0 0 16px rgba(255,61,143,.4); }
+.modal-header-text { flex:1; }
+.modal-header-text h3 { font-size:17px; font-weight:900; color:#FF3D8F;
+                         letter-spacing:-.2px; line-height:1; }
+.modal-header-text p  { font-size:11px; color:#888; font-weight:600; margin-top:2px; }
+.modal-close-x { width:32px; height:32px; border-radius:50%;
+                 background:rgba(255,255,255,.08); border:none;
+                 color:#aaa; font-size:16px; cursor:pointer;
+                 display:flex; align-items:center; justify-content:center; }
 
-/* Foto frame */
-.photo-frame { position:relative; border-radius:20px; overflow:hidden;
-               box-shadow:0 8px 40px rgba(255,107,157,.3),
-                          0 0 0 1px rgba(255,255,255,.1); }
-#photoResult { width:100%; max-width:360px; max-height:55vh;
-               display:block; object-fit:cover; }
+/* Foto */
+.photo-frame { position:relative; border-radius:18px; overflow:hidden;
+               width:100%;
+               box-shadow:0 0 0 1px rgba(255,61,143,.25),
+                          0 8px 40px rgba(255,61,143,.2),
+                          0 0 60px rgba(184,143,224,.1); }
+#photoResult { width:100%; max-height:56vh; display:block; object-fit:cover; }
 
-/* Sticker watermark di atas foto */
-.photo-sticker { position:absolute; bottom:12px; left:12px;
-                 background:linear-gradient(135deg,rgba(255,107,157,.85),rgba(232,96,122,.85));
-                 backdrop-filter:blur(8px);
-                 padding:5px 12px; border-radius:100px;
-                 font-size:11px; font-weight:800; color:white;
-                 letter-spacing:.3px; }
+/* Corner stickers di foto */
+.corner-tl { position:absolute; top:10px; left:10px;
+             background:rgba(18,5,15,.65); backdrop-filter:blur(6px);
+             border-radius:100px; padding:4px 10px;
+             display:flex; align-items:center; gap:6px; }
+.corner-tl img { width:18px; height:18px; border-radius:50%; }
+.corner-tl span { font-size:10px; font-weight:800; color:#FF3D8F; }
 
-/* Shade info pill */
-.shade-pill { margin-top:12px; padding:6px 16px; border-radius:100px;
-              background:rgba(255,255,255,.07); border:1px solid rgba(255,255,255,.1);
-              font-size:12px; font-weight:700; color:#ddd;
-              display:flex; align-items:center; gap:8px; }
-.shade-dot  { width:14px; height:14px; border-radius:50%;
-              border:2px solid rgba(255,255,255,.3); flex-shrink:0; }
+/* Shade pill */
+.shade-pill { margin-top:12px; padding:7px 16px; border-radius:100px;
+              background:rgba(255,255,255,.06);
+              border:1px solid rgba(255,61,143,.2);
+              display:flex; align-items:center; gap:8px; width:100%; }
+.shade-dot   { width:16px; height:16px; border-radius:50%; flex-shrink:0;
+               border:2px solid rgba(255,255,255,.25); }
+.shade-pill-text { flex:1; font-size:12px; font-weight:700; color:#ddd; }
+.shade-pill-brand { font-size:10px; color:#888; font-weight:700; }
 
 /* Hint */
-.modal-hint { margin-top:10px; font-size:11px; color:#777; font-weight:600;
-              text-align:center; }
-.modal-hint strong { color:#ff6b9d; }
+.modal-hint { font-size:11px; color:#666; font-weight:700;
+              margin-top:8px; text-align:center; }
+.modal-hint strong { color:#1ECFC0; }
 
 /* Buttons */
-.modal-btns { display:flex; gap:10px; margin-top:16px; width:100%; }
-.btn-download { flex:1; padding:13px; border:none; border-radius:14px; cursor:pointer;
-                font-size:14px; font-weight:800; font-family:'Nunito',sans-serif;
-                background:linear-gradient(135deg,#ff6b9d,#e8607a);
-                color:white; box-shadow:0 4px 16px rgba(255,107,157,.4);
-                transition:all .2s; display:flex; align-items:center;
-                justify-content:center; gap:6px; }
-.btn-download:active { transform:scale(.97); }
-.btn-close { flex:0 0 52px; padding:13px; border:none; border-radius:14px;
-             cursor:pointer; font-size:18px; font-weight:800;
-             background:rgba(255,255,255,.08);
-             border:1px solid rgba(255,255,255,.1); color:#aaa;
-             transition:all .2s; }
-.btn-close:active { transform:scale(.97); }
+.modal-btns { display:flex; gap:10px; margin-top:12px; width:100%; }
+.btn-download { flex:1; padding:13px; border:none; border-radius:14px;
+                font-size:14px; font-weight:800; cursor:pointer;
+                font-family:'Nunito',sans-serif;
+                background:linear-gradient(135deg,#FF3D8F,#FF6BB3);
+                color:white; letter-spacing:.3px;
+                box-shadow:0 4px 18px rgba(255,61,143,.4);
+                transition:all .18s; display:flex;
+                align-items:center; justify-content:center; gap:6px; }
+.btn-download:active { transform:scale(.96); }
+.btn-share { flex:0 0 52px; padding:13px; border:none; border-radius:14px;
+             font-size:18px; cursor:pointer;
+             background:linear-gradient(135deg,rgba(30,207,192,.15),rgba(184,143,224,.15));
+             border:1px solid rgba(30,207,192,.2); color:#1ECFC0;
+             transition:all .18s; }
+.btn-share:active { transform:scale(.96); }
 </style>
 </head>
 <body>
 
 <div id="loading">
-  <div class="spinner"></div>
-  <h2>⬡ OPSHE Beauty AR</h2>
+  <div class="logo-wrap">
+    <div class="spinner"></div>
+    <img class="logo-load" src="/logo" alt="Opshe" onerror="this.style.display='none'">
+  </div>
+  <h2>Opshe Beauty AR</h2>
   <p id="loadTxt">Memuat face detection...</p>
 </div>
 
@@ -169,7 +204,10 @@ select { background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.12
 </div>
 
 <div id="infoBar">
-  <div class="logo">⬡ OPSHE</div>
+  <div class="logo-bar">
+    <img src="/logo" alt="Opshe" onerror="this.style.display='none'">
+    <span>Opshe</span>
+  </div>
   <div id="selInfo">Pilih shade untuk mencoba 💄</div>
 </div>
 
@@ -182,26 +220,43 @@ select { background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.12
 <div id="photoModal">
   <div id="modalBg" onclick="closePhoto()"></div>
   <div class="modal-inner">
+
     <div class="modal-header">
-      <span>🌸</span>
-      <h3>Your Beauty Look</h3>
-      <span>✨</span>
+      <img src="/logo" alt="Opshe" onerror="this.style.display='none'">
+      <div class="modal-header-text">
+        <h3>Your Beauty Look ✨</h3>
+        <p>Opshe Virtual Try-On</p>
+      </div>
+      <button class="modal-close-x" onclick="closePhoto()">✕</button>
     </div>
+
     <div class="photo-frame">
       <img id="photoResult" src="" alt="Foto">
-      <div class="photo-sticker">⬡ OPSHE Beauty AR</div>
+      <div class="corner-tl">
+        <img src="/logo" alt="" onerror="this.style.display='none'">
+        <span>opshe.id</span>
+      </div>
     </div>
+
     <div class="shade-pill" id="shadePill">
       <div class="shade-dot" id="shadeDot"></div>
-      <span id="shadeInfoText">OPSHE Virtual Try-On</span>
+      <div class="shade-pill-text">
+        <div id="shadeNameText">Opshe Beauty AR</div>
+        <div class="shade-pill-brand" id="shadeBrandText">Virtual Try-On</div>
+      </div>
     </div>
+
     <p class="modal-hint">Tekan lama pada foto → <strong>Save Image 💾</strong></p>
+
     <div class="modal-btns">
       <button class="btn-download" onclick="downloadPhoto()">
         💾 Simpan Foto
       </button>
-      <button class="btn-close" onclick="closePhoto()">✕</button>
+      <button class="btn-share" onclick="sharePhoto()" title="Share">
+        🔗
+      </button>
     </div>
+
   </div>
 </div>
 
@@ -248,55 +303,53 @@ let finish        = 'matte';
 let landmarks     = null;
 let prevLandmarks = null;
 let lastPhotoUrl  = null;
+let lastPhotoBlob = null;
 const SMOOTH      = 0.55;
 
 function hexRgb(hex) {
-  const h = hex.replace('#','');
-  return { r:parseInt(h.slice(0,2),16), g:parseInt(h.slice(2,4),16), b:parseInt(h.slice(4,6),16) };
+  const h=hex.replace('#','');
+  return {r:parseInt(h.slice(0,2),16),g:parseInt(h.slice(2,4),16),b:parseInt(h.slice(4,6),16)};
 }
-function pts(lm, idx) {
-  return idx.map(i => ({ x:lm[i].x*canvas.width, y:lm[i].y*canvas.height }));
+function pts(lm,idx) {
+  return idx.map(i=>({x:lm[i].x*canvas.width,y:lm[i].y*canvas.height}));
 }
-function drawPath(c, pts) {
-  c.beginPath();
-  c.moveTo(pts[0].x, pts[0].y);
-  for (let i=1; i<pts.length-1; i++) {
-    const xc=(pts[i].x+pts[i+1].x)/2, yc=(pts[i].y+pts[i+1].y)/2;
-    c.quadraticCurveTo(pts[i].x,pts[i].y,xc,yc);
+function drawPath(c,p) {
+  c.beginPath(); c.moveTo(p[0].x,p[0].y);
+  for(let i=1;i<p.length-1;i++){
+    const xc=(p[i].x+p[i+1].x)/2,yc=(p[i].y+p[i+1].y)/2;
+    c.quadraticCurveTo(p[i].x,p[i].y,xc,yc);
   }
-  c.lineTo(pts[0].x,pts[0].y);
-  c.closePath();
+  c.lineTo(p[0].x,p[0].y); c.closePath();
 }
 function makeOff() {
   const o=document.createElement('canvas');
   o.width=canvas.width; o.height=canvas.height;
-  return [o, o.getContext('2d')];
+  return [o,o.getContext('2d')];
 }
 
 function drawLip() {
-  if (!shade||!landmarks) return;
+  if(!shade||!landmarks) return;
   const rgb   = hexRgb(shade.hex);
   const upAdj = pts(landmarks,UPPER).map(p=>({x:p.x,y:p.y-1}));
   const loAdj = pts(landmarks,LOWER).map(p=>({x:p.x,y:p.y-1}));
   const inner = pts(landmarks,INNER);
   const mouthH= Math.abs(landmarks[14].y-landmarks[13].y)*canvas.height;
-  const [off,oc] = makeOff();
+  const [off,oc]=makeOff();
 
-  const cutTeeth = () => {
-    if (mouthH>8) {
-      oc.globalCompositeOperation='destination-out';
-      oc.globalAlpha=1;
-      drawPath(oc,inner); oc.fill();
+  const cutTeeth=(o)=>{
+    if(mouthH>8){
+      o.globalCompositeOperation='destination-out';
+      o.globalAlpha=1; drawPath(o,inner); o.fill();
     }
   };
 
-  if (finish==='gloss') {
+  if(finish==='gloss'){
     oc.globalCompositeOperation='source-over';
     oc.globalAlpha=opacity*0.75;
     oc.fillStyle=`rgb(${rgb.r},${rgb.g},${rgb.b})`;
     drawPath(oc,upAdj); oc.fill();
     drawPath(oc,loAdj); oc.fill();
-    cutTeeth();
+    cutTeeth(oc);
     const [o2,oc2]=makeOff();
     const ctr=loAdj.reduce((s,p)=>({x:s.x+p.x,y:s.y+p.y}),{x:0,y:0});
     ctr.x/=loAdj.length; ctr.y/=loAdj.length;
@@ -305,29 +358,25 @@ function drawLip() {
     g.addColorStop(1,'rgba(255,255,255,0)');
     oc2.globalAlpha=0.28; drawPath(oc2,loAdj);
     oc2.fillStyle=g; oc2.fill();
-    if (mouthH>8) {
-      oc2.globalCompositeOperation='destination-out';
-      oc2.globalAlpha=1; drawPath(oc2,inner); oc2.fill();
-    }
-    oc.globalCompositeOperation='source-over'; oc.globalAlpha=1;
-    oc.drawImage(o2,0,0);
-
-  } else if (finish==='satin') {
+    cutTeeth(oc2);
+    oc.globalCompositeOperation='source-over';
+    oc.globalAlpha=1; oc.drawImage(o2,0,0);
+  } else if(finish==='satin'){
     oc.globalAlpha=opacity*0.72;
     oc.fillStyle=`rgb(${rgb.r},${rgb.g},${rgb.b})`;
     drawPath(oc,upAdj); oc.fill();
     drawPath(oc,loAdj); oc.fill();
-    oc.globalAlpha=0.08; oc.fillStyle='rgba(255,255,255,0.5)';
+    oc.globalAlpha=0.08;
+    oc.fillStyle='rgba(255,255,255,0.5)';
     drawPath(oc,upAdj); oc.fill();
     drawPath(oc,loAdj); oc.fill();
-    cutTeeth();
-
+    cutTeeth(oc);
   } else {
     oc.globalAlpha=opacity*0.80;
     oc.fillStyle=`rgb(${rgb.r},${rgb.g},${rgb.b})`;
     drawPath(oc,upAdj); oc.fill();
     drawPath(oc,loAdj); oc.fill();
-    cutTeeth();
+    cutTeeth(oc);
   }
 
   ctx.save();
@@ -337,19 +386,24 @@ function drawLip() {
 }
 
 function resize() { canvas.width=window.innerWidth; canvas.height=window.innerHeight; }
-window.addEventListener('resize', resize);
+window.addEventListener('resize',resize);
 resize();
 
-// ── Capture ──────────────────────────────────────────────────────────────────
+// ── Logo image untuk watermark ─────────────────────────────────────────────
+const logoImg = new Image();
+logoImg.src = '/logo';
+
+// ── Capture ────────────────────────────────────────────────────────────────
 function capturePhoto() {
-  const flash = document.getElementById('flashEl');
+  const flash=document.getElementById('flashEl');
   flash.style.opacity='1';
-  setTimeout(()=>flash.style.opacity='0', 120);
+  setTimeout(()=>flash.style.opacity='0',120);
 
   const out=document.createElement('canvas');
   out.width=canvas.width; out.height=canvas.height;
   const oc=out.getContext('2d');
 
+  // Video + AR
   oc.save(); oc.scale(-1,1);
   oc.drawImage(video,-out.width,0,out.width,out.height);
   oc.restore();
@@ -357,87 +411,109 @@ function capturePhoto() {
   oc.drawImage(canvas,-out.width,0,out.width,out.height);
   oc.restore();
 
-  // Gradient bar bawah
-  const grad=oc.createLinearGradient(0,out.height-60,0,out.height);
-  grad.addColorStop(0,'rgba(0,0,0,0)');
-  grad.addColorStop(1,'rgba(20,5,18,0.7)');
-  oc.fillStyle=grad; oc.fillRect(0,out.height-60,out.width,60);
+  // Gradient bottom
+  const grad=oc.createLinearGradient(0,out.height-80,0,out.height);
+  grad.addColorStop(0,'rgba(18,5,15,0)');
+  grad.addColorStop(1,'rgba(18,5,15,0.8)');
+  oc.fillStyle=grad; oc.fillRect(0,out.height-80,out.width,80);
 
-  // Logo
-  oc.fillStyle='rgba(255,107,157,0.95)';
+  // Logo bulat kiri bawah
+  const logoSize=44;
+  const logoX=14, logoY=out.height-logoSize-14;
+  oc.save();
+  oc.beginPath();
+  oc.arc(logoX+logoSize/2, logoY+logoSize/2, logoSize/2, 0, Math.PI*2);
+  oc.clip();
+  if(logoImg.complete && logoImg.naturalWidth>0) {
+    oc.drawImage(logoImg, logoX, logoY, logoSize, logoSize);
+  }
+  oc.restore();
+
+  // Teks opshe.id
+  oc.fillStyle='rgba(255,61,143,0.95)';
   oc.font='bold 14px system-ui';
-  oc.fillText('⬡ OPSHE Beauty AR', 14, out.height-14);
+  oc.fillText('opshe.id', logoX+logoSize+8, logoY+logoSize/2+2);
 
   // Shade name
-  if (shade) {
-    oc.fillStyle='rgba(255,255,255,0.7)';
-    oc.font='12px system-ui';
-    oc.fillText(shade.shade_name + ' · ' + shade.brand_name, 14, out.height-32);
+  if(shade){
+    oc.fillStyle='rgba(255,255,255,0.65)';
+    oc.font='11px system-ui';
+    oc.fillText(shade.shade_name+' · '+shade.brand_name,
+                logoX+logoSize+8, logoY+logoSize/2+18);
   }
 
-  out.toBlob(blob => {
-    if (lastPhotoUrl) URL.revokeObjectURL(lastPhotoUrl);
-    lastPhotoUrl = URL.createObjectURL(blob);
+  out.toBlob(blob=>{
+    if(lastPhotoUrl) URL.revokeObjectURL(lastPhotoUrl);
+    lastPhotoBlob = blob;
+    lastPhotoUrl  = URL.createObjectURL(blob);
     document.getElementById('photoResult').src = lastPhotoUrl;
 
-    // Update shade info di modal
-    if (shade) {
-      document.getElementById('shadeDot').style.background = shade.hex;
-      document.getElementById('shadeInfoText').textContent =
-        shade.shade_name + ' — ' + shade.brand_name;
+    if(shade){
+      document.getElementById('shadeDot').style.background  = shade.hex;
+      document.getElementById('shadeNameText').textContent  = shade.shade_name;
+      document.getElementById('shadeBrandText').textContent = shade.brand_name;
     }
-
-    const modal = document.getElementById('photoModal');
-    modal.style.display = 'flex';
-  }, 'image/jpeg', 0.93);
+    document.getElementById('photoModal').style.display='flex';
+  },'image/jpeg',0.93);
 }
 
 function downloadPhoto() {
-  if (!lastPhotoUrl) return;
-  const link = document.createElement('a');
-  link.href  = lastPhotoUrl;
-  const name = shade ? shade.shade_name.replace(/\s+/g,'-') : 'look';
-  link.download = `OPSHE-${name}.jpg`;
+  if(!lastPhotoUrl) return;
+  const link=document.createElement('a');
+  link.href=lastPhotoUrl;
+  const name=shade ? shade.shade_name.replace(/\s+/g,'-') : 'look';
+  link.download=`Opshe-${name}.jpg`;
   document.body.appendChild(link);
   link.click();
   document.body.removeChild(link);
 }
 
-function closePhoto() {
-  document.getElementById('photoModal').style.display = 'none';
+async function sharePhoto() {
+  if(!lastPhotoBlob) return;
+  const file=new File([lastPhotoBlob],'opshe-look.jpg',{type:'image/jpeg'});
+  if(navigator.canShare && navigator.canShare({files:[file]})){
+    try { await navigator.share({files:[file],title:'Opshe Beauty AR',text:'Check out my lip look! 💄 @opshe.id'}); }
+    catch(e){}
+  } else {
+    downloadPhoto();
+  }
 }
 
-// ── Brands & Shades ──────────────────────────────────────────────────────────
+function closePhoto() {
+  document.getElementById('photoModal').style.display='none';
+}
+
+// ── Brands ────────────────────────────────────────────────────────────────
 async function loadBrands() {
-  loadTxt.textContent = 'Memuat data brand...';
+  loadTxt.textContent='Memuat data brand...';
   try {
-    const res  = await fetch(`${API}/brands`);
-    const data = await res.json();
-    brandRow.innerHTML = '';
-    data.data.forEach((b,i) => {
-      const btn = document.createElement('button');
-      btn.className = 'brand-btn'+(i===0?' active':'');
-      btn.textContent = b.brand_name.replace(' New York','');
-      btn.dataset.id  = b.brand_id;
-      btn.onclick = () => selectBrand(b.brand_id);
+    const res=await fetch(`${API}/brands`);
+    const data=await res.json();
+    brandRow.innerHTML='';
+    data.data.forEach((b,i)=>{
+      const btn=document.createElement('button');
+      btn.className='brand-btn'+(i===0?' active':'');
+      btn.textContent=b.brand_name.replace(' New York','');
+      btn.dataset.id=b.brand_id;
+      btn.onclick=()=>selectBrand(b.brand_id);
       brandRow.appendChild(btn);
     });
-    if (data.data.length>0) selectBrand(data.data[0].brand_id);
-  } catch(e) {
-    loadTxt.textContent = 'Gagal memuat server OPSHE!';
+    if(data.data.length>0) selectBrand(data.data[0].brand_id);
+  } catch(e){
+    loadTxt.textContent='Gagal memuat server!';
   }
 }
 
 async function selectBrand(brandId) {
-  document.querySelectorAll('.brand-btn').forEach(b =>
-    b.classList.toggle('active', b.dataset.id===brandId)
+  document.querySelectorAll('.brand-btn').forEach(b=>
+    b.classList.toggle('active',b.dataset.id===brandId)
   );
-  shadeRow.innerHTML='<span style="color:#666;font-size:13px;padding:8px">Memuat...</span>';
-  const res  = await fetch(`${API}/shades?brand_id=${brandId}&per_page=100`);
-  const data = await res.json();
+  shadeRow.innerHTML='<span style="color:#555;font-size:13px;padding:8px">Memuat...</span>';
+  const res=await fetch(`${API}/shades?brand_id=${brandId}&per_page=100`);
+  const data=await res.json();
   shadeRow.innerHTML='';
-  data.data.forEach(s => {
-    const item = document.createElement('div');
+  data.data.forEach(s=>{
+    const item=document.createElement('div');
     item.className='shade-item';
     item.innerHTML=`
       <div class="shade-circle" style="background:${s.hex}" data-id="${s.shade_id}"></div>
@@ -445,8 +521,8 @@ async function selectBrand(brandId) {
     `;
     item.onclick=()=>{
       shade=s;
-      document.querySelectorAll('.shade-circle').forEach(c =>
-        c.classList.toggle('active', c.dataset.id===s.shade_id)
+      document.querySelectorAll('.shade-circle').forEach(c=>
+        c.classList.toggle('active',c.dataset.id===s.shade_id)
       );
       selInfo.innerHTML=`<b>${s.shade_name}</b> · ${s.brand_name}`;
       fetch(`${API}/analytics/event`,{
@@ -458,13 +534,13 @@ async function selectBrand(brandId) {
   });
 }
 
-opSlider.addEventListener('input', e => {
+opSlider.addEventListener('input',e=>{
   opacity=e.target.value/100;
   opVal.textContent=e.target.value+'%';
 });
-finSel.addEventListener('change', e => { finish=e.target.value; });
+finSel.addEventListener('change',e=>{finish=e.target.value;});
 
-// ── Face Mesh ────────────────────────────────────────────────────────────────
+// ── Face Mesh ──────────────────────────────────────────────────────────────
 async function initFaceMesh() {
   loadTxt.textContent='Memuat AI face detection...';
   const fm=new FaceMesh({locateFile:f=>`https://cdn.jsdelivr.net/npm/@mediapipe/face_mesh/${f}`});
@@ -472,11 +548,13 @@ async function initFaceMesh() {
                  minDetectionConfidence:.5,minTrackingConfidence:.5});
   fm.onResults(res=>{
     ctx.clearRect(0,0,canvas.width,canvas.height);
-    if (res.multiFaceLandmarks?.length>0) {
+    if(res.multiFaceLandmarks?.length>0){
       const raw=res.multiFaceLandmarks[0];
       landmarks=prevLandmarks
-        ? raw.map((lm,i)=>({x:lm.x*(1-SMOOTH)+prevLandmarks[i].x*SMOOTH,
-                             y:lm.y*(1-SMOOTH)+prevLandmarks[i].y*SMOOTH,z:lm.z}))
+        ? raw.map((lm,i)=>({
+            x:lm.x*(1-SMOOTH)+prevLandmarks[i].x*SMOOTH,
+            y:lm.y*(1-SMOOTH)+prevLandmarks[i].y*SMOOTH,
+            z:lm.z}))
         : raw;
       prevLandmarks=landmarks;
       statusDot.style.display='block';
@@ -497,7 +575,7 @@ async function initFaceMesh() {
     loadEl.style.transition='opacity 0.6s';
     loadEl.style.opacity='0';
     setTimeout(()=>loadEl.style.display='none',600);
-  },600);
+  },500);
 }
 
 async function init() {
