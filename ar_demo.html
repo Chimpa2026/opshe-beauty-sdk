@@ -90,7 +90,7 @@ select { background:#1a1a24; border:1px solid #333; color:#fff;
 <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@mediapipe/face_mesh/face_mesh.js"></script>
 <script>
-const API = 'http://localhost:5000/api/v1';
+const API = window.location.origin + '/api/v1';
 
 // Lip landmarks MediaPipe yang lebih akurat
 const UPPER = [
