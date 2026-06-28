@@ -65,6 +65,21 @@ select { background:#1a1a24; border:1px solid #333; color:#fff;
   <div id="selInfo">Pilih shade untuk mencoba</div>
 </div>
 <div id="statusDot">● Face detected</div>
+<button id="captureBtn" onclick="capturePhoto()" style="
+  position:fixed; right:16px; top:50%; transform:translateY(-50%);
+  z-index:60; width:56px; height:56px; border-radius:50%;
+  background:#e8607a; border:none; cursor:pointer;
+  display:flex; align-items:center; justify-content:center;
+  box-shadow:0 4px 16px rgba(232,96,122,.5); font-size:24px;">
+  📸
+</button>
+
+<div id="flashEl" style="
+  position:fixed; inset:0; background:white; z-index:200;
+  opacity:0; pointer-events:none; transition:opacity 0.1s;">
+</div>
+
+<a id="downloadLink" style="display:none"></a>
 <div id="ui">
   <div class="brand-scroll" id="brandRow"></div>
   <div class="shade-scroll" id="shadeRow"></div>
