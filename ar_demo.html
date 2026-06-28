@@ -92,43 +92,29 @@ select { background:#1a1a24; border:1px solid #333; color:#fff;
 <script>
 const API = window.location.origin + '/api/v1';
 
-// Lip landmarks MediaPipe yang lebih akurat
-const UPPER = [
-  61,185,40,39,37,0,267,269,270,409,291,
-  375,321,405,314,17,84,181,91,146,61
-];
-const LOWER = [
-  78,95,88,178,87,14,317,402,318,324,308,
-  415,310,311,312,13,82,81,80,191,78
-];
-const OUTER = [
-  10,338,297,332,284,251,389,356,454,323,361,
-  288,397,365,379,378,400,377,152,148,176,149,
-  150,136,172,58,132,93,234,127,162,21,54,103,67,109
-];
-
-// Inner mouth — untuk masking area gigi
+const UPPER = [61,185,40,39,37,0,267,269,270,409,291,375,321,405,314,17,84,181,91,146,61];
+const LOWER = [78,95,88,178,87,14,317,402,318,324,308,415,310,311,312,13,82,81,80,191,78];
 const INNER = [78,191,80,81,82,13,312,311,310,415,308,324,318,402,317,14,87,178,88,95];
 
-const video    = document.getElementById('video');
-const canvas   = document.getElementById('canvas');
-const ctx      = canvas.getContext('2d');
-const loadEl   = document.getElementById('loading');
-const loadTxt  = document.getElementById('loadTxt');
-const brandRow = document.getElementById('brandRow');
-const shadeRow = document.getElementById('shadeRow');
-const opSlider = document.getElementById('opSlider');
-const opVal    = document.getElementById('opVal');
-const finSel   = document.getElementById('finSel');
-const selInfo  = document.getElementById('selInfo');
-const statusDot= document.getElementById('statusDot');
+const video     = document.getElementById('video');
+const canvas    = document.getElementById('canvas');
+const ctx       = canvas.getContext('2d');
+const loadEl    = document.getElementById('loading');
+const loadTxt   = document.getElementById('loadTxt');
+const brandRow  = document.getElementById('brandRow');
+const shadeRow  = document.getElementById('shadeRow');
+const opSlider  = document.getElementById('opSlider');
+const opVal     = document.getElementById('opVal');
+const finSel    = document.getElementById('finSel');
+const selInfo   = document.getElementById('selInfo');
+const statusDot = document.getElementById('statusDot');
 
-let shade       = null;
-let opacity     = 0.60;
-let finish      = 'matte';
-let landmarks   = null;
+let shade         = null;
+let opacity       = 0.60;
+let finish        = 'matte';
+let landmarks     = null;
 let prevLandmarks = null;
-const SMOOTH    = 0.65; // 0 = no smooth, 1 = full smooth
+const SMOOTH      = 0.55;
 
 function hexRgb(hex) {
   const h = hex.replace('#','');
@@ -151,50 +137,27 @@ function path(points) {
   ctx.closePath();
 }
 
-function center(points) {
-  return {
-    x: points.reduce((s,p)=>s+p.x,0)/points.length,
-    y: points.reduce((s,p)=>s+p.y,0)/points.length
-  };
-}
-
 function drawLip() {
   if (!shade || !landmarks) return;
 
-  // Smoothing — blend posisi sekarang dengan sebelumnya
-  if (prevLandmarks) {
-    landmarks = landmarks.map((lm, i) => ({
-      x: lm.x * (1 - SMOOTH) + prevLandmarks[i].x * SMOOTH,
-      y: lm.y * (1 - SMOOTH) + prevLandmarks[i].y * SMOOTH,
-      z: lm.z
-    }));
-  }
-  prevLandmarks = landmarks;
-
-  const rgb = hexRgb(shade.hex);
-  // Gunakan landmark bibir yang lebih presisi
-  const up  = pts(landmarks, UPPER);
-  const lo  = pts(landmarks, LOWER);
-  
-  // Koreksi posisi — geser sedikit ke atas
-  const adjustY = (points) => points.map(p => ({x: p.x, y: p.y - 1}));
-  const upAdj = adjustY(up);
-  const loAdj = adjustY(lo);
+  const rgb  = hexRgb(shade.hex);
+  const upAdj = pts(landmarks, UPPER).map(p => ({x: p.x, y: p.y - 1}));
+  const loAdj = pts(landmarks, LOWER).map(p => ({x: p.x, y: p.y - 1}));
 
   ctx.save();
 
   if (finish === 'gloss') {
-    // Base
     ctx.globalCompositeOperation = 'multiply';
     ctx.globalAlpha = opacity * 0.75;
     ctx.fillStyle = `rgb(${rgb.r},${rgb.g},${rgb.b})`;
     path(upAdj); ctx.fill();
     path(loAdj); ctx.fill();
-    // Highlight
+    // Gloss highlight
     ctx.globalCompositeOperation = 'screen';
-    ctx.globalAlpha = 0.3;
-    const c = center(lo);
-    const g = ctx.createRadialGradient(c.x, c.y-2, 1, c.x, c.y, 20);
+    ctx.globalAlpha = 0.28;
+    const ctr = loAdj.reduce((s,p)=>({x:s.x+p.x,y:s.y+p.y}),{x:0,y:0});
+    ctr.x /= loAdj.length; ctr.y /= loAdj.length;
+    const g = ctx.createRadialGradient(ctr.x, ctr.y-2, 1, ctr.x, ctr.y, 22);
     g.addColorStop(0, 'rgba(255,255,255,0.9)');
     g.addColorStop(1, 'rgba(255,255,255,0)');
     path(loAdj);
@@ -207,9 +170,8 @@ function drawLip() {
     ctx.fillStyle = `rgb(${rgb.r},${rgb.g},${rgb.b})`;
     path(upAdj); ctx.fill();
     path(loAdj); ctx.fill();
-    // Soft sheen
     ctx.globalCompositeOperation = 'screen';
-    ctx.globalAlpha = 0.1;
+    ctx.globalAlpha = 0.08;
     ctx.fillStyle = 'rgba(255,255,255,0.5)';
     path(upAdj); ctx.fill();
     path(loAdj); ctx.fill();
@@ -223,33 +185,16 @@ function drawLip() {
     path(loAdj); ctx.fill();
   }
 
-  // Potong area dalam mulut agar gigi terlihat
-  ctx.save();
-  ctx.globalCompositeOperation = 'destination-out';
-  ctx.globalAlpha = 1;
-  const inner = pts(landmarks, INNER);
-  const topLip = landmarks[13];
-  const botLip = landmarks[14];
-  const mouthH = Math.abs(botLip.y - topLip.y) * canvas.height;
+  // Masking gigi — hanya sekali
+  const topY   = landmarks[13].y * canvas.height;
+  const botY   = landmarks[14].y * canvas.height;
+  const mouthH = Math.abs(botY - topY);
   if (mouthH > 8) {
-    path(inner);
+    ctx.globalCompositeOperation = 'destination-out';
+    ctx.globalAlpha = 1;
+    path(pts(landmarks, INNER));
     ctx.fill();
   }
-  ctx.restore();
-
-  // Masking gigi untuk semua finish
-  ctx.save();
-  ctx.globalCompositeOperation = 'destination-out';
-  ctx.globalAlpha = 1;
-  const inner = pts(landmarks, INNER);
-  const topLip = landmarks[13];
-  const botLip = landmarks[14];
-  const mouthH = Math.abs(botLip.y - topLip.y) * canvas.height;
-  if (mouthH > 8) {
-    path(inner);
-    ctx.fill();
-  }
-  ctx.restore();
 
   ctx.restore();
 }
@@ -331,25 +276,25 @@ async function initFaceMesh() {
     minDetectionConfidence: 0.5,
     minTrackingConfidence: 0.5
   });
+
   faceMesh.onResults(res => {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     if (res.multiFaceLandmarks && res.multiFaceLandmarks.length > 0) {
       const raw = res.multiFaceLandmarks[0];
       // Smooth landmarks
-      if (prevLandmarks) {
-        landmarks = raw.map((lm, i) => ({
-          x: lm.x * (1 - SMOOTH) + prevLandmarks[i].x * SMOOTH,
-          y: lm.y * (1 - SMOOTH) + prevLandmarks[i].y * SMOOTH,
-          z: lm.z
-        }));
-      } else {
-        landmarks = raw;
-      }
+      landmarks = prevLandmarks
+        ? raw.map((lm, i) => ({
+            x: lm.x * (1-SMOOTH) + prevLandmarks[i].x * SMOOTH,
+            y: lm.y * (1-SMOOTH) + prevLandmarks[i].y * SMOOTH,
+            z: lm.z
+          }))
+        : raw;
       prevLandmarks = landmarks;
       statusDot.style.display = 'block';
       drawLip();
     } else {
-      landmarks = null;
+      landmarks     = null;
+      prevLandmarks = null;
       statusDot.style.display = 'none';
     }
   });
