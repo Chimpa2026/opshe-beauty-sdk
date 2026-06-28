@@ -224,6 +224,20 @@ function drawLip() {
   }
   ctx.restore();
 
+  // Masking gigi untuk semua finish
+  ctx.save();
+  ctx.globalCompositeOperation = 'destination-out';
+  ctx.globalAlpha = 1;
+  const inner = pts(landmarks, INNER);
+  const topLip = landmarks[13];
+  const botLip = landmarks[14];
+  const mouthH = Math.abs(botLip.y - topLip.y) * canvas.height;
+  if (mouthH > 8) {
+    path(inner);
+    ctx.fill();
+  }
+  ctx.restore();
+
   ctx.restore();
 }
 
