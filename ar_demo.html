@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>OPSHE Beauty AR</title>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:#000; overflow:hidden; height:100vh; font-family:system-ui,sans-serif; color:#fff; }
+#container { position:relative; width:100vw; height:100vh; }
+#video  { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; transform:scaleX(-1); }
+#canvas { position:absolute; inset:0; width:100%; height:100%; transform:scaleX(-1); }
+#loading { position:fixed; inset:0; background:#0f0f14; display:flex; flex-direction:column;
+           align-items:center; justify-content:center; z-index:100; }
+#loading h2 { font-size:22px; margin-bottom:12px; color:#e8607a; }
+#loading p  { color:#7878a0; font-size:14px; margin-bottom:24px; }
+.spinner { width:48px; height:48px; border:3px solid #2e2e42;
+           border-top-color:#e8607a; border-radius:50%;
+           animation:spin 0.8s linear infinite; }
+@keyframes spin { to { transform:rotate(360deg); } }
+#ui { position:fixed; bottom:0; left:0; right:0; z-index:50;
+      background:linear-gradient(transparent, rgba(0,0,0,.9));
+      padding:12px 12px 20px; }
+.brand-scroll { display:flex; gap:8px; overflow-x:auto; padding-bottom:8px;
+                margin-bottom:10px; scrollbar-width:none; }
+.brand-scroll::-webkit-scrollbar { display:none; }
+.brand-btn { flex-shrink:0; padding:5px 14px; border-radius:100px;
+             border:1.5px solid #444; background:rgba(30,30,40,.8);
+             color:#888; font-size:13px; cursor:pointer; transition:all .2s; }
+.brand-btn.active { border-color:#e8607a; color:#e8607a; background:rgba(232,96,122,.15); }
+.shade-scroll { display:flex; gap:10px; overflow-x:auto; padding-bottom:8px; scrollbar-width:none; }
+.shade-scroll::-webkit-scrollbar { display:none; }
+.shade-item { flex-shrink:0; display:flex; flex-direction:column; align-items:center; gap:4px; cursor:pointer; }
+.shade-circle { width:38px; height:38px; border-radius:50%; border:2.5px solid transparent; transition:all .2s; }
+.shade-circle.active { border-color:#fff; transform:scale(1.2); box-shadow:0 0 10px rgba(255,255,255,.4); }
+.shade-label { font-size:9px; color:#888; text-align:center; max-width:44px; line-height:1.2; }
+.controls { display:flex; align-items:center; gap:10px; margin-top:8px; flex-wrap:wrap; }
+.controls label { font-size:12px; color:#888; white-space:nowrap; }
+input[type=range] { flex:1; accent-color:#e8607a; min-width:80px; }
+.oval { font-size:12px; color:#e8607a; width:30px; }
+select { background:#1a1a24; border:1px solid #333; color:#fff;
+         border-radius:6px; padding:3px 6px; font-size:12px; }
+#infoBar { position:fixed; top:0; left:0; right:0; z-index:50; padding:10px 14px;
+           background:linear-gradient(rgba(0,0,0,.7),transparent);
+           display:flex; justify-content:space-between; align-items:center; }
+.logo { font-weight:700; color:#e8607a; font-size:16px; }
+#selInfo { font-size:11px; color:#ddd; text-align:right; line-height:1.5; }
+#selInfo b { color:#e8607a; }
+#statusDot { position:fixed; top:14px; left:50%; transform:translateX(-50%);
+             z-index:60; font-size:12px; color:#4caf82; background:rgba(0,0,0,.6);
+             padding:3px 12px; border-radius:100px; display:none; }
+</style>
+</head>
+<body>
+
+<div id="loading">
+  <div class="spinner"></div>
+  <h2 style="margin-top:20px">⬡ OPSHE Beauty AR</h2>
+  <p id="loadTxt">Memuat face detection...</p>
+</div>
+
+<div id="container">
+  <video id="video" autoplay muted playsinline></video>
+  <canvas id="canvas"></canvas>
+</div>
+
+<div id="infoBar">
+  <div class="logo">⬡ OPSHE</div>
+  <div id="selInfo">Pilih shade untuk mencoba</div>
+</div>
+
+<div id="statusDot">● Face detected</div>
+
+<div id="ui">
+  <div class="brand-scroll" id="brandRow"></div>
+  <div class="shade-scroll" id="shadeRow"></div>
+  <div class="controls">
+    <label>Opacity</label>
+    <input type="range" id="opSlider" min="10" max="90" value="60">
+    <span class="oval" id="opVal">60%</span>
+    <label>Finish</label>
+    <select id="finSel">
+      <option value="matte">Matte</option>
+      <option value="gloss">Gloss</option>
+      <option value="satin">Satin</option>
+    </select>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@mediapipe/face_mesh/face_mesh.js"></script>
+<script>
+const API = 'http://localhost:5000/api/v1';
+
+// Lip landmarks MediaPipe yang lebih akurat
+const UPPER = [
+  61,185,40,39,37,0,267,269,270,409,291,
+  375,321,405,314,17,84,181,91,146,61
+];
+const LOWER = [
+  78,95,88,178,87,14,317,402,318,324,308,
+  415,310,311,312,13,82,81,80,191,78
+];
+const OUTER = [
+  10,338,297,332,284,251,389,356,454,323,361,
+  288,397,365,379,378,400,377,152,148,176,149,
+  150,136,172,58,132,93,234,127,162,21,54,103,67,109
+];
+
+// Inner mouth — untuk masking area gigi
+const INNER = [78,191,80,81,82,13,312,311,310,415,308,324,318,402,317,14,87,178,88,95];
+
+const video    = document.getElementById('video');
+const canvas   = document.getElementById('canvas');
+const ctx      = canvas.getContext('2d');
+const loadEl   = document.getElementById('loading');
+const loadTxt  = document.getElementById('loadTxt');
+const brandRow = document.getElementById('brandRow');
+const shadeRow = document.getElementById('shadeRow');
+const opSlider = document.getElementById('opSlider');
+const opVal    = document.getElementById('opVal');
+const finSel   = document.getElementById('finSel');
+const selInfo  = document.getElementById('selInfo');
+const statusDot= document.getElementById('statusDot');
+
+let shade    = null;
+let opacity  = 0.60;
+let finish   = 'matte';
+let landmarks= null;
+
+function hexRgb(hex) {
+  const h = hex.replace('#','');
+  return { r:parseInt(h.slice(0,2),16), g:parseInt(h.slice(2,4),16), b:parseInt(h.slice(4,6),16) };
+}
+
+function pts(lm, idx) {
+  return idx.map(i => ({ x: lm[i].x * canvas.width, y: lm[i].y * canvas.height }));
+}
+
+function path(points) {
+  ctx.beginPath();
+  ctx.moveTo(points[0].x, points[0].y);
+  for (let i=1; i<points.length-1; i++) {
+    const xc = (points[i].x + points[i+1].x) / 2;
+    const yc = (points[i].y + points[i+1].y) / 2;
+    ctx.quadraticCurveTo(points[i].x, points[i].y, xc, yc);
+  }
+  ctx.lineTo(points[0].x, points[0].y);
+  ctx.closePath();
+}
+
+function center(points) {
+  return {
+    x: points.reduce((s,p)=>s+p.x,0)/points.length,
+    y: points.reduce((s,p)=>s+p.y,0)/points.length
+  };
+}
+
+function drawLip() {
+  if (!shade || !landmarks) return;
+  const rgb = hexRgb(shade.hex);
+  // Gunakan landmark bibir yang lebih presisi
+  const up  = pts(landmarks, UPPER);
+  const lo  = pts(landmarks, LOWER);
+  
+  // Koreksi posisi — geser sedikit ke atas
+  const adjustY = (points) => points.map(p => ({x: p.x, y: p.y - 1}));
+  const upAdj = adjustY(up);
+  const loAdj = adjustY(lo);
+
+  ctx.save();
+
+  if (finish === 'gloss') {
+    // Base
+    ctx.globalCompositeOperation = 'multiply';
+    ctx.globalAlpha = opacity * 0.75;
+    ctx.fillStyle = `rgb(${rgb.r},${rgb.g},${rgb.b})`;
+    path(upAdj); ctx.fill();
+    path(loAdj); ctx.fill();
+    // Highlight
+    ctx.globalCompositeOperation = 'screen';
+    ctx.globalAlpha = 0.3;
+    const c = center(lo);
+    const g = ctx.createRadialGradient(c.x, c.y-2, 1, c.x, c.y, 20);
+    g.addColorStop(0, 'rgba(255,255,255,0.9)');
+    g.addColorStop(1, 'rgba(255,255,255,0)');
+    path(loAdj);
+    ctx.fillStyle = g;
+    ctx.fill();
+
+  } else if (finish === 'satin') {
+    ctx.globalCompositeOperation = 'multiply';
+    ctx.globalAlpha = opacity * 0.72;
+    ctx.fillStyle = `rgb(${rgb.r},${rgb.g},${rgb.b})`;
+    path(upAdj); ctx.fill();
+    path(loAdj); ctx.fill();
+    // Soft sheen
+    ctx.globalCompositeOperation = 'screen';
+    ctx.globalAlpha = 0.1;
+    ctx.fillStyle = 'rgba(255,255,255,0.5)';
+    path(upAdj); ctx.fill();
+    path(loAdj); ctx.fill();
+
+  } else {
+    // Matte
+    ctx.globalCompositeOperation = 'multiply';
+    ctx.globalAlpha = opacity * 0.80;
+    ctx.fillStyle = `rgb(${rgb.r},${rgb.g},${rgb.b})`;
+    path(upAdj); ctx.fill();
+    path(loAdj); ctx.fill();
+  }
+
+  // Potong area dalam mulut agar gigi terlihat
+  ctx.save();
+  ctx.globalCompositeOperation = 'destination-out';
+  ctx.globalAlpha = 1;
+  const inner = pts(landmarks, INNER);
+  const topLip = landmarks[13];
+  const botLip = landmarks[14];
+  const mouthH = Math.abs(botLip.y - topLip.y) * canvas.height;
+  if (mouthH > 8) {
+    path(inner);
+    ctx.fill();
+  }
+  ctx.restore();
+
+  ctx.restore();
+}
+
+function resize() {
+  canvas.width  = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+window.addEventListener('resize', resize);
+resize();
+
+async function loadBrands() {
+  loadTxt.textContent = 'Memuat data brand...';
+  try {
+    const res  = await fetch(`${API}/brands`);
+    const data = await res.json();
+    brandRow.innerHTML = '';
+    data.data.forEach((b,i) => {
+      const btn = document.createElement('button');
+      btn.className = 'brand-btn' + (i===0?' active':'');
+      btn.textContent = b.brand_name.replace(' New York','');
+      btn.dataset.id  = b.brand_id;
+      btn.onclick = () => selectBrand(b.brand_id);
+      brandRow.appendChild(btn);
+    });
+    if (data.data.length > 0) selectBrand(data.data[0].brand_id);
+  } catch(e) {
+    loadTxt.textContent = 'Gagal memuat. Pastikan server OPSHE jalan!';
+  }
+}
+
+async function selectBrand(brandId) {
+  document.querySelectorAll('.brand-btn').forEach(b => {
+    b.classList.toggle('active', b.dataset.id === brandId);
+  });
+  shadeRow.innerHTML = '<span style="color:#666;font-size:13px;padding:8px">Memuat...</span>';
+  const res  = await fetch(`${API}/shades?brand_id=${brandId}&per_page=100`);
+  const data = await res.json();
+  shadeRow.innerHTML = '';
+  data.data.forEach(s => {
+    const item = document.createElement('div');
+    item.className = 'shade-item';
+    item.innerHTML = `
+      <div class="shade-circle" style="background:${s.hex}" data-id="${s.shade_id}"></div>
+      <div class="shade-label">${s.shade_name}</div>
+    `;
+    item.onclick = () => {
+      shade = s;
+      document.querySelectorAll('.shade-circle').forEach(c =>
+        c.classList.toggle('active', c.dataset.id === s.shade_id)
+      );
+      selInfo.innerHTML = `<b>${s.shade_name}</b><br>${s.brand_name} · ${s.hex}`;
+      fetch(`${API}/analytics/event`, {
+        method:'POST', headers:{'Content-Type':'application/json'},
+        body: JSON.stringify({event_type:'try', shade_id: s.shade_id})
+      }).catch(()=>{});
+    };
+    shadeRow.appendChild(item);
+  });
+}
+
+opSlider.addEventListener('input', e => {
+  opacity = e.target.value / 100;
+  opVal.textContent = e.target.value + '%';
+});
+
+finSel.addEventListener('change', e => {
+  finish = e.target.value;
+});
+
+async function initFaceMesh() {
+  loadTxt.textContent = 'Memuat AI face detection...';
+  const faceMesh = new FaceMesh({
+    locateFile: f => `https://cdn.jsdelivr.net/npm/@mediapipe/face_mesh/${f}`
+  });
+  faceMesh.setOptions({
+    maxNumFaces: 1,
+    refineLandmarks: true,
+    minDetectionConfidence: 0.5,
+    minTrackingConfidence: 0.5
+  });
+  faceMesh.onResults(res => {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    if (res.multiFaceLandmarks && res.multiFaceLandmarks.length > 0) {
+      landmarks = res.multiFaceLandmarks[0];
+      statusDot.style.display = 'block';
+      drawLip();
+    } else {
+      landmarks = null;
+      statusDot.style.display = 'none';
+    }
+  });
+
+  loadTxt.textContent = 'Mengaktifkan kamera...';
+  const cam = new Camera(video, {
+    onFrame: async () => { await faceMesh.send({image: video}); },
+    width: 1280, height: 720
+  });
+  await cam.start();
+
+  loadTxt.textContent = 'Siap!';
+  setTimeout(() => {
+    loadEl.style.transition = 'opacity 0.5s';
+    loadEl.style.opacity = '0';
+    setTimeout(() => loadEl.style.display = 'none', 500);
+  }, 600);
+}
+
+async function init() {
+  await loadBrands();
+  await initFaceMesh();
+}
+
+init();
+</script>
+</body>
+</html>
