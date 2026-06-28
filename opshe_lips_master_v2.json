@@ -1,0 +1,5553 @@
+{
+  "database_name": "OPSHE Beauty AR SDK — Lip Database",
+  "version": "2.0",
+  "built_at": "2026-06-28T03:28:11.296158",
+  "phase": "Phase 1 MVP",
+  "summary": {
+    "total_brands": 4,
+    "total_products": 20,
+    "total_shades": 242,
+    "brands": [
+      {
+        "id": "WARDAH_001",
+        "name": "Wardah",
+        "origin": "🇮🇩",
+        "products": 8,
+        "shades": 81
+      },
+      {
+        "id": "MAYBELLINE_001",
+        "name": "Maybelline",
+        "origin": "🇺🇸",
+        "products": 3,
+        "shades": 94
+      },
+      {
+        "id": "HANASUI_001",
+        "name": "Hanasui",
+        "origin": "🇮🇩",
+        "products": 4,
+        "shades": 35
+      },
+      {
+        "id": "BLP_001",
+        "name": "BLP Beauty",
+        "origin": "🇮🇩",
+        "products": 5,
+        "shades": 32
+      }
+    ]
+  },
+  "brands": [
+    {
+      "brand_id": "WARDAH_001",
+      "brand_name": "Wardah",
+      "brand_country": "Indonesia",
+      "brand_website": "https://www.wardahbeauty.com",
+      "halal_certified": true,
+      "parent_company": "Paragon Technology and Innovation",
+      "built_at": "2026-06-28T03:16:06.282787",
+      "data_source": "wardahbeauty.com (official) via web reconnaissance",
+      "version": "3.0",
+      "products": [
+        {
+          "product_id": "WD_LIP_001",
+          "brand_id": "WARDAH_001",
+          "product_name": "Wardah Long Lasting Lipstick",
+          "series": "Long Lasting",
+          "finish": "satin",
+          "product_type": "lipstick_bullet",
+          "source_url": "https://www.wardahbeauty.com/en/product/make-up/wardah-long-lasting-lipstick",
+          "total_shades": 19,
+          "shades": [
+            {
+              "shade_id": "SH_01",
+              "shade_number": "01",
+              "shade_name": "Fabulous Peach",
+              "hex": "#E8896A",
+              "rgb": {
+                "r": 232,
+                "g": 137,
+                "b": 106
+              },
+              "lab": {
+                "L": 66.6,
+                "a": 33.2,
+                "b": 32.1
+              },
+              "opacity": 95,
+              "gloss": 5,
+              "color_source": "name_semantic_estimate",
+              "confidence": 62,
+              "verified": false,
+              "note": "Needs manual verification"
+            },
+            {
+              "shade_id": "SH_02",
+              "shade_number": "02",
+              "shade_name": "Pink Sorbet",
+              "hex": "#E8808A",
+              "rgb": {
+                "r": 232,
+                "g": 128,
+                "b": 138
+              },
+              "lab": {
+                "L": 65.3,
+                "a": 40.9,
+                "b": 12.6
+              },
+              "opacity": 95,
+              "gloss": 5,
+              "color_source": "name_semantic_estimate",
+              "confidence": 60,
+              "verified": false,
+              "note": "Needs manual verification"
+            },
+            {
+              "shade_id": "SH_03",
+              "shade_number": "03",
+              "shade_name": "Simply Brown",
+              "hex": "#8B5E52",
+              "rgb": {
+                "r": 139,
+                "g": 94,
+                "b": 82
+              },
+              "lab": {
+                "L": 44.4,
+                "a": 16.8,
+                "b": 14.3
+              },
+              "opacity": 95,
+              "gloss": 5,
+              "color_source": "name_semantic_estimate",
+              "confidence": 60,
+              "verified": false,
+              "note": "Needs manual verification"
+            },
+            {
+              "shade_id": "SH_04",
+              "shade_number": "04",
+              "shade_name": "Antique Pink",
+              "hex": "#E8808A",
+              "rgb": {
+                "r": 232,
+                "g": 128,
+                "b": 138
+              },
+              "lab": {
+                "L": 65.3,
+                "a": 40.9,
+                "b": 12.6
+              },
+              "opacity": 95,
+              "gloss": 5,
+              "color_source": "name_semantic_estimate",
+              "confidence": 60,
+              "verified": false,
+              "note": "Needs manual verification"
+            },
+            {
+              "shade_id": "SH_05",
+              "shade_number": "05",
+              "shade_name": "Fuschia Fever",
+              "hex": "#C08070",
+              "rgb": {
+                "r": 192,
+                "g": 128,
+                "b": 112
+              },
+              "lab": {
+                "L": 59.7,
+                "a": 22.8,
+                "b": 18.8
+              },
+              "opacity": 95,
+              "gloss": 5,
+              "color_source": "name_semantic_estimate",
+              "confidence": 30,
+              "verified": false,
+              "note": "Needs manual verification"
+            },
+            {
+              "shade_id": "SH_06",
+              "shade_number": "06",
+              "shade_name": "Delicate Pink",
+              "hex": "#E8808A",
+              "rgb": {
+                "r": 232,
+                "g": 128,
+                "b": 138
+              },
+              "lab": {
+                "L": 65.3,
+                "a": 40.9,
+                "b": 12.6
+              },
+              "opacity": 95,
+              "gloss": 5,
+              "color_source": "name_semantic_estimate",
+              "confidence": 60,
+              "verified": false,
+              "note": "Needs manual verification"
+            },
+            {
+              "shade_id": "SH_07",
+              "shade_number": "07",
+              "shade_name": "Rapsberry Hip",
+              "hex": "#A83055",
+              "rgb": {
+                "r": 168,
+                "g": 48,
+                "b": 85
+              },
+              "lab": {
+                "L": 39.7,
+                "a": 51.3,
+                "b": 6.7
+              },
+              "opacity": 95,
+              "gloss": 5,
+              "color_source": "name_semantic_estimate",
+              "confidence": 65,
+              "verified": false,
+              "note": "Needs manual verification"
+            },
+            {
+              "shade_id": "SH_08",
+              "shade_number": "08",
+              "shade_name": "Red Velvet",
+              "hex": "#C02030",
+              "rgb": {
+                "r": 192,
+                "g": 32,
+                "b": 48
+              },
+              "lab": {
+                "L": 41.9,
+                "a": 60.9,
+                "b": 33.4
+              },
+              "opacity": 95,
+              "gloss": 5,
+              "color_source": "name_semantic_estimate",
+              "confidence": 65,
+              "verified": false,
+              "note": "Needs manual verification"
+            },
+            {
+              "shade_id": "SH_09",
+              "shade_number": "09",
+              "shade_name": "Vibrant Red",
+              "hex": "#C02030",
+              "rgb": {
+                "r": 192,
+                "g": 32,
+                "b": 48
+              },
+              "lab": {
+                "L": 41.9,
+                "a": 60.9,
+                "b": 33.4
+              },
+              "opacity": 95,
+              "gloss": 5,
+              "color_source": "name_semantic_estimate",
+              "confidence": 65,
+              "verified": false,
+              "note": "Needs manual verification"
+            },
+            {
+              "shade_id": "SH_10",
+              "shade_number": "10",
+              "shade_name": "Stylish Mocca",
+              "hex": "#C08070",
+              "rgb": {
+                "r": 192,
+                "g": 128,
+                "b": 112
+              },
+              "lab": {
+                "L": 59.7,
+                "a": 22.8,
+                "b": 18.8
+              },
+              "opacity": 95,
+              "gloss": 5,
+              "color_source": "name_semantic_estimate",
+              "confidence": 30,
+              "verified": false,
+              "note": "Needs manual verification"
+            },
+            {
+              "shade_id": "SH_11",
+              "shade_number": "11",
+              "shade_name": "Cherrie Glam",
+              "hex": "#C07040",
+              "rgb": {
+                "r": 192,
+                "g": 112,
+                "b": 64
+              },
+              "lab": {
+                "L": 55.2,
+                "a": 27.4,
+                "b": 39.7
+              },
+              "opacity": 95,
+              "gloss": 5,
+              "color_source": "name_semantic_estimate",
+              "confidence": 50,
+              "verified": false,
+              "note": "Needs manual verification"
+            },
+            {
+              "shade_id": "SH_12",
+              "shade_number": "12",
+              "shade_name": "Lustrous Red",
+              "hex": "#C02030",
+              "rgb": {
+                "r": 192,
+                "g": 32,
+                "b": 48
+              },
+              "lab": {
+                "L": 41.9,
+                "a": 60.9,
+                "b": 33.4
+              },
+              "opacity": 95,
+              "gloss": 5,
+              "color_source": "name_semantic_estimate",
+              "confidence": 65,
+              "verified": false,
+              "note": "Needs manual verification"
+            },
+            {
+              "shade_id": "SH_13",
+              "shade_number": "13",
+              "shade_name": "Classic Brown",
+              "hex": "#8B5E52",
+              "rgb": {
+                "r": 139,
+                "g": 94,
+                "b": 82
+              },
+              "lab": {
+                "L": 44.4,
+                "a": 16.8,
+                "b": 14.3
+              },
+              "opacity": 95,
+              "gloss": 5,
+              "color_source": "name_semantic_estimate",
+              "confidence": 60,
+              "verified": false,
+              "note": "Needs manual verification"
+            },
+            {
+              "shade_id": "SH_14",
+              "shade_number": "14",
+              "shade_name": "Violet Pink",
+              "hex": "#E8808A",
+              "rgb": {
+                "r": 232,
+                "g": 128,
+                "b": 138
+              },
+              "lab": {
+                "L": 65.3,
+                "a": 40.9,
+                "b": 12.6
+              },
+              "opacity": 95,
+              "gloss": 5,
+              "color_source": "name_semantic_estimate",
+              "confidence": 60,
+              "verified": false,
+              "note": "Needs manual verification"
+            },
+            {
+              "shade_id": "SH_15",
+              "shade_number": "15",
+              "shade_name": "Rouge Red",
+              "hex": "#C02030",
+              "rgb": {
+                "r": 192,
+                "g": 32,
+                "b": 48
+              },
+              "lab": {
+                "L": 41.9,
+                "a": 60.9,
+                "b": 33.4
+              },
+              "opacity": 95,
+              "gloss": 5,
+              "color_source": "name_semantic_estimate",
+              "confidence": 65,
+              "verified": false,
+              "note": "Needs manual verification"
+            },
+            {
+              "shade_id": "SH_16",
+              "shade_number": "16",
+              "shade_name": "Smooth Latte",
+              "hex": "#A0624A",
+              "rgb": {
+                "r": 160,
+                "g": 98,
+                "b": 74
+              },
+              "lab": {
+                "L": 47.9,
+                "a": 22.5,
+                "b": 24.2
+              },
+              "opacity": 95,
+              "gloss": 5,
+              "color_source": "name_semantic_estimate",
+              "confidence": 60,
+              "verified": false,
+              "note": "Needs manual verification"
+            },
+            {
+              "shade_id": "SH_17",
+              "shade_number": "17",
+              "shade_name": "Passionate Red",
+              "hex": "#C02030",
+              "rgb": {
+                "r": 192,
+                "g": 32,
+                "b": 48
+              },
+              "lab": {
+                "L": 41.9,
+                "a": 60.9,
+                "b": 33.4
+              },
+              "opacity": 95,
+              "gloss": 5,
+              "color_source": "name_semantic_estimate",
+              "confidence": 65,
+              "verified": false,
+              "note": "Needs manual verification"
+            },
+            {
+              "shade_id": "SH_18",
+              "shade_number": "18",
+              "shade_name": "Sunset Orange",
+              "hex": "#E26030",
+              "rgb": {
+                "r": 226,
+                "g": 96,
+                "b": 48
+              },
+              "lab": {
+                "L": 56.8,
+                "a": 48.1,
+                "b": 50.9
+              },
+              "opacity": 95,
+              "gloss": 5,
+              "color_source": "name_semantic_estimate",
+              "confidence": 65,
+              "verified": false,
+              "note": "Needs manual verification"
+            },
+            {
+              "shade_id": "SH_19",
+              "shade_number": "19",
+              "shade_name": "Sunrise Nude",
+              "hex": "#C49A8A",
+              "rgb": {
+                "r": 196,
+                "g": 154,
+                "b": 138
+              },
+              "lab": {
+                "L": 67.0,
+                "a": 13.3,
+                "b": 14.4
+              },
+              "opacity": 95,
+              "gloss": 5,
+              "color_source": "name_semantic_estimate",
+              "confidence": 55,
+              "verified": false,
+              "note": "Needs manual verification"
+            }
+          ]
+        },
+        {
+          "product_id": "WD_LIP_002",
+          "brand_id": "WARDAH_001",
+          "product_name": "Wardah Exclusive Moist Lipstick",
+          "series": "Exclusive",
+          "finish": "satin",
+          "product_type": "lipstick_bullet",
+          "source_url": "https://www.wardahbeauty.com/en/product/make-up/exclusive-moist-lipstick",
+          "total_shades": 12,
+          "shades": [
+            {
+              "shade_id": "SH_20",
+              "shade_number": "20",
+              "shade_name": "Pink Pearl",
+              "hex": "#E8808A",
+              "rgb": {
+                "r": 232,
+                "g": 128,
+                "b": 138
+              },
+              "lab": {
+                "L": 65.3,
+                "a": 40.9,
+                "b": 12.6
+              },
+              "opacity": 95,
+              "gloss": 5,
+              "color_source": "name_semantic_estimate",
+              "confidence": 60,
+              "verified": false,
+              "note": "Needs manual verification"
+            },
+            {
+              "shade_id": "SH_21",
+              "shade_number": "21",
+              "shade_name": "Pink Orchid",
+              "hex": "#E8808A",
+              "rgb": {
+                "r": 232,
+                "g": 128,
+                "b": 138
+              },
+              "lab": {
+                "L": 65.3,
+                "a": 40.9,
+                "b": 12.6
+              },
+              "opacity": 95,
+              "gloss": 5,
+              "color_source": "name_semantic_estimate",
+              "confidence": 60,
+              "verified": false,
+              "note": "Needs manual verification"
+            },
+            {
+              "shade_id": "SH_23",
+              "shade_number": "23",
+              "shade_name": "Ruby Red",
+              "hex": "#C02030",
+              "rgb": {
+                "r": 192,
+                "g": 32,
+                "b": 48
+              },
+              "lab": {
+                "L": 41.9,
+                "a": 60.9,
+                "b": 33.4
+              },
+              "opacity": 95,
+              "gloss": 5,
+              "color_source": "name_semantic_estimate",
+              "confidence": 65,
+              "verified": false,
+              "note": "Needs manual verification"
+            },
+            {
+              "shade_id": "SH_26",
+              "shade_number": "26",
+              "shade_name": "Mango",
+              "hex": "#C08070",
+              "rgb": {
+                "r": 192,
+                "g": 128,
+                "b": 112
+              },
+              "lab": {
+                "L": 59.7,
+                "a": 22.8,
+                "b": 18.8
+              },
+              "opacity": 95,
+              "gloss": 5,
+              "color_source": "name_semantic_estimate",
+              "confidence": 30,
+              "verified": false,
+              "note": "Needs manual verification"
+            },
+            {
+              "shade_id": "SH_29",
+              "shade_number": "29",
+              "shade_name": "Lavender",
+              "hex": "#B080C0",
+              "rgb": {
+                "r": 176,
+                "g": 128,
+                "b": 192
+              },
+              "lab": {
+                "L": 60.3,
+                "a": 29.9,
+                "b": -26.2
+              },
+              "opacity": 95,
+              "gloss": 5,
+              "color_source": "name_semantic_estimate",
+              "confidence": 55,
+              "verified": false,
+              "note": "Needs manual verification"
+            },
+            {
+              "shade_id": "SH_30",
+              "shade_number": "30",
+              "shade_name": "Golden Coral",
+              "hex": "#E8896A",
+              "rgb": {
+                "r": 232,
+                "g": 137,
+                "b": 106
+              },
+              "lab": {
+                "L": 66.6,
+                "a": 33.2,
+                "b": 32.1
+              },
+              "opacity": 95,
+              "gloss": 5,
+              "color_source": "name_semantic_estimate",
+              "confidence": 62,
+              "verified": false,
+              "note": "Needs manual verification"
+            },
+            {
+              "shade_id": "SH_32",
+              "shade_number": "32",
+              "shade_name": "Sheer Brown",
+              "hex": "#8B5E52",
+              "rgb": {
+                "r": 139,
+                "g": 94,
+                "b": 82
+              },
+              "lab": {
+                "L": 44.4,
+                "a": 16.8,
+                "b": 14.3
+              },
+              "opacity": 95,
+              "gloss": 5,
+              "color_source": "name_semantic_estimate",
+              "confidence": 60,
+              "verified": false,
+              "note": "Needs manual verification"
+            },
+            {
+              "shade_id": "SH_35",
+              "shade_number": "35",
+              "shade_name": "Great Berry",
+              "hex": "#A83055",
+              "rgb": {
+                "r": 168,
+                "g": 48,
+                "b": 85
+              },
+              "lab": {
+                "L": 39.7,
+                "a": 51.3,
+                "b": 6.7
+              },
+              "opacity": 95,
+              "gloss": 5,
+              "color_source": "name_semantic_estimate",
+              "confidence": 65,
+              "verified": false,
+              "note": "Needs manual verification"
+            },
+            {
+              "shade_id": "SH_36",
+              "shade_number": "36",
+              "shade_name": "Sugary Pink",
+              "hex": "#E8808A",
+              "rgb": {
+                "r": 232,
+                "g": 128,
+                "b": 138
+              },
+              "lab": {
+                "L": 65.3,
+                "a": 40.9,
+                "b": 12.6
+              },
+              "opacity": 95,
+              "gloss": 5,
+              "color_source": "name_semantic_estimate",
+              "confidence": 60,
+              "verified": false,
+              "note": "Needs manual verification"
+            },
+            {
+              "shade_id": "SH_41",
+              "shade_number": "41",
+              "shade_name": "Charming Red",
+              "hex": "#C02030",
+              "rgb": {
+                "r": 192,
+                "g": 32,
+                "b": 48
+              },
+              "lab": {
+                "L": 41.9,
+                "a": 60.9,
+                "b": 33.4
+              },
+              "opacity": 95,
+              "gloss": 5,
+              "color_source": "name_semantic_estimate",
+              "confidence": 65,
+              "verified": false,
+              "note": "Needs manual verification"
+            },
+            {
+              "shade_id": "SH_43",
+              "shade_number": "43",
+              "shade_name": "Magnificent Red",
+              "hex": "#C02030",
+              "rgb": {
+                "r": 192,
+                "g": 32,
+                "b": 48
+              },
+              "lab": {
+                "L": 41.9,
+                "a": 60.9,
+                "b": 33.4
+              },
+              "opacity": 95,
+              "gloss": 5,
+              "color_source": "name_semantic_estimate",
+              "confidence": 65,
+              "verified": false,
+              "note": "Needs manual verification"
+            },
+            {
+              "shade_id": "SH_46",
+              "shade_number": "46",
+              "shade_name": "Chic Magenta",
+              "hex": "#D43070",
+              "rgb": {
+                "r": 212,
+                "g": 48,
+                "b": 112
+              },
+              "lab": {
+                "L": 48.6,
+                "a": 66.2,
+                "b": 3.7
+              },
+              "opacity": 95,
+              "gloss": 5,
+              "color_source": "name_semantic_estimate",
+              "confidence": 65,
+              "verified": false,
+              "note": "Needs manual verification"
+            }
+          ]
+        },
+        {
+          "product_id": "WD_LIP_003",
+          "brand_id": "WARDAH_001",
+          "product_name": "Wardah Exclusive Matte Lipstick",
+          "series": "Exclusive",
+          "finish": "matte",
+          "product_type": "lipstick_bullet",
+          "source_url": "https://www.wardahbeauty.com/en/product/make-up/exclusive-matte-lipstick",
+          "total_shades": 12,
+          "shades": [
+            {
+              "shade_id": "SH_01",
+              "shade_number": "01",
+              "shade_name": "Pink",
+              "hex": "#E8808A",
+              "rgb": {
+                "r": 232,
+                "g": 128,
+                "b": 138
+              },
+              "lab": {
+                "L": 65.3,
+                "a": 40.9,
+                "b": 12.6
+              },
+              "opacity": 95,
+              "gloss": 5,
+              "color_source": "name_semantic_estimate",
+              "confidence": 60,
+              "verified": false,
+              "note": "Needs manual verification"
+            },
+            {
+              "shade_id": "SH_02",
+              "shade_number": "02",
+              "shade_name": "Magenta",
+              "hex": "#D43070",
+              "rgb": {
+                "r": 212,
+                "g": 48,
+                "b": 112
+              },
+              "lab": {
+                "L": 48.6,
+                "a": 66.2,
+                "b": 3.7
+              },
+              "opacity": 95,
+              "gloss": 5,
+              "color_source": "name_semantic_estimate",
+              "confidence": 65,
+              "verified": false,
+              "note": "Needs manual verification"
+            },
+            {
+              "shade_id": "SH_03",
+              "shade_number": "03",
+              "shade_name": "Red",
+              "hex": "#C02030",
+              "rgb": {
+                "r": 192,
+                "g": 32,
+                "b": 48
+              },
+              "lab": {
+                "L": 41.9,
+                "a": 60.9,
+                "b": 33.4
+              },
+              "opacity": 95,
+              "gloss": 5,
+              "color_source": "name_semantic_estimate",
+              "confidence": 65,
+              "verified": false,
+              "note": "Needs manual verification"
+            },
+            {
+              "shade_id": "SH_04",
+              "shade_number": "04",
+              "shade_name": "Orange",
+              "hex": "#E26030",
+              "rgb": {
+                "r": 226,
+                "g": 96,
+                "b": 48
+              },
+              "lab": {
+                "L": 56.8,
+                "a": 48.1,
+                "b": 50.9
+              },
+              "opacity": 95,
+              "gloss": 5,
+              "color_source": "name_semantic_estimate",
+              "confidence": 65,
+              "verified": false,
+              "note": "Needs manual verification"
+            },
+            {
+              "shade_id": "SH_05",
+              "shade_number": "05",
+              "shade_name": "Peach",
+              "hex": "#E8896A",
+              "rgb": {
+                "r": 232,
+                "g": 137,
+                "b": 106
+              },
+              "lab": {
+                "L": 66.6,
+                "a": 33.2,
+                "b": 32.1
+              },
+              "opacity": 95,
+              "gloss": 5,
+              "color_source": "name_semantic_estimate",
+              "confidence": 62,
+              "verified": false,
+              "note": "Needs manual verification"
+            },
+            {
+              "shade_id": "SH_06",
+              "shade_number": "06",
+              "shade_name": "Dark Red",
+              "hex": "#C02030",
+              "rgb": {
+                "r": 192,
+                "g": 32,
+                "b": 48
+              },
+              "lab": {
+                "L": 41.9,
+                "a": 60.9,
+                "b": 33.4
+              },
+              "opacity": 95,
+              "gloss": 5,
+              "color_source": "name_semantic_estimate",
+              "confidence": 65,
+              "verified": false,
+              "note": "Needs manual verification"
+            },
+            {
+              "shade_id": "SH_09",
+              "shade_number": "09",
+              "shade_name": "True Red",
+              "hex": "#C02030",
+              "rgb": {
+                "r": 192,
+                "g": 32,
+                "b": 48
+              },
+              "lab": {
+                "L": 41.9,
+                "a": 60.9,
+                "b": 33.4
+              },
+              "opacity": 95,
+              "gloss": 5,
+              "color_source": "name_semantic_estimate",
+              "confidence": 65,
+              "verified": false,
+              "note": "Needs manual verification"
+            },
+            {
+              "shade_id": "SH_12",
+              "shade_number": "12",
+              "shade_name": "Maroon",
+              "hex": "#6A1020",
+              "rgb": {
+                "r": 106,
+                "g": 16,
+                "b": 32
+              },
+              "lab": {
+                "L": 22.1,
+                "a": 39.1,
+                "b": 15.6
+              },
+              "opacity": 95,
+              "gloss": 5,
+              "color_source": "name_semantic_estimate",
+              "confidence": 65,
+              "verified": false,
+              "note": "Needs manual verification"
+            },
+            {
+              "shade_id": "SH_13",
+              "shade_number": "13",
+              "shade_name": "Cocoa Look",
+              "hex": "#8B5E52",
+              "rgb": {
+                "r": 139,
+                "g": 94,
+                "b": 82
+              },
+              "lab": {
+                "L": 44.4,
+                "a": 16.8,
+                "b": 14.3
+              },
+              "opacity": 95,
+              "gloss": 5,
+              "color_source": "name_semantic_estimate",
+              "confidence": 60,
+              "verified": false,
+              "note": "Needs manual verification"
+            },
+            {
+              "shade_id": "SH_16",
+              "shade_number": "16",
+              "shade_name": "Summer Pink",
+              "hex": "#E8808A",
+              "rgb": {
+                "r": 232,
+                "g": 128,
+                "b": 138
+              },
+              "lab": {
+                "L": 65.3,
+                "a": 40.9,
+                "b": 12.6
+              },
+              "opacity": 95,
+              "gloss": 5,
+              "color_source": "name_semantic_estimate",
+              "confidence": 60,
+              "verified": false,
+              "note": "Needs manual verification"
+            },
+            {
+              "shade_id": "SH_17",
+              "shade_number": "17",
+              "shade_name": "Gorgeous Pink",
+              "hex": "#E8808A",
+              "rgb": {
+                "r": 232,
+                "g": 128,
+                "b": 138
+              },
+              "lab": {
+                "L": 65.3,
+                "a": 40.9,
+                "b": 12.6
+              },
+              "opacity": 95,
+              "gloss": 5,
+              "color_source": "name_semantic_estimate",
+              "confidence": 60,
+              "verified": false,
+              "note": "Needs manual verification"
+            },
+            {
+              "shade_id": "SH_18",
+              "shade_number": "18",
+              "shade_name": "Rosy Pink",
+              "hex": "#E8808A",
+              "rgb": {
+                "r": 232,
+                "g": 128,
+                "b": 138
+              },
+              "lab": {
+                "L": 65.3,
+                "a": 40.9,
+                "b": 12.6
+              },
+              "opacity": 95,
+              "gloss": 5,
+              "color_source": "name_semantic_estimate",
+              "confidence": 60,
+              "verified": false,
+              "note": "Needs manual verification"
+            }
+          ]
+        },
+        {
+          "product_id": "WD_LIP_004",
+          "brand_id": "WARDAH_001",
+          "product_name": "Wardah Colorfit Velvet Matte Lip Mousse",
+          "series": "Colorfit",
+          "finish": "velvet",
+          "product_type": "liquid_lipstick",
+          "source_url": "https://www.wardahbeauty.com/en/product/make-up/colorfit-velvet-matte-lip-mousse",
+          "total_shades": 14,
+          "shades": [
+            {
+              "shade_id": "SH_01",
+              "shade_number": "01",
+              "shade_name": "Brown Dreamer",
+              "hex": "#8B5E52",
+              "rgb": {
+                "r": 139,
+                "g": 94,
+                "b": 82
+              },
+              "lab": {
+                "L": 44.4,
+                "a": 16.8,
+                "b": 14.3
+              },
+              "opacity": 95,
+              "gloss": 5,
+              "color_source": "name_semantic_estimate",
+              "confidence": 60,
+              "verified": false,
+              "note": "Needs manual verification"
+            },
+            {
+              "shade_id": "SH_02",
+              "shade_number": "02",
+              "shade_name": "Joyful Orange",
+              "hex": "#E26030",
+              "rgb": {
+                "r": 226,
+                "g": 96,
+                "b": 48
+              },
+              "lab": {
+                "L": 56.8,
+                "a": 48.1,
+                "b": 50.9
+              },
+              "opacity": 95,
+              "gloss": 5,
+              "color_source": "name_semantic_estimate",
+              "confidence": 65,
+              "verified": false,
+              "note": "Needs manual verification"
+            },
+            {
+              "shade_id": "SH_03",
+              "shade_number": "03",
+              "shade_name": "Rose Ballerina",
+              "hex": "#E8808A",
+              "rgb": {
+                "r": 232,
+                "g": 128,
+                "b": 138
+              },
+              "lab": {
+                "L": 65.3,
+                "a": 40.9,
+                "b": 12.6
+              },
+              "opacity": 95,
+              "gloss": 5,
+              "color_source": "name_semantic_estimate",
+              "confidence": 60,
+              "verified": false,
+              "note": "Needs manual verification"
+            },
+            {
+              "shade_id": "SH_04",
+              "shade_number": "04",
+              "shade_name": "Pink Sweetheart",
+              "hex": "#E8808A",
+              "rgb": {
+                "r": 232,
+                "g": 128,
+                "b": 138
+              },
+              "lab": {
+                "L": 65.3,
+                "a": 40.9,
+                "b": 12.6
+              },
+              "opacity": 95,
+              "gloss": 5,
+              "color_source": "name_semantic_estimate",
+              "confidence": 60,
+              "verified": false,
+              "note": "Needs manual verification"
+            },
+            {
+              "shade_id": "SH_05",
+              "shade_number": "05",
+              "shade_name": "Artisan Mauve",
+              "hex": "#C17E8A",
+              "rgb": {
+                "r": 193,
+                "g": 126,
+                "b": 138
+              },
+              "lab": {
+                "L": 60.0,
+                "a": 27.6,
+                "b": 4.3
+              },
+              "opacity": 95,
+              "gloss": 5,
+              "color_source": "name_semantic_estimate",
+              "confidence": 60,
+              "verified": false,
+              "note": "Needs manual verification"
+            },
+            {
+              "shade_id": "SH_06",
+              "shade_number": "06",
+              "shade_name": "Fuchsia Lover",
+              "hex": "#D43070",
+              "rgb": {
+                "r": 212,
+                "g": 48,
+                "b": 112
+              },
+              "lab": {
+                "L": 48.6,
+                "a": 66.2,
+                "b": 3.7
+              },
+              "opacity": 95,
+              "gloss": 5,
+              "color_source": "name_semantic_estimate",
+              "confidence": 65,
+              "verified": false,
+              "note": "Needs manual verification"
+            },
+            {
+              "shade_id": "SH_07",
+              "shade_number": "07",
+              "shade_name": "Red Pioneer",
+              "hex": "#C02030",
+              "rgb": {
+                "r": 192,
+                "g": 32,
+                "b": 48
+              },
+              "lab": {
+                "L": 41.9,
+                "a": 60.9,
+                "b": 33.4
+              },
+              "opacity": 95,
+              "gloss": 5,
+              "color_source": "name_semantic_estimate",
+              "confidence": 65,
+              "verified": false,
+              "note": "Needs manual verification"
+            },
+            {
+              "shade_id": "SH_08",
+              "shade_number": "08",
+              "shade_name": "Brown Creator",
+              "hex": "#8B5E52",
+              "rgb": {
+                "r": 139,
+                "g": 94,
+                "b": 82
+              },
+              "lab": {
+                "L": 44.4,
+                "a": 16.8,
+                "b": 14.3
+              },
+              "opacity": 95,
+              "gloss": 5,
+              "color_source": "name_semantic_estimate",
+              "confidence": 60,
+              "verified": false,
+              "note": "Needs manual verification"
+            },
+            {
+              "shade_id": "SH_09",
+              "shade_number": "09",
+              "shade_name": "Ombre Charmer",
+              "hex": "#C08070",
+              "rgb": {
+                "r": 192,
+                "g": 128,
+                "b": 112
+              },
+              "lab": {
+                "L": 59.7,
+                "a": 22.8,
+                "b": 18.8
+              },
+              "opacity": 95,
+              "gloss": 5,
+              "color_source": "name_semantic_estimate",
+              "confidence": 30,
+              "verified": false,
+              "note": "Needs manual verification"
+            },
+            {
+              "shade_id": "SH_10",
+              "shade_number": "10",
+              "shade_name": "Lively Coral",
+              "hex": "#E8896A",
+              "rgb": {
+                "r": 232,
+                "g": 137,
+                "b": 106
+              },
+              "lab": {
+                "L": 66.6,
+                "a": 33.2,
+                "b": 32.1
+              },
+              "opacity": 95,
+              "gloss": 5,
+              "color_source": "name_semantic_estimate",
+              "confidence": 62,
+              "verified": false,
+              "note": "Needs manual verification"
+            },
+            {
+              "shade_id": "SH_11",
+              "shade_number": "11",
+              "shade_name": "Cherish Marmalade",
+              "hex": "#C08070",
+              "rgb": {
+                "r": 192,
+                "g": 128,
+                "b": 112
+              },
+              "lab": {
+                "L": 59.7,
+                "a": 22.8,
+                "b": 18.8
+              },
+              "opacity": 95,
+              "gloss": 5,
+              "color_source": "name_semantic_estimate",
+              "confidence": 30,
+              "verified": false,
+              "note": "Needs manual verification"
+            },
+            {
+              "shade_id": "SH_12",
+              "shade_number": "12",
+              "shade_name": "Chic Terracota",
+              "hex": "#C08070",
+              "rgb": {
+                "r": 192,
+                "g": 128,
+                "b": 112
+              },
+              "lab": {
+                "L": 59.7,
+                "a": 22.8,
+                "b": 18.8
+              },
+              "opacity": 95,
+              "gloss": 5,
+              "color_source": "name_semantic_estimate",
+              "confidence": 30,
+              "verified": false,
+              "note": "Needs manual verification"
+            },
+            {
+              "shade_id": "SH_13",
+              "shade_number": "13",
+              "shade_name": "Sweet Cinnamon",
+              "hex": "#955030",
+              "rgb": {
+                "r": 149,
+                "g": 80,
+                "b": 48
+              },
+              "lab": {
+                "L": 41.8,
+                "a": 26.0,
+                "b": 31.2
+              },
+              "opacity": 95,
+              "gloss": 5,
+              "color_source": "name_semantic_estimate",
+              "confidence": 58,
+              "verified": false,
+              "note": "Needs manual verification"
+            },
+            {
+              "shade_id": "SH_14",
+              "shade_number": "14",
+              "shade_name": "Dainty Caramel",
+              "hex": "#A0624A",
+              "rgb": {
+                "r": 160,
+                "g": 98,
+                "b": 74
+              },
+              "lab": {
+                "L": 47.9,
+                "a": 22.5,
+                "b": 24.2
+              },
+              "opacity": 95,
+              "gloss": 5,
+              "color_source": "name_semantic_estimate",
+              "confidence": 60,
+              "verified": false,
+              "note": "Needs manual verification"
+            }
+          ]
+        },
+        {
+          "product_id": "WD_LIP_005",
+          "brand_id": "WARDAH_001",
+          "product_name": "Wardah Glasting Liquid Lip",
+          "series": "Glasting",
+          "finish": "gloss",
+          "product_type": "liquid_lip_gloss",
+          "source_url": "https://www.wardahbeauty.com/en/product/make-up/wardah-glasting-liquid-lip",
+          "total_shades": 8,
+          "shades": [
+            {
+              "shade_id": "SH_01",
+              "shade_number": "01",
+              "shade_name": "Caramel Coat",
+              "hex": "#A0624A",
+              "rgb": {
+                "r": 160,
+                "g": 98,
+                "b": 74
+              },
+              "lab": {
+                "L": 47.9,
+                "a": 22.5,
+                "b": 24.2
+              },
+              "opacity": 95,
+              "gloss": 5,
+              "color_source": "name_semantic_estimate",
+              "confidence": 60,
+              "verified": false,
+              "note": "Needs manual verification"
+            },
+            {
+              "shade_id": "SH_02",
+              "shade_number": "02",
+              "shade_name": "Peach Polish",
+              "hex": "#E8896A",
+              "rgb": {
+                "r": 232,
+                "g": 137,
+                "b": 106
+              },
+              "lab": {
+                "L": 66.6,
+                "a": 33.2,
+                "b": 32.1
+              },
+              "opacity": 95,
+              "gloss": 5,
+              "color_source": "name_semantic_estimate",
+              "confidence": 62,
+              "verified": false,
+              "note": "Needs manual verification"
+            },
+            {
+              "shade_id": "SH_03",
+              "shade_number": "03",
+              "shade_name": "Dazzle Maple",
+              "hex": "#C08070",
+              "rgb": {
+                "r": 192,
+                "g": 128,
+                "b": 112
+              },
+              "lab": {
+                "L": 59.7,
+                "a": 22.8,
+                "b": 18.8
+              },
+              "opacity": 95,
+              "gloss": 5,
+              "color_source": "name_semantic_estimate",
+              "confidence": 30,
+              "verified": false,
+              "note": "Needs manual verification"
+            },
+            {
+              "shade_id": "SH_04",
+              "shade_number": "04",
+              "shade_name": "Rosewood Radiance",
+              "hex": "#C17E8A",
+              "rgb": {
+                "r": 193,
+                "g": 126,
+                "b": 138
+              },
+              "lab": {
+                "L": 60.0,
+                "a": 27.6,
+                "b": 4.3
+              },
+              "opacity": 95,
+              "gloss": 5,
+              "color_source": "name_semantic_estimate",
+              "confidence": 60,
+              "verified": false,
+              "note": "Needs manual verification"
+            },
+            {
+              "shade_id": "SH_05",
+              "shade_number": "05",
+              "shade_name": "Glazing Berry",
+              "hex": "#A83055",
+              "rgb": {
+                "r": 168,
+                "g": 48,
+                "b": 85
+              },
+              "lab": {
+                "L": 39.7,
+                "a": 51.3,
+                "b": 6.7
+              },
+              "opacity": 95,
+              "gloss": 5,
+              "color_source": "name_semantic_estimate",
+              "confidence": 65,
+              "verified": false,
+              "note": "Needs manual verification"
+            },
+            {
+              "shade_id": "SH_06",
+              "shade_number": "06",
+              "shade_name": "Ruby Sparks",
+              "hex": "#C08070",
+              "rgb": {
+                "r": 192,
+                "g": 128,
+                "b": 112
+              },
+              "lab": {
+                "L": 59.7,
+                "a": 22.8,
+                "b": 18.8
+              },
+              "opacity": 95,
+              "gloss": 5,
+              "color_source": "name_semantic_estimate",
+              "confidence": 30,
+              "verified": false,
+              "note": "Needs manual verification"
+            },
+            {
+              "shade_id": "SH_14",
+              "shade_number": "14",
+              "shade_name": "Latte Lacque",
+              "hex": "#A0624A",
+              "rgb": {
+                "r": 160,
+                "g": 98,
+                "b": 74
+              },
+              "lab": {
+                "L": 47.9,
+                "a": 22.5,
+                "b": 24.2
+              },
+              "opacity": 95,
+              "gloss": 5,
+              "color_source": "name_semantic_estimate",
+              "confidence": 60,
+              "verified": false,
+              "note": "Needs manual verification"
+            },
+            {
+              "shade_id": "SH_15",
+              "shade_number": "15",
+              "shade_name": "Blossom Veil",
+              "hex": "#C08070",
+              "rgb": {
+                "r": 192,
+                "g": 128,
+                "b": 112
+              },
+              "lab": {
+                "L": 59.7,
+                "a": 22.8,
+                "b": 18.8
+              },
+              "opacity": 95,
+              "gloss": 5,
+              "color_source": "name_semantic_estimate",
+              "confidence": 30,
+              "verified": false,
+              "note": "Needs manual verification"
+            }
+          ]
+        },
+        {
+          "product_id": "WD_LIP_006",
+          "brand_id": "WARDAH_001",
+          "product_name": "Wardah Everyday Cheek & Liptint",
+          "series": "Everyday",
+          "finish": "tint",
+          "product_type": "lip_tint",
+          "source_url": "https://www.wardahbeauty.com/en/product/make-up/wardah-everyday-cheek-liptint",
+          "total_shades": 3,
+          "shades": [
+            {
+              "shade_id": "SH_01",
+              "shade_number": "01",
+              "shade_name": "Pink Flush",
+              "hex": "#E8808A",
+              "rgb": {
+                "r": 232,
+                "g": 128,
+                "b": 138
+              },
+              "lab": {
+                "L": 65.3,
+                "a": 40.9,
+                "b": 12.6
+              },
+              "opacity": 95,
+              "gloss": 5,
+              "color_source": "name_semantic_estimate",
+              "confidence": 60,
+              "verified": false,
+              "note": "Needs manual verification"
+            },
+            {
+              "shade_id": "SH_02",
+              "shade_number": "02",
+              "shade_name": "Rosy Glow",
+              "hex": "#C08070",
+              "rgb": {
+                "r": 192,
+                "g": 128,
+                "b": 112
+              },
+              "lab": {
+                "L": 59.7,
+                "a": 22.8,
+                "b": 18.8
+              },
+              "opacity": 95,
+              "gloss": 5,
+              "color_source": "name_semantic_estimate",
+              "confidence": 30,
+              "verified": false,
+              "note": "Needs manual verification"
+            },
+            {
+              "shade_id": "SH_03",
+              "shade_number": "03",
+              "shade_name": "Coral Bliss",
+              "hex": "#E8896A",
+              "rgb": {
+                "r": 232,
+                "g": 137,
+                "b": 106
+              },
+              "lab": {
+                "L": 66.6,
+                "a": 33.2,
+                "b": 32.1
+              },
+              "opacity": 95,
+              "gloss": 5,
+              "color_source": "name_semantic_estimate",
+              "confidence": 62,
+              "verified": false,
+              "note": "Needs manual verification"
+            }
+          ]
+        },
+        {
+          "product_id": "WD_LIP_007",
+          "brand_id": "WARDAH_001",
+          "product_name": "Wardah Colorfit Ultralight Matte Lipstick",
+          "series": "Colorfit",
+          "finish": "matte",
+          "product_type": "lipstick_bullet",
+          "source_url": "https://www.wardahbeauty.com/en/product/make-up/colorfit-ultralight-matte-lipstick",
+          "total_shades": 8,
+          "shades": [
+            {
+              "shade_id": "SH_01",
+              "shade_number": "01",
+              "shade_name": "Dusty Rose",
+              "hex": "#C17E8A",
+              "rgb": {
+                "r": 193,
+                "g": 126,
+                "b": 138
+              },
+              "lab": {
+                "L": 60.0,
+                "a": 27.6,
+                "b": 4.3
+              },
+              "opacity": 95,
+              "gloss": 5,
+              "color_source": "name_semantic_estimate",
+              "confidence": 60,
+              "verified": false,
+              "note": "Needs manual verification"
+            },
+            {
+              "shade_id": "SH_02",
+              "shade_number": "02",
+              "shade_name": "Warm Nude",
+              "hex": "#C49A8A",
+              "rgb": {
+                "r": 196,
+                "g": 154,
+                "b": 138
+              },
+              "lab": {
+                "L": 67.0,
+                "a": 13.3,
+                "b": 14.4
+              },
+              "opacity": 95,
+              "gloss": 5,
+              "color_source": "name_semantic_estimate",
+              "confidence": 55,
+              "verified": false,
+              "note": "Needs manual verification"
+            },
+            {
+              "shade_id": "SH_03",
+              "shade_number": "03",
+              "shade_name": "Berry Babe",
+              "hex": "#A83055",
+              "rgb": {
+                "r": 168,
+                "g": 48,
+                "b": 85
+              },
+              "lab": {
+                "L": 39.7,
+                "a": 51.3,
+                "b": 6.7
+              },
+              "opacity": 95,
+              "gloss": 5,
+              "color_source": "name_semantic_estimate",
+              "confidence": 65,
+              "verified": false,
+              "note": "Needs manual verification"
+            },
+            {
+              "shade_id": "SH_04",
+              "shade_number": "04",
+              "shade_name": "Classic Red",
+              "hex": "#C02030",
+              "rgb": {
+                "r": 192,
+                "g": 32,
+                "b": 48
+              },
+              "lab": {
+                "L": 41.9,
+                "a": 60.9,
+                "b": 33.4
+              },
+              "opacity": 95,
+              "gloss": 5,
+              "color_source": "name_semantic_estimate",
+              "confidence": 65,
+              "verified": false,
+              "note": "Needs manual verification"
+            },
+            {
+              "shade_id": "SH_05",
+              "shade_number": "05",
+              "shade_name": "Soft Mauve",
+              "hex": "#C17E8A",
+              "rgb": {
+                "r": 193,
+                "g": 126,
+                "b": 138
+              },
+              "lab": {
+                "L": 60.0,
+                "a": 27.6,
+                "b": 4.3
+              },
+              "opacity": 95,
+              "gloss": 5,
+              "color_source": "name_semantic_estimate",
+              "confidence": 60,
+              "verified": false,
+              "note": "Needs manual verification"
+            },
+            {
+              "shade_id": "SH_06",
+              "shade_number": "06",
+              "shade_name": "Coral Rush",
+              "hex": "#E8896A",
+              "rgb": {
+                "r": 232,
+                "g": 137,
+                "b": 106
+              },
+              "lab": {
+                "L": 66.6,
+                "a": 33.2,
+                "b": 32.1
+              },
+              "opacity": 95,
+              "gloss": 5,
+              "color_source": "name_semantic_estimate",
+              "confidence": 62,
+              "verified": false,
+              "note": "Needs manual verification"
+            },
+            {
+              "shade_id": "SH_07",
+              "shade_number": "07",
+              "shade_name": "Deep Plum",
+              "hex": "#8B3070",
+              "rgb": {
+                "r": 139,
+                "g": 48,
+                "b": 112
+              },
+              "lab": {
+                "L": 35.5,
+                "a": 45.8,
+                "b": -17.2
+              },
+              "opacity": 95,
+              "gloss": 5,
+              "color_source": "name_semantic_estimate",
+              "confidence": 60,
+              "verified": false,
+              "note": "Needs manual verification"
+            },
+            {
+              "shade_id": "SH_08",
+              "shade_number": "08",
+              "shade_name": "Terracotta Haze",
+              "hex": "#B55A46",
+              "rgb": {
+                "r": 181,
+                "g": 90,
+                "b": 70
+              },
+              "lab": {
+                "L": 49.0,
+                "a": 35.1,
+                "b": 28.5
+              },
+              "opacity": 95,
+              "gloss": 5,
+              "color_source": "name_semantic_estimate",
+              "confidence": 62,
+              "verified": false,
+              "note": "Needs manual verification"
+            }
+          ]
+        },
+        {
+          "product_id": "WD_LIP_008",
+          "brand_id": "WARDAH_001",
+          "product_name": "Wardah Colorfit Last All Day Lip Paint",
+          "series": "Colorfit Around The World",
+          "finish": "matte",
+          "product_type": "liquid_lipstick",
+          "source_url": "https://www.wardahbeauty.com/en/product/make-up/colorfit-lip-paint",
+          "total_shades": 5,
+          "shades": [
+            {
+              "shade_id": "SH_19",
+              "shade_number": "19",
+              "shade_name": "Authentic Granada",
+              "hex": "#C08070",
+              "rgb": {
+                "r": 192,
+                "g": 128,
+                "b": 112
+              },
+              "lab": {
+                "L": 59.7,
+                "a": 22.8,
+                "b": 18.8
+              },
+              "opacity": 95,
+              "gloss": 5,
+              "color_source": "name_semantic_estimate",
+              "confidence": 30,
+              "verified": false,
+              "note": "Needs manual verification"
+            },
+            {
+              "shade_id": "SH_20",
+              "shade_number": "20",
+              "shade_name": "Mesmeric Paris",
+              "hex": "#C08070",
+              "rgb": {
+                "r": 192,
+                "g": 128,
+                "b": 112
+              },
+              "lab": {
+                "L": 59.7,
+                "a": 22.8,
+                "b": 18.8
+              },
+              "opacity": 95,
+              "gloss": 5,
+              "color_source": "name_semantic_estimate",
+              "confidence": 30,
+              "verified": false,
+              "note": "Needs manual verification"
+            },
+            {
+              "shade_id": "SH_21",
+              "shade_number": "21",
+              "shade_name": "Venice Muse",
+              "hex": "#C08070",
+              "rgb": {
+                "r": 192,
+                "g": 128,
+                "b": 112
+              },
+              "lab": {
+                "L": 59.7,
+                "a": 22.8,
+                "b": 18.8
+              },
+              "opacity": 95,
+              "gloss": 5,
+              "color_source": "name_semantic_estimate",
+              "confidence": 30,
+              "verified": false,
+              "note": "Needs manual verification"
+            },
+            {
+              "shade_id": "SH_22",
+              "shade_number": "22",
+              "shade_name": "Panoramic Istanbul",
+              "hex": "#C08070",
+              "rgb": {
+                "r": 192,
+                "g": 128,
+                "b": 112
+              },
+              "lab": {
+                "L": 59.7,
+                "a": 22.8,
+                "b": 18.8
+              },
+              "opacity": 95,
+              "gloss": 5,
+              "color_source": "name_semantic_estimate",
+              "confidence": 30,
+              "verified": false,
+              "note": "Needs manual verification"
+            },
+            {
+              "shade_id": "SH_23",
+              "shade_number": "23",
+              "shade_name": "Kyoto Adore",
+              "hex": "#C08070",
+              "rgb": {
+                "r": 192,
+                "g": 128,
+                "b": 112
+              },
+              "lab": {
+                "L": 59.7,
+                "a": 22.8,
+                "b": 18.8
+              },
+              "opacity": 95,
+              "gloss": 5,
+              "color_source": "name_semantic_estimate",
+              "confidence": 30,
+              "verified": false,
+              "note": "Needs manual verification"
+            }
+          ]
+        }
+      ],
+      "summary": {
+        "total_products": 8,
+        "total_shades": 81,
+        "verified_shades": 0,
+        "pending_verification": 81,
+        "finish_breakdown": {
+          "satin": 31,
+          "matte": 25,
+          "velvet": 14,
+          "gloss": 8,
+          "tint": 3
+        }
+      }
+    },
+    {
+      "brand_id": "MAYBELLINE_001",
+      "brand_name": "Maybelline New York",
+      "brand_name_short": "Maybelline",
+      "brand_country": "USA",
+      "brand_website": "https://www.maybelline.co.id",
+      "parent_company": "L'Oréal Group",
+      "halal_certified": false,
+      "bpom_registered": true,
+      "market_position": "Market Leader Indonesia (20.64% share, Q1 2026)",
+      "built_at": "2026-06-28T03:20:51.525887",
+      "data_source": "maybelline.co.id official pages (web reconnaissance)",
+      "version": "1.0",
+      "products": [
+        {
+          "product_id": "MBL_LIP_001",
+          "brand_id": "MAYBELLINE_001",
+          "product_name": "SuperStay Matte Ink Liquid Lipstick",
+          "series": "SuperStay",
+          "finish": "matte",
+          "product_type": "liquid_lipstick",
+          "wear_time_hours": "16 jam",
+          "price_idr": 132500,
+          "source_url": "https://www.maybelline.co.id/all-products/lips/lip-cream/super-stay-matte-ink-liquid-lipstick",
+          "total_shades": 50,
+          "shades": [
+            {
+              "shade_id": "MBL_001_015",
+              "shade_number": "15",
+              "shade_name": "Lover",
+              "hex": "#D05060",
+              "rgb": {
+                "r": 208,
+                "g": 80,
+                "b": 96
+              },
+              "lab": {
+                "L": 51.8,
+                "a": 51.8,
+                "b": 17.7
+              },
+              "undertone": "cool",
+              "finish_override": null,
+              "color_source": "manual_reference",
+              "confidence": 75,
+              "verified": false
+            },
+            {
+              "shade_id": "MBL_001_020",
+              "shade_number": "20",
+              "shade_name": "Pioneer",
+              "hex": "#C03040",
+              "rgb": {
+                "r": 192,
+                "g": 48,
+                "b": 64
+              },
+              "lab": {
+                "L": 43.8,
+                "a": 57.1,
+                "b": 26.0
+              },
+              "undertone": "cool",
+              "finish_override": null,
+              "color_source": "manual_reference",
+              "confidence": 75,
+              "verified": false
+            },
+            {
+              "shade_id": "MBL_001_025",
+              "shade_number": "25",
+              "shade_name": "Heroine",
+              "hex": "#8B2040",
+              "rgb": {
+                "r": 139,
+                "g": 32,
+                "b": 64
+              },
+              "lab": {
+                "L": 31.6,
+                "a": 46.4,
+                "b": 7.9
+              },
+              "undertone": "cool",
+              "finish_override": null,
+              "color_source": "manual_reference",
+              "confidence": 75,
+              "verified": false
+            },
+            {
+              "shade_id": "MBL_001_050",
+              "shade_number": "50",
+              "shade_name": "Voyager",
+              "hex": "#7A1828",
+              "rgb": {
+                "r": 122,
+                "g": 24,
+                "b": 40
+              },
+              "lab": {
+                "L": 26.6,
+                "a": 42.1,
+                "b": 16.6
+              },
+              "undertone": "cool",
+              "finish_override": null,
+              "color_source": "manual_reference",
+              "confidence": 75,
+              "verified": false
+            },
+            {
+              "shade_id": "MBL_001_060",
+              "shade_number": "60",
+              "shade_name": "Poet",
+              "hex": "#C84858",
+              "rgb": {
+                "r": 200,
+                "g": 72,
+                "b": 88
+              },
+              "lab": {
+                "L": 49.0,
+                "a": 52.0,
+                "b": 18.5
+              },
+              "undertone": "cool",
+              "finish_override": null,
+              "color_source": "manual_reference",
+              "confidence": 75,
+              "verified": false
+            },
+            {
+              "shade_id": "MBL_001_065",
+              "shade_number": "65",
+              "shade_name": "Seductress",
+              "hex": "#A83050",
+              "rgb": {
+                "r": 168,
+                "g": 48,
+                "b": 80
+              },
+              "lab": {
+                "L": 39.6,
+                "a": 50.9,
+                "b": 9.6
+              },
+              "undertone": "cool",
+              "finish_override": null,
+              "color_source": "manual_reference",
+              "confidence": 75,
+              "verified": false
+            },
+            {
+              "shade_id": "MBL_001_070",
+              "shade_number": "70",
+              "shade_name": "Amazonian",
+              "hex": "#C02030",
+              "rgb": {
+                "r": 192,
+                "g": 32,
+                "b": 48
+              },
+              "lab": {
+                "L": 41.9,
+                "a": 60.9,
+                "b": 33.4
+              },
+              "undertone": "warm",
+              "finish_override": null,
+              "color_source": "manual_reference",
+              "confidence": 75,
+              "verified": false
+            },
+            {
+              "shade_id": "MBL_001_075",
+              "shade_number": "75",
+              "shade_name": "Fighter",
+              "hex": "#B02830",
+              "rgb": {
+                "r": 176,
+                "g": 40,
+                "b": 48
+              },
+              "lab": {
+                "L": 39.5,
+                "a": 54.1,
+                "b": 29.8
+              },
+              "undertone": "neutral",
+              "finish_override": null,
+              "color_source": "manual_reference",
+              "confidence": 75,
+              "verified": false
+            },
+            {
+              "shade_id": "MBL_001_080",
+              "shade_number": "80",
+              "shade_name": "Ruler",
+              "hex": "#901828",
+              "rgb": {
+                "r": 144,
+                "g": 24,
+                "b": 40
+              },
+              "lab": {
+                "L": 31.2,
+                "a": 48.8,
+                "b": 23.3
+              },
+              "undertone": "cool",
+              "finish_override": null,
+              "color_source": "manual_reference",
+              "confidence": 75,
+              "verified": false
+            },
+            {
+              "shade_id": "MBL_001_115",
+              "shade_number": "115",
+              "shade_name": "Founder",
+              "hex": "#C05848",
+              "rgb": {
+                "r": 192,
+                "g": 88,
+                "b": 72
+              },
+              "lab": {
+                "L": 50.3,
+                "a": 40.5,
+                "b": 29.3
+              },
+              "undertone": "warm",
+              "finish_override": null,
+              "color_source": "manual_reference",
+              "confidence": 75,
+              "verified": false
+            },
+            {
+              "shade_id": "MBL_001_117",
+              "shade_number": "117",
+              "shade_name": "Groundbreaker",
+              "hex": "#B04838",
+              "rgb": {
+                "r": 176,
+                "g": 72,
+                "b": 56
+              },
+              "lab": {
+                "L": 44.5,
+                "a": 41.4,
+                "b": 30.9
+              },
+              "undertone": "warm",
+              "finish_override": null,
+              "color_source": "manual_reference",
+              "confidence": 75,
+              "verified": false
+            },
+            {
+              "shade_id": "MBL_001_118",
+              "shade_number": "118",
+              "shade_name": "Dancer",
+              "hex": "#D06858",
+              "rgb": {
+                "r": 208,
+                "g": 104,
+                "b": 88
+              },
+              "lab": {
+                "L": 56.1,
+                "a": 39.6,
+                "b": 28.1
+              },
+              "undertone": "warm",
+              "finish_override": null,
+              "color_source": "manual_reference",
+              "confidence": 75,
+              "verified": false
+            },
+            {
+              "shade_id": "MBL_001_120",
+              "shade_number": "120",
+              "shade_name": "Artist",
+              "hex": "#E07060",
+              "rgb": {
+                "r": 224,
+                "g": 112,
+                "b": 96
+              },
+              "lab": {
+                "L": 60.1,
+                "a": 42.2,
+                "b": 29.2
+              },
+              "undertone": "warm",
+              "finish_override": null,
+              "color_source": "manual_reference",
+              "confidence": 75,
+              "verified": false
+            },
+            {
+              "shade_id": "MBL_001_125",
+              "shade_number": "125",
+              "shade_name": "Inspirer",
+              "hex": "#D08070",
+              "rgb": {
+                "r": 208,
+                "g": 128,
+                "b": 112
+              },
+              "lab": {
+                "L": 61.7,
+                "a": 29.2,
+                "b": 21.8
+              },
+              "undertone": "warm",
+              "finish_override": null,
+              "color_source": "manual_reference",
+              "confidence": 75,
+              "verified": false
+            },
+            {
+              "shade_id": "MBL_001_130",
+              "shade_number": "130",
+              "shade_name": "Selfstarter",
+              "hex": "#E09070",
+              "rgb": {
+                "r": 224,
+                "g": 144,
+                "b": 112
+              },
+              "lab": {
+                "L": 67.3,
+                "a": 26.9,
+                "b": 29.5
+              },
+              "undertone": "warm",
+              "finish_override": null,
+              "color_source": "manual_reference",
+              "confidence": 75,
+              "verified": false
+            },
+            {
+              "shade_id": "MBL_001_135",
+              "shade_number": "135",
+              "shade_name": "Globetrotter",
+              "hex": "#C06850",
+              "rgb": {
+                "r": 192,
+                "g": 104,
+                "b": 80
+              },
+              "lab": {
+                "L": 53.7,
+                "a": 32.8,
+                "b": 29.1
+              },
+              "undertone": "warm",
+              "finish_override": null,
+              "color_source": "manual_reference",
+              "confidence": 75,
+              "verified": false
+            },
+            {
+              "shade_id": "MBL_001_150",
+              "shade_number": "150",
+              "shade_name": "Savant",
+              "hex": "#A85040",
+              "rgb": {
+                "r": 168,
+                "g": 80,
+                "b": 64
+              },
+              "lab": {
+                "L": 44.8,
+                "a": 34.8,
+                "b": 26.4
+              },
+              "undertone": "warm",
+              "finish_override": null,
+              "color_source": "manual_reference",
+              "confidence": 75,
+              "verified": false
+            },
+            {
+              "shade_id": "MBL_001_155",
+              "shade_number": "155",
+              "shade_name": "Pathfinder",
+              "hex": "#C07868",
+              "rgb": {
+                "r": 192,
+                "g": 120,
+                "b": 104
+              },
+              "lab": {
+                "L": 57.7,
+                "a": 26.4,
+                "b": 20.6
+              },
+              "undertone": "warm",
+              "finish_override": null,
+              "color_source": "manual_reference",
+              "confidence": 75,
+              "verified": false
+            },
+            {
+              "shade_id": "MBL_001_160",
+              "shade_number": "160",
+              "shade_name": "Mover",
+              "hex": "#D07060",
+              "rgb": {
+                "r": 208,
+                "g": 112,
+                "b": 96
+              },
+              "lab": {
+                "L": 57.9,
+                "a": 36.2,
+                "b": 25.8
+              },
+              "undertone": "warm",
+              "finish_override": null,
+              "color_source": "manual_reference",
+              "confidence": 75,
+              "verified": false
+            },
+            {
+              "shade_id": "MBL_001_170",
+              "shade_number": "170",
+              "shade_name": "Initiator",
+              "hex": "#E08878",
+              "rgb": {
+                "r": 224,
+                "g": 136,
+                "b": 120
+              },
+              "lab": {
+                "L": 65.6,
+                "a": 31.9,
+                "b": 22.9
+              },
+              "undertone": "warm",
+              "finish_override": null,
+              "color_source": "manual_reference",
+              "confidence": 75,
+              "verified": false
+            },
+            {
+              "shade_id": "MBL_001_175",
+              "shade_number": "175",
+              "shade_name": "Ringleader",
+              "hex": "#C06058",
+              "rgb": {
+                "r": 192,
+                "g": 96,
+                "b": 88
+              },
+              "lab": {
+                "L": 52.2,
+                "a": 37.7,
+                "b": 22.5
+              },
+              "undertone": "warm",
+              "finish_override": null,
+              "color_source": "manual_reference",
+              "confidence": 75,
+              "verified": false
+            },
+            {
+              "shade_id": "MBL_001_180",
+              "shade_number": "180",
+              "shade_name": "Revolutionary",
+              "hex": "#B05048",
+              "rgb": {
+                "r": 176,
+                "g": 80,
+                "b": 72
+              },
+              "lab": {
+                "L": 46.2,
+                "a": 38.5,
+                "b": 23.7
+              },
+              "undertone": "neutral",
+              "finish_override": null,
+              "color_source": "manual_reference",
+              "confidence": 75,
+              "verified": false
+            },
+            {
+              "shade_id": "MBL_001_205",
+              "shade_number": "205",
+              "shade_name": "Assertive",
+              "hex": "#C85068",
+              "rgb": {
+                "r": 200,
+                "g": 80,
+                "b": 104
+              },
+              "lab": {
+                "L": 50.7,
+                "a": 49.8,
+                "b": 11.2
+              },
+              "undertone": "cool",
+              "finish_override": null,
+              "color_source": "manual_reference",
+              "confidence": 75,
+              "verified": false
+            },
+            {
+              "shade_id": "MBL_001_210",
+              "shade_number": "210",
+              "shade_name": "Versatile",
+              "hex": "#D06878",
+              "rgb": {
+                "r": 208,
+                "g": 104,
+                "b": 120
+              },
+              "lab": {
+                "L": 56.8,
+                "a": 42.6,
+                "b": 10.4
+              },
+              "undertone": "neutral",
+              "finish_override": null,
+              "color_source": "manual_reference",
+              "confidence": 75,
+              "verified": false
+            },
+            {
+              "shade_id": "MBL_001_220",
+              "shade_number": "220",
+              "shade_name": "Ambitious",
+              "hex": "#E08888",
+              "rgb": {
+                "r": 224,
+                "g": 136,
+                "b": 136
+              },
+              "lab": {
+                "L": 65.9,
+                "a": 33.6,
+                "b": 14.4
+              },
+              "undertone": "cool",
+              "finish_override": null,
+              "color_source": "manual_reference",
+              "confidence": 75,
+              "verified": false
+            },
+            {
+              "shade_id": "MBL_001_225",
+              "shade_number": "225",
+              "shade_name": "Delicate",
+              "hex": "#E09898",
+              "rgb": {
+                "r": 224,
+                "g": 152,
+                "b": 152
+              },
+              "lab": {
+                "L": 69.9,
+                "a": 27.0,
+                "b": 11.0
+              },
+              "undertone": "cool",
+              "finish_override": null,
+              "color_source": "manual_reference",
+              "confidence": 75,
+              "verified": false
+            },
+            {
+              "shade_id": "MBL_001_230",
+              "shade_number": "230",
+              "shade_name": "Transformer",
+              "hex": "#B04060",
+              "rgb": {
+                "r": 176,
+                "g": 64,
+                "b": 96
+              },
+              "lab": {
+                "L": 43.9,
+                "a": 48.3,
+                "b": 5.8
+              },
+              "undertone": "cool",
+              "finish_override": null,
+              "color_source": "manual_reference",
+              "confidence": 75,
+              "verified": false
+            },
+            {
+              "shade_id": "MBL_001_245",
+              "shade_number": "245",
+              "shade_name": "Seeker",
+              "hex": "#A83060",
+              "rgb": {
+                "r": 168,
+                "g": 48,
+                "b": 96
+              },
+              "lab": {
+                "L": 40.1,
+                "a": 52.3,
+                "b": 0.2
+              },
+              "undertone": "cool",
+              "finish_override": null,
+              "color_source": "manual_reference",
+              "confidence": 75,
+              "verified": false
+            },
+            {
+              "shade_id": "MBL_001_285",
+              "shade_number": "285",
+              "shade_name": "Gritty",
+              "hex": "#6A1828",
+              "rgb": {
+                "r": 106,
+                "g": 24,
+                "b": 40
+              },
+              "lab": {
+                "L": 23.2,
+                "a": 36.9,
+                "b": 11.6
+              },
+              "undertone": "cool",
+              "finish_override": null,
+              "color_source": "manual_reference",
+              "confidence": 75,
+              "verified": false
+            },
+            {
+              "shade_id": "MBL_001_305",
+              "shade_number": "305",
+              "shade_name": "Unconventional",
+              "hex": "#8B3058",
+              "rgb": {
+                "r": 139,
+                "g": 48,
+                "b": 88
+              },
+              "lab": {
+                "L": 34.6,
+                "a": 42.5,
+                "b": -3.3
+              },
+              "undertone": "cool",
+              "finish_override": null,
+              "color_source": "manual_reference",
+              "confidence": 75,
+              "verified": false
+            },
+            {
+              "shade_id": "MBL_001_315",
+              "shade_number": "315",
+              "shade_name": "Extraordinary",
+              "hex": "#7A2050",
+              "rgb": {
+                "r": 122,
+                "g": 32,
+                "b": 80
+              },
+              "lab": {
+                "L": 28.8,
+                "a": 43.0,
+                "b": -7.2
+              },
+              "undertone": "cool",
+              "finish_override": null,
+              "color_source": "manual_reference",
+              "confidence": 75,
+              "verified": false
+            },
+            {
+              "shade_id": "MBL_001_325",
+              "shade_number": "325",
+              "shade_name": "Shotcaller",
+              "hex": "#A04058",
+              "rgb": {
+                "r": 160,
+                "g": 64,
+                "b": 88
+              },
+              "lab": {
+                "L": 41.0,
+                "a": 42.1,
+                "b": 6.3
+              },
+              "undertone": "cool",
+              "finish_override": null,
+              "color_source": "manual_reference",
+              "confidence": 75,
+              "verified": false
+            },
+            {
+              "shade_id": "MBL_001_335",
+              "shade_number": "335",
+              "shade_name": "Hustler",
+              "hex": "#C04870",
+              "rgb": {
+                "r": 192,
+                "g": 72,
+                "b": 112
+              },
+              "lab": {
+                "L": 48.3,
+                "a": 51.6,
+                "b": 2.7
+              },
+              "undertone": "cool",
+              "finish_override": null,
+              "color_source": "manual_reference",
+              "confidence": 75,
+              "verified": false
+            },
+            {
+              "shade_id": "MBL_001_340",
+              "shade_number": "340",
+              "shade_name": "Exhilarator",
+              "hex": "#D05878",
+              "rgb": {
+                "r": 208,
+                "g": 88,
+                "b": 120
+              },
+              "lab": {
+                "L": 53.8,
+                "a": 50.4,
+                "b": 6.1
+              },
+              "undertone": "cool",
+              "finish_override": null,
+              "color_source": "manual_reference",
+              "confidence": 75,
+              "verified": false
+            },
+            {
+              "shade_id": "MBL_001_350",
+              "shade_number": "350",
+              "shade_name": "Freethinker",
+              "hex": "#B85068",
+              "rgb": {
+                "r": 184,
+                "g": 80,
+                "b": 104
+              },
+              "lab": {
+                "L": 48.2,
+                "a": 44.3,
+                "b": 7.3
+              },
+              "undertone": "cool",
+              "finish_override": null,
+              "color_source": "manual_reference",
+              "confidence": 75,
+              "verified": false
+            },
+            {
+              "shade_id": "MBL_001_355",
+              "shade_number": "355",
+              "shade_name": "Shaker",
+              "hex": "#D06888",
+              "rgb": {
+                "r": 208,
+                "g": 104,
+                "b": 136
+              },
+              "lab": {
+                "L": 57.2,
+                "a": 44.4,
+                "b": 1.6
+              },
+              "undertone": "cool",
+              "finish_override": null,
+              "color_source": "manual_reference",
+              "confidence": 75,
+              "verified": false
+            },
+            {
+              "shade_id": "MBL_001_360",
+              "shade_number": "360",
+              "shade_name": "Discoverer",
+              "hex": "#C85880",
+              "rgb": {
+                "r": 200,
+                "g": 88,
+                "b": 128
+              },
+              "lab": {
+                "L": 52.8,
+                "a": 48.6,
+                "b": -0.2
+              },
+              "undertone": "cool",
+              "finish_override": null,
+              "color_source": "manual_reference",
+              "confidence": 75,
+              "verified": false
+            },
+            {
+              "shade_id": "MBL_001_365",
+              "shade_number": "365",
+              "shade_name": "Enthusiast",
+              "hex": "#E07898",
+              "rgb": {
+                "r": 224,
+                "g": 120,
+                "b": 152
+              },
+              "lab": {
+                "L": 63.0,
+                "a": 43.8,
+                "b": 1.1
+              },
+              "undertone": "cool",
+              "finish_override": null,
+              "color_source": "manual_reference",
+              "confidence": 75,
+              "verified": false
+            },
+            {
+              "shade_id": "MBL_001_370",
+              "shade_number": "370",
+              "shade_name": "Overseer",
+              "hex": "#A03060",
+              "rgb": {
+                "r": 160,
+                "g": 48,
+                "b": 96
+              },
+              "lab": {
+                "L": 38.6,
+                "a": 50.0,
+                "b": -2.1
+              },
+              "undertone": "cool",
+              "finish_override": null,
+              "color_source": "manual_reference",
+              "confidence": 75,
+              "verified": false
+            },
+            {
+              "shade_id": "MBL_001_375",
+              "shade_number": "375",
+              "shade_name": "Peacekeeper",
+              "hex": "#C06880",
+              "rgb": {
+                "r": 192,
+                "g": 104,
+                "b": 128
+              },
+              "lab": {
+                "L": 54.7,
+                "a": 37.8,
+                "b": 2.5
+              },
+              "undertone": "cool",
+              "finish_override": null,
+              "color_source": "manual_reference",
+              "confidence": 75,
+              "verified": false
+            },
+            {
+              "shade_id": "MBL_001_380",
+              "shade_number": "380",
+              "shade_name": "Enchanter",
+              "hex": "#D07888",
+              "rgb": {
+                "r": 208,
+                "g": 120,
+                "b": 136
+              },
+              "lab": {
+                "L": 60.4,
+                "a": 36.1,
+                "b": 6.4
+              },
+              "undertone": "cool",
+              "finish_override": null,
+              "color_source": "manual_reference",
+              "confidence": 75,
+              "verified": false
+            },
+            {
+              "shade_id": "MBL_001_385",
+              "shade_number": "385",
+              "shade_name": "Validator",
+              "hex": "#E08898",
+              "rgb": {
+                "r": 224,
+                "g": 136,
+                "b": 152
+              },
+              "lab": {
+                "L": 66.3,
+                "a": 35.5,
+                "b": 5.9
+              },
+              "undertone": "cool",
+              "finish_override": null,
+              "color_source": "manual_reference",
+              "confidence": 75,
+              "verified": false
+            },
+            {
+              "shade_id": "MBL_001_500",
+              "shade_number": "500",
+              "shade_name": "Insider",
+              "hex": "#A06858",
+              "rgb": {
+                "r": 160,
+                "g": 104,
+                "b": 88
+              },
+              "lab": {
+                "L": 49.6,
+                "a": 20.5,
+                "b": 18.3
+              },
+              "undertone": "warm",
+              "finish_override": null,
+              "color_source": "manual_reference",
+              "confidence": 75,
+              "verified": false
+            },
+            {
+              "shade_id": "MBL_001_505",
+              "shade_number": "505",
+              "shade_name": "Entertainer",
+              "hex": "#B07868",
+              "rgb": {
+                "r": 176,
+                "g": 120,
+                "b": 104
+              },
+              "lab": {
+                "L": 55.8,
+                "a": 19.9,
+                "b": 17.7
+              },
+              "undertone": "warm",
+              "finish_override": null,
+              "color_source": "manual_reference",
+              "confidence": 75,
+              "verified": false
+            },
+            {
+              "shade_id": "MBL_001_510",
+              "shade_number": "510",
+              "shade_name": "Charmer",
+              "hex": "#C08878",
+              "rgb": {
+                "r": 192,
+                "g": 136,
+                "b": 120
+              },
+              "lab": {
+                "L": 61.8,
+                "a": 19.3,
+                "b": 17.1
+              },
+              "undertone": "warm",
+              "finish_override": null,
+              "color_source": "manual_reference",
+              "confidence": 75,
+              "verified": false
+            },
+            {
+              "shade_id": "MBL_001_515",
+              "shade_number": "515",
+              "shade_name": "Renegade",
+              "hex": "#906050",
+              "rgb": {
+                "r": 144,
+                "g": 96,
+                "b": 80
+              },
+              "lab": {
+                "L": 45.5,
+                "a": 17.5,
+                "b": 17.1
+              },
+              "undertone": "warm",
+              "finish_override": null,
+              "color_source": "manual_reference",
+              "confidence": 75,
+              "verified": false
+            },
+            {
+              "shade_id": "MBL_001_520",
+              "shade_number": "520",
+              "shade_name": "Champion",
+              "hex": "#B07060",
+              "rgb": {
+                "r": 176,
+                "g": 112,
+                "b": 96
+              },
+              "lab": {
+                "L": 53.7,
+                "a": 23.5,
+                "b": 19.4
+              },
+              "undertone": "warm",
+              "finish_override": null,
+              "color_source": "manual_reference",
+              "confidence": 75,
+              "verified": false
+            },
+            {
+              "shade_id": "MBL_001_530",
+              "shade_number": "530",
+              "shade_name": "Warrior",
+              "hex": "#A06050",
+              "rgb": {
+                "r": 160,
+                "g": 96,
+                "b": 80
+              },
+              "lab": {
+                "L": 47.5,
+                "a": 24.2,
+                "b": 20.2
+              },
+              "undertone": "warm",
+              "finish_override": null,
+              "color_source": "manual_reference",
+              "confidence": 75,
+              "verified": false
+            },
+            {
+              "shade_id": "MBL_001_535",
+              "shade_number": "535",
+              "shade_name": "Wildcard",
+              "hex": "#C09080",
+              "rgb": {
+                "r": 192,
+                "g": 144,
+                "b": 128
+              },
+              "lab": {
+                "L": 63.9,
+                "a": 15.9,
+                "b": 15.6
+              },
+              "undertone": "neutral",
+              "finish_override": null,
+              "color_source": "manual_reference",
+              "confidence": 75,
+              "verified": false
+            },
+            {
+              "shade_id": "MBL_001_545",
+              "shade_number": "545",
+              "shade_name": "Disrupter",
+              "hex": "#885040",
+              "rgb": {
+                "r": 136,
+                "g": 80,
+                "b": 64
+              },
+              "lab": {
+                "L": 40.2,
+                "a": 21.7,
+                "b": 19.4
+              },
+              "undertone": "warm",
+              "finish_override": null,
+              "color_source": "manual_reference",
+              "confidence": 75,
+              "verified": false
+            }
+          ]
+        },
+        {
+          "product_id": "MBL_LIP_002",
+          "brand_id": "MAYBELLINE_001",
+          "product_name": "SuperStay Vinyl Ink",
+          "series": "SuperStay",
+          "finish": "gloss",
+          "product_type": "liquid_lipstick",
+          "wear_time_hours": "16 jam",
+          "price_idr": 122500,
+          "source_url": "https://www.maybelline.co.id/all-products/lips/lip-cream/superstay-vinyl-ink",
+          "total_shades": 19,
+          "shades": [
+            {
+              "shade_id": "MBL_002_010",
+              "shade_number": "10",
+              "shade_name": "Lippy",
+              "hex": "#B04040",
+              "rgb": {
+                "r": 176,
+                "g": 64,
+                "b": 64
+              },
+              "lab": {
+                "L": 43.2,
+                "a": 45.6,
+                "b": 24.6
+              },
+              "undertone": "warm",
+              "finish_override": null,
+              "color_source": "manual_reference",
+              "confidence": 75,
+              "verified": false
+            },
+            {
+              "shade_id": "MBL_002_015",
+              "shade_number": "15",
+              "shade_name": "Peachy",
+              "hex": "#E08870",
+              "rgb": {
+                "r": 224,
+                "g": 136,
+                "b": 112
+              },
+              "lab": {
+                "L": 65.5,
+                "a": 31.1,
+                "b": 27.2
+              },
+              "undertone": "warm",
+              "finish_override": null,
+              "color_source": "manual_reference",
+              "confidence": 75,
+              "verified": false
+            },
+            {
+              "shade_id": "MBL_002_020",
+              "shade_number": "20",
+              "shade_name": "Coy",
+              "hex": "#D07880",
+              "rgb": {
+                "r": 208,
+                "g": 120,
+                "b": 128
+              },
+              "lab": {
+                "L": 60.3,
+                "a": 35.2,
+                "b": 10.7
+              },
+              "undertone": "neutral",
+              "finish_override": null,
+              "color_source": "manual_reference",
+              "confidence": 75,
+              "verified": false
+            },
+            {
+              "shade_id": "MBL_002_025",
+              "shade_number": "25",
+              "shade_name": "Red Hot",
+              "hex": "#C02828",
+              "rgb": {
+                "r": 192,
+                "g": 40,
+                "b": 40
+              },
+              "lab": {
+                "L": 42.6,
+                "a": 58.5,
+                "b": 38.7
+              },
+              "undertone": "warm",
+              "finish_override": null,
+              "color_source": "manual_reference",
+              "confidence": 75,
+              "verified": false
+            },
+            {
+              "shade_id": "MBL_002_030",
+              "shade_number": "30",
+              "shade_name": "Unrivaled",
+              "hex": "#8B2848",
+              "rgb": {
+                "r": 139,
+                "g": 40,
+                "b": 72
+              },
+              "lab": {
+                "L": 32.9,
+                "a": 44.2,
+                "b": 4.5
+              },
+              "undertone": "cool",
+              "finish_override": null,
+              "color_source": "manual_reference",
+              "confidence": 75,
+              "verified": false
+            },
+            {
+              "shade_id": "MBL_002_035",
+              "shade_number": "35",
+              "shade_name": "Cheeky",
+              "hex": "#E08888",
+              "rgb": {
+                "r": 224,
+                "g": 136,
+                "b": 136
+              },
+              "lab": {
+                "L": 65.9,
+                "a": 33.6,
+                "b": 14.4
+              },
+              "undertone": "neutral",
+              "finish_override": null,
+              "color_source": "manual_reference",
+              "confidence": 75,
+              "verified": false
+            },
+            {
+              "shade_id": "MBL_002_040",
+              "shade_number": "40",
+              "shade_name": "Witty",
+              "hex": "#C07880",
+              "rgb": {
+                "r": 192,
+                "g": 120,
+                "b": 128
+              },
+              "lab": {
+                "L": 58.2,
+                "a": 29.2,
+                "b": 7.5
+              },
+              "undertone": "neutral",
+              "finish_override": null,
+              "color_source": "manual_reference",
+              "confidence": 75,
+              "verified": false
+            },
+            {
+              "shade_id": "MBL_002_050",
+              "shade_number": "50",
+              "shade_name": "Wicked",
+              "hex": "#901830",
+              "rgb": {
+                "r": 144,
+                "g": 24,
+                "b": 48
+              },
+              "lab": {
+                "L": 31.3,
+                "a": 49.3,
+                "b": 18.3
+              },
+              "undertone": "cool",
+              "finish_override": null,
+              "color_source": "manual_reference",
+              "confidence": 75,
+              "verified": false
+            },
+            {
+              "shade_id": "MBL_002_060",
+              "shade_number": "60",
+              "shade_name": "Mischievous",
+              "hex": "#C84060",
+              "rgb": {
+                "r": 200,
+                "g": 64,
+                "b": 96
+              },
+              "lab": {
+                "L": 48.0,
+                "a": 55.9,
+                "b": 12.3
+              },
+              "undertone": "cool",
+              "finish_override": null,
+              "color_source": "manual_reference",
+              "confidence": 75,
+              "verified": false
+            },
+            {
+              "shade_id": "MBL_002_061",
+              "shade_number": "61",
+              "shade_name": "Risky",
+              "hex": "#A83050",
+              "rgb": {
+                "r": 168,
+                "g": 48,
+                "b": 80
+              },
+              "lab": {
+                "L": 39.6,
+                "a": 50.9,
+                "b": 9.6
+              },
+              "undertone": "cool",
+              "finish_override": null,
+              "color_source": "manual_reference",
+              "confidence": 75,
+              "verified": false
+            },
+            {
+              "shade_id": "MBL_002_062",
+              "shade_number": "62",
+              "shade_name": "Irresistible",
+              "hex": "#B84040",
+              "rgb": {
+                "r": 184,
+                "g": 64,
+                "b": 64
+              },
+              "lab": {
+                "L": 44.6,
+                "a": 48.4,
+                "b": 26.6
+              },
+              "undertone": "warm",
+              "finish_override": null,
+              "color_source": "manual_reference",
+              "confidence": 75,
+              "verified": false
+            },
+            {
+              "shade_id": "MBL_002_063",
+              "shade_number": "63",
+              "shade_name": "Intriguing",
+              "hex": "#C05040",
+              "rgb": {
+                "r": 192,
+                "g": 80,
+                "b": 64
+              },
+              "lab": {
+                "L": 48.7,
+                "a": 43.9,
+                "b": 31.9
+              },
+              "undertone": "neutral",
+              "finish_override": null,
+              "color_source": "manual_reference",
+              "confidence": 75,
+              "verified": false
+            },
+            {
+              "shade_id": "MBL_002_065",
+              "shade_number": "65",
+              "shade_name": "Saucy",
+              "hex": "#D06070",
+              "rgb": {
+                "r": 208,
+                "g": 96,
+                "b": 112
+              },
+              "lab": {
+                "L": 55.0,
+                "a": 45.7,
+                "b": 12.7
+              },
+              "undertone": "cool",
+              "finish_override": null,
+              "color_source": "manual_reference",
+              "confidence": 75,
+              "verified": false
+            },
+            {
+              "shade_id": "MBL_002_095",
+              "shade_number": "95",
+              "shade_name": "Captivated",
+              "hex": "#C03050",
+              "rgb": {
+                "r": 192,
+                "g": 48,
+                "b": 80
+              },
+              "lab": {
+                "L": 44.1,
+                "a": 58.1,
+                "b": 16.5
+              },
+              "undertone": "cool",
+              "finish_override": null,
+              "color_source": "manual_reference",
+              "confidence": 75,
+              "verified": false
+            },
+            {
+              "shade_id": "MBL_002_100",
+              "shade_number": "100",
+              "shade_name": "Charmed",
+              "hex": "#A07060",
+              "rgb": {
+                "r": 160,
+                "g": 112,
+                "b": 96
+              },
+              "lab": {
+                "L": 51.7,
+                "a": 16.9,
+                "b": 16.5
+              },
+              "undertone": "warm",
+              "finish_override": null,
+              "color_source": "manual_reference",
+              "confidence": 75,
+              "verified": false
+            },
+            {
+              "shade_id": "MBL_002_115",
+              "shade_number": "115",
+              "shade_name": "Peppy",
+              "hex": "#E07888",
+              "rgb": {
+                "r": 224,
+                "g": 120,
+                "b": 136
+              },
+              "lab": {
+                "L": 62.6,
+                "a": 41.9,
+                "b": 9.7
+              },
+              "undertone": "cool",
+              "finish_override": null,
+              "color_source": "manual_reference",
+              "confidence": 75,
+              "verified": false
+            },
+            {
+              "shade_id": "MBL_002_120",
+              "shade_number": "120",
+              "shade_name": "Punchy",
+              "hex": "#D04060",
+              "rgb": {
+                "r": 208,
+                "g": 64,
+                "b": 96
+              },
+              "lab": {
+                "L": 49.4,
+                "a": 58.4,
+                "b": 14.4
+              },
+              "undertone": "cool",
+              "finish_override": null,
+              "color_source": "manual_reference",
+              "confidence": 75,
+              "verified": false
+            },
+            {
+              "shade_id": "MBL_002_125",
+              "shade_number": "125",
+              "shade_name": "Keen",
+              "hex": "#C86070",
+              "rgb": {
+                "r": 200,
+                "g": 96,
+                "b": 112
+              },
+              "lab": {
+                "L": 53.8,
+                "a": 42.9,
+                "b": 10.8
+              },
+              "undertone": "cool",
+              "finish_override": null,
+              "color_source": "manual_reference",
+              "confidence": 75,
+              "verified": false
+            },
+            {
+              "shade_id": "MBL_002_130",
+              "shade_number": "130",
+              "shade_name": "Extra",
+              "hex": "#A05060",
+              "rgb": {
+                "r": 160,
+                "g": 80,
+                "b": 96
+              },
+              "lab": {
+                "L": 44.3,
+                "a": 34.8,
+                "b": 6.1
+              },
+              "undertone": "cool",
+              "finish_override": null,
+              "color_source": "manual_reference",
+              "confidence": 75,
+              "verified": false
+            }
+          ]
+        },
+        {
+          "product_id": "MBL_LIP_003",
+          "brand_id": "MAYBELLINE_001",
+          "product_name": "SuperStay Teddy Tint",
+          "series": "SuperStay",
+          "finish": "soft_matte",
+          "product_type": "lip_tint",
+          "wear_time_hours": "12 jam",
+          "price_idr": 112500,
+          "source_url": "https://www.maybelline.co.id/all-products/lips/lip-cream/superstay-teddy",
+          "total_shades": 25,
+          "shades": [
+            {
+              "shade_id": "MBL_003_010",
+              "shade_number": "10",
+              "shade_name": "Skinnydip",
+              "hex": "#E08888",
+              "rgb": {
+                "r": 224,
+                "g": 136,
+                "b": 136
+              },
+              "lab": {
+                "L": 65.9,
+                "a": 33.6,
+                "b": 14.4
+              },
+              "undertone": "cool",
+              "finish_override": null,
+              "color_source": "manual_reference",
+              "confidence": 75,
+              "verified": false
+            },
+            {
+              "shade_id": "MBL_003_015",
+              "shade_number": "15",
+              "shade_name": "Punch",
+              "hex": "#D04870",
+              "rgb": {
+                "r": 208,
+                "g": 72,
+                "b": 112
+              },
+              "lab": {
+                "L": 50.9,
+                "a": 56.6,
+                "b": 6.9
+              },
+              "undertone": "cool",
+              "finish_override": null,
+              "color_source": "manual_reference",
+              "confidence": 75,
+              "verified": false
+            },
+            {
+              "shade_id": "MBL_003_020",
+              "shade_number": "20",
+              "shade_name": "Apricot",
+              "hex": "#E08870",
+              "rgb": {
+                "r": 224,
+                "g": 136,
+                "b": 112
+              },
+              "lab": {
+                "L": 65.5,
+                "a": 31.1,
+                "b": 27.2
+              },
+              "undertone": "warm",
+              "finish_override": null,
+              "color_source": "manual_reference",
+              "confidence": 75,
+              "verified": false
+            },
+            {
+              "shade_id": "MBL_003_025",
+              "shade_number": "25",
+              "shade_name": "Berry",
+              "hex": "#A02848",
+              "rgb": {
+                "r": 160,
+                "g": 40,
+                "b": 72
+              },
+              "lab": {
+                "L": 36.9,
+                "a": 50.7,
+                "b": 10.7
+              },
+              "undertone": "cool",
+              "finish_override": null,
+              "color_source": "manual_reference",
+              "confidence": 75,
+              "verified": false
+            },
+            {
+              "shade_id": "MBL_003_030",
+              "shade_number": "30",
+              "shade_name": "Caramel",
+              "hex": "#A06040",
+              "rgb": {
+                "r": 160,
+                "g": 96,
+                "b": 64
+              },
+              "lab": {
+                "L": 47.3,
+                "a": 22.8,
+                "b": 29.1
+              },
+              "undertone": "warm",
+              "finish_override": null,
+              "color_source": "manual_reference",
+              "confidence": 75,
+              "verified": false
+            },
+            {
+              "shade_id": "MBL_003_035",
+              "shade_number": "35",
+              "shade_name": "Nude",
+              "hex": "#C49070",
+              "rgb": {
+                "r": 196,
+                "g": 144,
+                "b": 112
+              },
+              "lab": {
+                "L": 64.0,
+                "a": 15.6,
+                "b": 24.7
+              },
+              "undertone": "neutral",
+              "finish_override": null,
+              "color_source": "manual_reference",
+              "confidence": 75,
+              "verified": false
+            },
+            {
+              "shade_id": "MBL_003_040",
+              "shade_number": "40",
+              "shade_name": "Red",
+              "hex": "#C02030",
+              "rgb": {
+                "r": 192,
+                "g": 32,
+                "b": 48
+              },
+              "lab": {
+                "L": 41.9,
+                "a": 60.9,
+                "b": 33.4
+              },
+              "undertone": "neutral",
+              "finish_override": null,
+              "color_source": "manual_reference",
+              "confidence": 75,
+              "verified": false
+            },
+            {
+              "shade_id": "MBL_003_045",
+              "shade_number": "45",
+              "shade_name": "Coral",
+              "hex": "#E07058",
+              "rgb": {
+                "r": 224,
+                "g": 112,
+                "b": 88
+              },
+              "lab": {
+                "L": 60.0,
+                "a": 41.6,
+                "b": 33.5
+              },
+              "undertone": "warm",
+              "finish_override": null,
+              "color_source": "manual_reference",
+              "confidence": 75,
+              "verified": false
+            },
+            {
+              "shade_id": "MBL_003_050",
+              "shade_number": "50",
+              "shade_name": "Rose",
+              "hex": "#D06878",
+              "rgb": {
+                "r": 208,
+                "g": 104,
+                "b": 120
+              },
+              "lab": {
+                "L": 56.8,
+                "a": 42.6,
+                "b": 10.4
+              },
+              "undertone": "cool",
+              "finish_override": null,
+              "color_source": "manual_reference",
+              "confidence": 75,
+              "verified": false
+            },
+            {
+              "shade_id": "MBL_003_055",
+              "shade_number": "55",
+              "shade_name": "Mauve",
+              "hex": "#B06878",
+              "rgb": {
+                "r": 176,
+                "g": 104,
+                "b": 120
+              },
+              "lab": {
+                "L": 52.4,
+                "a": 30.8,
+                "b": 3.6
+              },
+              "undertone": "cool",
+              "finish_override": null,
+              "color_source": "manual_reference",
+              "confidence": 75,
+              "verified": false
+            },
+            {
+              "shade_id": "MBL_003_060",
+              "shade_number": "60",
+              "shade_name": "Plum",
+              "hex": "#7A2060",
+              "rgb": {
+                "r": 122,
+                "g": 32,
+                "b": 96
+              },
+              "lab": {
+                "L": 29.5,
+                "a": 45.2,
+                "b": -16.6
+              },
+              "undertone": "cool",
+              "finish_override": null,
+              "color_source": "manual_reference",
+              "confidence": 75,
+              "verified": false
+            },
+            {
+              "shade_id": "MBL_003_065",
+              "shade_number": "65",
+              "shade_name": "Brown",
+              "hex": "#8B5040",
+              "rgb": {
+                "r": 139,
+                "g": 80,
+                "b": 64
+              },
+              "lab": {
+                "L": 40.6,
+                "a": 23.0,
+                "b": 20.1
+              },
+              "undertone": "warm",
+              "finish_override": null,
+              "color_source": "manual_reference",
+              "confidence": 75,
+              "verified": false
+            },
+            {
+              "shade_id": "MBL_003_070",
+              "shade_number": "70",
+              "shade_name": "Cherry",
+              "hex": "#901830",
+              "rgb": {
+                "r": 144,
+                "g": 24,
+                "b": 48
+              },
+              "lab": {
+                "L": 31.3,
+                "a": 49.3,
+                "b": 18.3
+              },
+              "undertone": "cool",
+              "finish_override": null,
+              "color_source": "manual_reference",
+              "confidence": 75,
+              "verified": false
+            },
+            {
+              "shade_id": "MBL_003_075",
+              "shade_number": "75",
+              "shade_name": "Latte To Go",
+              "hex": "#A07858",
+              "rgb": {
+                "r": 160,
+                "g": 120,
+                "b": 88
+              },
+              "lab": {
+                "L": 53.6,
+                "a": 11.4,
+                "b": 23.6
+              },
+              "undertone": "warm",
+              "finish_override": null,
+              "color_source": "manual_reference",
+              "confidence": 75,
+              "verified": false
+            },
+            {
+              "shade_id": "MBL_003_080",
+              "shade_number": "80",
+              "shade_name": "Pink",
+              "hex": "#E080A0",
+              "rgb": {
+                "r": 224,
+                "g": 128,
+                "b": 160
+              },
+              "lab": {
+                "L": 64.8,
+                "a": 40.8,
+                "b": -0.7
+              },
+              "undertone": "cool",
+              "finish_override": null,
+              "color_source": "manual_reference",
+              "confidence": 75,
+              "verified": false
+            },
+            {
+              "shade_id": "MBL_003_085",
+              "shade_number": "85",
+              "shade_name": "Raspberry",
+              "hex": "#B03060",
+              "rgb": {
+                "r": 176,
+                "g": 48,
+                "b": 96
+              },
+              "lab": {
+                "L": 41.5,
+                "a": 54.7,
+                "b": 2.5
+              },
+              "undertone": "cool",
+              "finish_override": null,
+              "color_source": "manual_reference",
+              "confidence": 75,
+              "verified": false
+            },
+            {
+              "shade_id": "MBL_003_090",
+              "shade_number": "90",
+              "shade_name": "Fuchsia",
+              "hex": "#C03078",
+              "rgb": {
+                "r": 192,
+                "g": 48,
+                "b": 120
+              },
+              "lab": {
+                "L": 45.2,
+                "a": 61.6,
+                "b": -6.7
+              },
+              "undertone": "cool",
+              "finish_override": null,
+              "color_source": "manual_reference",
+              "confidence": 75,
+              "verified": false
+            },
+            {
+              "shade_id": "MBL_003_095",
+              "shade_number": "95",
+              "shade_name": "Wine",
+              "hex": "#7A1530",
+              "rgb": {
+                "r": 122,
+                "g": 21,
+                "b": 48
+              },
+              "lab": {
+                "L": 26.4,
+                "a": 43.6,
+                "b": 10.9
+              },
+              "undertone": "cool",
+              "finish_override": null,
+              "color_source": "manual_reference",
+              "confidence": 75,
+              "verified": false
+            },
+            {
+              "shade_id": "MBL_003_100",
+              "shade_number": "100",
+              "shade_name": "Peach",
+              "hex": "#E09070",
+              "rgb": {
+                "r": 224,
+                "g": 144,
+                "b": 112
+              },
+              "lab": {
+                "L": 67.3,
+                "a": 26.9,
+                "b": 29.5
+              },
+              "undertone": "warm",
+              "finish_override": null,
+              "color_source": "manual_reference",
+              "confidence": 75,
+              "verified": false
+            },
+            {
+              "shade_id": "MBL_003_105",
+              "shade_number": "105",
+              "shade_name": "Terracotta",
+              "hex": "#B85840",
+              "rgb": {
+                "r": 184,
+                "g": 88,
+                "b": 64
+              },
+              "lab": {
+                "L": 48.9,
+                "a": 36.9,
+                "b": 32.0
+              },
+              "undertone": "warm",
+              "finish_override": null,
+              "color_source": "manual_reference",
+              "confidence": 75,
+              "verified": false
+            },
+            {
+              "shade_id": "MBL_003_110",
+              "shade_number": "110",
+              "shade_name": "Cinnamon",
+              "hex": "#955030",
+              "rgb": {
+                "r": 149,
+                "g": 80,
+                "b": 48
+              },
+              "lab": {
+                "L": 41.8,
+                "a": 26.0,
+                "b": 31.2
+              },
+              "undertone": "warm",
+              "finish_override": null,
+              "color_source": "manual_reference",
+              "confidence": 75,
+              "verified": false
+            },
+            {
+              "shade_id": "MBL_003_115",
+              "shade_number": "115",
+              "shade_name": "Dusty Rose",
+              "hex": "#C07880",
+              "rgb": {
+                "r": 192,
+                "g": 120,
+                "b": 128
+              },
+              "lab": {
+                "L": 58.2,
+                "a": 29.2,
+                "b": 7.5
+              },
+              "undertone": "cool",
+              "finish_override": null,
+              "color_source": "manual_reference",
+              "confidence": 75,
+              "verified": false
+            },
+            {
+              "shade_id": "MBL_003_120",
+              "shade_number": "120",
+              "shade_name": "Nude Pink",
+              "hex": "#D09888",
+              "rgb": {
+                "r": 208,
+                "g": 152,
+                "b": 136
+              },
+              "lab": {
+                "L": 67.8,
+                "a": 18.9,
+                "b": 16.7
+              },
+              "undertone": "neutral",
+              "finish_override": null,
+              "color_source": "manual_reference",
+              "confidence": 75,
+              "verified": false
+            },
+            {
+              "shade_id": "MBL_003_125",
+              "shade_number": "125",
+              "shade_name": "Brick",
+              "hex": "#A04030",
+              "rgb": {
+                "r": 160,
+                "g": 64,
+                "b": 48
+              },
+              "lab": {
+                "L": 40.2,
+                "a": 38.8,
+                "b": 29.8
+              },
+              "undertone": "warm",
+              "finish_override": null,
+              "color_source": "manual_reference",
+              "confidence": 75,
+              "verified": false
+            },
+            {
+              "shade_id": "MBL_003_130",
+              "shade_number": "130",
+              "shade_name": "Burgundy",
+              "hex": "#7A1828",
+              "rgb": {
+                "r": 122,
+                "g": 24,
+                "b": 40
+              },
+              "lab": {
+                "L": 26.6,
+                "a": 42.1,
+                "b": 16.6
+              },
+              "undertone": "cool",
+              "finish_override": null,
+              "color_source": "manual_reference",
+              "confidence": 75,
+              "verified": false
+            }
+          ]
+        }
+      ],
+      "summary": {
+        "total_products": 3,
+        "total_shades": 94,
+        "verified_shades": 0,
+        "pending_verification": 94,
+        "finish_breakdown": {
+          "matte": 50,
+          "gloss": 19,
+          "soft_matte": 25
+        },
+        "market_share_q1_2026": "20.64%",
+        "shopee_rank": 1
+      }
+    },
+    {
+      "brand_id": "HANASUI_001",
+      "brand_name": "Hanasui",
+      "brand_country": "Indonesia",
+      "brand_website": "https://hanasui.id",
+      "parent_company": "PT Eka Jaya Internasional",
+      "halal_certified": true,
+      "bpom_registered": true,
+      "market_position": "#3 lip terlaris Shopee Q1 2026 (7.70% share)",
+      "price_segment": "budget (Rp25.000-35.000)",
+      "built_at": "2026-06-28T03:27:58.592313",
+      "data_source": "hanasui.id + popbela.com + mybest.id + readmore.id",
+      "version": "1.0",
+      "products": [
+        {
+          "product_id": "HNS_LIP_001",
+          "brand_id": "HANASUI_001",
+          "product_name": "Mattedorable Lip Cream",
+          "series": "Mattedorable",
+          "finish": "velvet_matte",
+          "product_type": "liquid_lipstick",
+          "wear_time": "12 jam",
+          "price_idr": 30500,
+          "key_ingredients": [
+            "Olive Oil",
+            "Vitamin E"
+          ],
+          "source_url": "https://hanasui.id/makeup/lip_cream",
+          "total_shades": 16,
+          "shades": [
+            {
+              "shade_id": "HANASUI_001_001",
+              "shade_number": "01",
+              "shade_name": "Kiss",
+              "hex": "#C13248",
+              "rgb": {
+                "r": 193,
+                "g": 50,
+                "b": 72
+              },
+              "lab": {
+                "L": 44.4,
+                "a": 57.2,
+                "b": 21.8
+              },
+              "undertone": "cool",
+              "color_source": "manual_reference",
+              "confidence": 78,
+              "verified": false
+            },
+            {
+              "shade_id": "HANASUI_001_002",
+              "shade_number": "02",
+              "shade_name": "Ruby",
+              "hex": "#A02030",
+              "rgb": {
+                "r": 160,
+                "g": 32,
+                "b": 48
+              },
+              "lab": {
+                "L": 35.4,
+                "a": 51.7,
+                "b": 24.1
+              },
+              "undertone": "cool",
+              "color_source": "manual_reference",
+              "confidence": 78,
+              "verified": false
+            },
+            {
+              "shade_id": "HANASUI_001_003",
+              "shade_number": "03",
+              "shade_name": "Bold",
+              "hex": "#8B1A28",
+              "rgb": {
+                "r": 139,
+                "g": 26,
+                "b": 40
+              },
+              "lab": {
+                "L": 30.4,
+                "a": 46.8,
+                "b": 22.1
+              },
+              "undertone": "cool",
+              "color_source": "manual_reference",
+              "confidence": 78,
+              "verified": false
+            },
+            {
+              "shade_id": "HANASUI_001_004",
+              "shade_number": "04",
+              "shade_name": "Chic",
+              "hex": "#D03058",
+              "rgb": {
+                "r": 208,
+                "g": 48,
+                "b": 88
+              },
+              "lab": {
+                "L": 47.3,
+                "a": 63.2,
+                "b": 16.4
+              },
+              "undertone": "cool",
+              "color_source": "manual_reference",
+              "confidence": 78,
+              "verified": false
+            },
+            {
+              "shade_id": "HANASUI_001_005",
+              "shade_number": "05",
+              "shade_name": "Classy",
+              "hex": "#C09080",
+              "rgb": {
+                "r": 192,
+                "g": 144,
+                "b": 128
+              },
+              "lab": {
+                "L": 63.9,
+                "a": 15.9,
+                "b": 15.6
+              },
+              "undertone": "neutral",
+              "color_source": "manual_reference",
+              "confidence": 78,
+              "verified": false
+            },
+            {
+              "shade_id": "HANASUI_001_006",
+              "shade_number": "06",
+              "shade_name": "Ritz",
+              "hex": "#D08870",
+              "rgb": {
+                "r": 208,
+                "g": 136,
+                "b": 112
+              },
+              "lab": {
+                "L": 63.5,
+                "a": 24.8,
+                "b": 24.2
+              },
+              "undertone": "warm",
+              "color_source": "manual_reference",
+              "confidence": 78,
+              "verified": false
+            },
+            {
+              "shade_id": "HANASUI_001_007",
+              "shade_number": "07",
+              "shade_name": "Spark",
+              "hex": "#E09088",
+              "rgb": {
+                "r": 224,
+                "g": 144,
+                "b": 136
+              },
+              "lab": {
+                "L": 67.7,
+                "a": 29.4,
+                "b": 16.9
+              },
+              "undertone": "neutral",
+              "color_source": "manual_reference",
+              "confidence": 78,
+              "verified": false
+            },
+            {
+              "shade_id": "HANASUI_001_008",
+              "shade_number": "08",
+              "shade_name": "Fancy",
+              "hex": "#C08870",
+              "rgb": {
+                "r": 192,
+                "g": 136,
+                "b": 112
+              },
+              "lab": {
+                "L": 61.6,
+                "a": 18.4,
+                "b": 21.4
+              },
+              "undertone": "warm",
+              "color_source": "manual_reference",
+              "confidence": 78,
+              "verified": false
+            },
+            {
+              "shade_id": "HANASUI_001_009",
+              "shade_number": "09",
+              "shade_name": "Glow",
+              "hex": "#D07068",
+              "rgb": {
+                "r": 208,
+                "g": 112,
+                "b": 104
+              },
+              "lab": {
+                "L": 58.0,
+                "a": 36.9,
+                "b": 21.4
+              },
+              "undertone": "warm",
+              "color_source": "manual_reference",
+              "confidence": 78,
+              "verified": false
+            },
+            {
+              "shade_id": "HANASUI_001_010",
+              "shade_number": "10",
+              "shade_name": "Bloom",
+              "hex": "#E08080",
+              "rgb": {
+                "r": 224,
+                "g": 128,
+                "b": 128
+              },
+              "lab": {
+                "L": 64.0,
+                "a": 36.9,
+                "b": 16.3
+              },
+              "undertone": "cool",
+              "color_source": "manual_reference",
+              "confidence": 78,
+              "verified": false
+            },
+            {
+              "shade_id": "HANASUI_001_011",
+              "shade_number": "11",
+              "shade_name": "Brick",
+              "hex": "#B55040",
+              "rgb": {
+                "r": 181,
+                "g": 80,
+                "b": 64
+              },
+              "lab": {
+                "L": 46.9,
+                "a": 39.8,
+                "b": 29.4
+              },
+              "undertone": "warm",
+              "color_source": "manual_reference",
+              "confidence": 78,
+              "verified": false
+            },
+            {
+              "shade_id": "HANASUI_001_012",
+              "shade_number": "12",
+              "shade_name": "Amaze",
+              "hex": "#D09880",
+              "rgb": {
+                "r": 208,
+                "g": 152,
+                "b": 128
+              },
+              "lab": {
+                "L": 67.6,
+                "a": 17.9,
+                "b": 20.9
+              },
+              "undertone": "warm",
+              "color_source": "manual_reference",
+              "confidence": 78,
+              "verified": false
+            },
+            {
+              "shade_id": "HANASUI_001_013",
+              "shade_number": "13",
+              "shade_name": "Grace",
+              "hex": "#C07070",
+              "rgb": {
+                "r": 192,
+                "g": 112,
+                "b": 112
+              },
+              "lab": {
+                "L": 56.1,
+                "a": 31.6,
+                "b": 13.8
+              },
+              "undertone": "neutral",
+              "color_source": "manual_reference",
+              "confidence": 78,
+              "verified": false
+            },
+            {
+              "shade_id": "HANASUI_001_014",
+              "shade_number": "14",
+              "shade_name": "Luxe",
+              "hex": "#901838",
+              "rgb": {
+                "r": 144,
+                "g": 24,
+                "b": 56
+              },
+              "lab": {
+                "L": 31.5,
+                "a": 49.8,
+                "b": 13.2
+              },
+              "undertone": "cool",
+              "color_source": "manual_reference",
+              "confidence": 78,
+              "verified": false
+            },
+            {
+              "shade_id": "HANASUI_001_015",
+              "shade_number": "15",
+              "shade_name": "Posh",
+              "hex": "#A04050",
+              "rgb": {
+                "r": 160,
+                "g": 64,
+                "b": 80
+              },
+              "lab": {
+                "L": 40.8,
+                "a": 41.3,
+                "b": 11.0
+              },
+              "undertone": "cool",
+              "color_source": "manual_reference",
+              "confidence": 78,
+              "verified": false
+            },
+            {
+              "shade_id": "HANASUI_001_016",
+              "shade_number": "16",
+              "shade_name": "Glam",
+              "hex": "#B07888",
+              "rgb": {
+                "r": 176,
+                "g": 120,
+                "b": 136
+              },
+              "lab": {
+                "L": 56.5,
+                "a": 24.2,
+                "b": 0.2
+              },
+              "undertone": "cool",
+              "color_source": "manual_reference",
+              "confidence": 78,
+              "verified": false
+            }
+          ]
+        },
+        {
+          "product_id": "HNS_LIP_002",
+          "brand_id": "HANASUI_001",
+          "product_name": "Mattedorable Lip Cream Boba Edition",
+          "series": "Mattedorable Boba",
+          "finish": "velvet_matte",
+          "product_type": "liquid_lipstick",
+          "wear_time": "12 jam",
+          "price_idr": 30500,
+          "key_ingredients": [
+            "Olive Oil",
+            "Vitamin E"
+          ],
+          "source_url": "https://hanasui.id/makeup/lip_cream",
+          "total_shades": 6,
+          "shades": [
+            {
+              "shade_id": "HANASUI_002_001",
+              "shade_number": "01",
+              "shade_name": "Forest Berry",
+              "hex": "#7A2040",
+              "rgb": {
+                "r": 122,
+                "g": 32,
+                "b": 64
+              },
+              "lab": {
+                "L": 28.2,
+                "a": 41.2,
+                "b": 2.7
+              },
+              "undertone": "cool",
+              "color_source": "manual_reference",
+              "confidence": 78,
+              "verified": false
+            },
+            {
+              "shade_id": "HANASUI_002_002",
+              "shade_number": "02",
+              "shade_name": "Brown Sugar",
+              "hex": "#A06848",
+              "rgb": {
+                "r": 160,
+                "g": 104,
+                "b": 72
+              },
+              "lab": {
+                "L": 49.3,
+                "a": 18.9,
+                "b": 27.2
+              },
+              "undertone": "warm",
+              "color_source": "manual_reference",
+              "confidence": 78,
+              "verified": false
+            },
+            {
+              "shade_id": "HANASUI_002_003",
+              "shade_number": "03",
+              "shade_name": "Salted Caramel",
+              "hex": "#B07050",
+              "rgb": {
+                "r": 176,
+                "g": 112,
+                "b": 80
+              },
+              "lab": {
+                "L": 53.4,
+                "a": 21.9,
+                "b": 28.2
+              },
+              "undertone": "warm",
+              "color_source": "manual_reference",
+              "confidence": 78,
+              "verified": false
+            },
+            {
+              "shade_id": "HANASUI_002_004",
+              "shade_number": "04",
+              "shade_name": "Taro Milk",
+              "hex": "#C08898",
+              "rgb": {
+                "r": 192,
+                "g": 136,
+                "b": 152
+              },
+              "lab": {
+                "L": 62.6,
+                "a": 23.8,
+                "b": 0.1
+              },
+              "undertone": "cool",
+              "color_source": "manual_reference",
+              "confidence": 78,
+              "verified": false
+            },
+            {
+              "shade_id": "HANASUI_002_005",
+              "shade_number": "05",
+              "shade_name": "Matcha Kiss",
+              "hex": "#8B5858",
+              "rgb": {
+                "r": 139,
+                "g": 88,
+                "b": 88
+              },
+              "lab": {
+                "L": 43.0,
+                "a": 21.1,
+                "b": 8.8
+              },
+              "undertone": "neutral",
+              "color_source": "manual_reference",
+              "confidence": 78,
+              "verified": false
+            },
+            {
+              "shade_id": "HANASUI_002_006",
+              "shade_number": "06",
+              "shade_name": "Hazelnut Latte",
+              "hex": "#B07858",
+              "rgb": {
+                "r": 176,
+                "g": 120,
+                "b": 88
+              },
+              "lab": {
+                "L": 55.5,
+                "a": 18.2,
+                "b": 26.4
+              },
+              "undertone": "warm",
+              "color_source": "manual_reference",
+              "confidence": 78,
+              "verified": false
+            }
+          ]
+        },
+        {
+          "product_id": "HNS_LIP_003",
+          "brand_id": "HANASUI_001",
+          "product_name": "Mattedorable Lip Cream Matcha Latte Edition",
+          "series": "Mattedorable Matcha",
+          "finish": "velvet_matte",
+          "product_type": "liquid_lipstick",
+          "wear_time": "12 jam",
+          "price_idr": 32025,
+          "key_ingredients": [
+            "Hydrolyzed Milk Protein",
+            "Water Dispersion Gel"
+          ],
+          "source_url": "https://hanasui.id/makeup/lip_cream",
+          "total_shades": 3,
+          "shades": [
+            {
+              "shade_id": "HANASUI_003_001",
+              "shade_number": "01",
+              "shade_name": "Matchalicious",
+              "hex": "#B06858",
+              "rgb": {
+                "r": 176,
+                "g": 104,
+                "b": 88
+              },
+              "lab": {
+                "L": 51.7,
+                "a": 27.1,
+                "b": 21.4
+              },
+              "undertone": "warm",
+              "color_source": "manual_reference",
+              "confidence": 78,
+              "verified": false
+            },
+            {
+              "shade_id": "HANASUI_003_002",
+              "shade_number": "02",
+              "shade_name": "Matcha Rose",
+              "hex": "#C07878",
+              "rgb": {
+                "r": 192,
+                "g": 120,
+                "b": 120
+              },
+              "lab": {
+                "L": 58.0,
+                "a": 28.2,
+                "b": 11.9
+              },
+              "undertone": "cool",
+              "color_source": "manual_reference",
+              "confidence": 78,
+              "verified": false
+            },
+            {
+              "shade_id": "HANASUI_003_003",
+              "shade_number": "03",
+              "shade_name": "Matchaciano",
+              "hex": "#A08068",
+              "rgb": {
+                "r": 160,
+                "g": 128,
+                "b": 104
+              },
+              "lab": {
+                "L": 56.0,
+                "a": 8.8,
+                "b": 17.7
+              },
+              "undertone": "warm",
+              "color_source": "manual_reference",
+              "confidence": 78,
+              "verified": false
+            }
+          ]
+        },
+        {
+          "product_id": "HNS_LIP_004",
+          "brand_id": "HANASUI_001",
+          "product_name": "Mattedorable Lipstick",
+          "series": "Mattedorable",
+          "finish": "matte",
+          "product_type": "lipstick_bullet",
+          "wear_time": "16 jam",
+          "price_idr": 35000,
+          "key_ingredients": [
+            "Ceramide",
+            "Hyaluronic Acid"
+          ],
+          "source_url": "https://hanasui.id/makeup/lipstick",
+          "total_shades": 10,
+          "shades": [
+            {
+              "shade_id": "HANASUI_004_101",
+              "shade_number": "101",
+              "shade_name": "Superstar",
+              "hex": "#C02030",
+              "rgb": {
+                "r": 192,
+                "g": 32,
+                "b": 48
+              },
+              "lab": {
+                "L": 41.9,
+                "a": 60.9,
+                "b": 33.4
+              },
+              "undertone": "warm",
+              "color_source": "manual_reference",
+              "confidence": 78,
+              "verified": false
+            },
+            {
+              "shade_id": "HANASUI_004_103",
+              "shade_number": "103",
+              "shade_name": "Sway",
+              "hex": "#901828",
+              "rgb": {
+                "r": 144,
+                "g": 24,
+                "b": 40
+              },
+              "lab": {
+                "L": 31.2,
+                "a": 48.8,
+                "b": 23.3
+              },
+              "undertone": "cool",
+              "color_source": "manual_reference",
+              "confidence": 78,
+              "verified": false
+            },
+            {
+              "shade_id": "HANASUI_004_105",
+              "shade_number": "105",
+              "shade_name": "Noona",
+              "hex": "#D09090",
+              "rgb": {
+                "r": 208,
+                "g": 144,
+                "b": 144
+              },
+              "lab": {
+                "L": 66.0,
+                "a": 24.2,
+                "b": 9.8
+              },
+              "undertone": "cool",
+              "color_source": "manual_reference",
+              "confidence": 78,
+              "verified": false
+            },
+            {
+              "shade_id": "HANASUI_004_107",
+              "shade_number": "107",
+              "shade_name": "Pop",
+              "hex": "#D03030",
+              "rgb": {
+                "r": 208,
+                "g": 48,
+                "b": 48
+              },
+              "lab": {
+                "L": 46.6,
+                "a": 61.2,
+                "b": 39.5
+              },
+              "undertone": "warm",
+              "color_source": "manual_reference",
+              "confidence": 78,
+              "verified": false
+            },
+            {
+              "shade_id": "HANASUI_004_110",
+              "shade_number": "110",
+              "shade_name": "Cinnamon",
+              "hex": "#B07050",
+              "rgb": {
+                "r": 176,
+                "g": 112,
+                "b": 80
+              },
+              "lab": {
+                "L": 53.4,
+                "a": 21.9,
+                "b": 28.2
+              },
+              "undertone": "warm",
+              "color_source": "manual_reference",
+              "confidence": 78,
+              "verified": false
+            },
+            {
+              "shade_id": "HANASUI_004_111",
+              "shade_number": "111",
+              "shade_name": "Peony",
+              "hex": "#D08870",
+              "rgb": {
+                "r": 208,
+                "g": 136,
+                "b": 112
+              },
+              "lab": {
+                "L": 63.5,
+                "a": 24.8,
+                "b": 24.2
+              },
+              "undertone": "warm",
+              "color_source": "manual_reference",
+              "confidence": 78,
+              "verified": false
+            },
+            {
+              "shade_id": "HANASUI_004_113",
+              "shade_number": "113",
+              "shade_name": "Tropical",
+              "hex": "#E06080",
+              "rgb": {
+                "r": 224,
+                "g": 96,
+                "b": 128
+              },
+              "lab": {
+                "L": 57.8,
+                "a": 52.8,
+                "b": 7.6
+              },
+              "undertone": "cool",
+              "color_source": "manual_reference",
+              "confidence": 78,
+              "verified": false
+            },
+            {
+              "shade_id": "HANASUI_004_115",
+              "shade_number": "115",
+              "shade_name": "Sandstone",
+              "hex": "#C4A090",
+              "rgb": {
+                "r": 196,
+                "g": 160,
+                "b": 144
+              },
+              "lab": {
+                "L": 68.7,
+                "a": 10.9,
+                "b": 13.3
+              },
+              "undertone": "neutral",
+              "color_source": "manual_reference",
+              "confidence": 78,
+              "verified": false
+            },
+            {
+              "shade_id": "HANASUI_004_117",
+              "shade_number": "117",
+              "shade_name": "Jazzy",
+              "hex": "#8B1820",
+              "rgb": {
+                "r": 139,
+                "g": 24,
+                "b": 32
+              },
+              "lab": {
+                "L": 30.0,
+                "a": 47.0,
+                "b": 26.8
+              },
+              "undertone": "cool",
+              "color_source": "manual_reference",
+              "confidence": 78,
+              "verified": false
+            },
+            {
+              "shade_id": "HANASUI_004_118",
+              "shade_number": "118",
+              "shade_name": "Retro",
+              "hex": "#7A1840",
+              "rgb": {
+                "r": 122,
+                "g": 24,
+                "b": 64
+              },
+              "lab": {
+                "L": 27.2,
+                "a": 44.1,
+                "b": 1.2
+              },
+              "undertone": "cool",
+              "color_source": "manual_reference",
+              "confidence": 78,
+              "verified": false
+            }
+          ]
+        }
+      ],
+      "summary": {
+        "total_products": 4,
+        "total_shades": 35,
+        "verified_shades": 0,
+        "pending_verification": 35,
+        "finish_breakdown": {
+          "velvet_matte": 25,
+          "matte": 10
+        }
+      }
+    },
+    {
+      "brand_id": "BLP_001",
+      "brand_name": "BLP Beauty",
+      "brand_name_full": "By Lizzie Parra Beauty",
+      "brand_country": "Indonesia",
+      "brand_website": "https://blpbeauty.com",
+      "founder": "Lizzie Parra",
+      "halal_certified": true,
+      "bpom_registered": true,
+      "vegan": true,
+      "cruelty_free": true,
+      "market_position": "#1 lip liner Shopee Q4 2025 + top 10 lip brand",
+      "price_segment": "mid-premium (Rp90.000-250.000)",
+      "philosophy": "Beauty is for Everyone",
+      "built_at": "2026-06-28T03:27:58.595150",
+      "data_source": "blpbeauty.com + beautynesia.id + dreamers.id + ponnybeaute.co.id",
+      "version": "1.0",
+      "products": [
+        {
+          "product_id": "BLP_LIP_001",
+          "brand_id": "BLP_001",
+          "product_name": "Lip Coat",
+          "series": "Lip Coat",
+          "finish": "velvet_matte",
+          "product_type": "liquid_lipstick",
+          "wear_time": "seharian",
+          "price_idr": 233000,
+          "key_ingredients": [
+            "Vitamin E"
+          ],
+          "source_url": "https://blpbeauty.com/collections/onthelips/lip-coat",
+          "total_shades": 14,
+          "shades": [
+            {
+              "shade_id": "BLP_001_001",
+              "shade_number": "01",
+              "shade_name": "Butter Fudge",
+              "hex": "#C49A70",
+              "rgb": {
+                "r": 196,
+                "g": 154,
+                "b": 112
+              },
+              "lab": {
+                "L": 66.5,
+                "a": 10.1,
+                "b": 28.0
+              },
+              "undertone": "warm",
+              "color_source": "manual_reference",
+              "confidence": 78,
+              "verified": false
+            },
+            {
+              "shade_id": "BLP_001_002",
+              "shade_number": "02",
+              "shade_name": "Peach Soda",
+              "hex": "#E09070",
+              "rgb": {
+                "r": 224,
+                "g": 144,
+                "b": 112
+              },
+              "lab": {
+                "L": 67.3,
+                "a": 26.9,
+                "b": 29.5
+              },
+              "undertone": "warm",
+              "color_source": "manual_reference",
+              "confidence": 78,
+              "verified": false
+            },
+            {
+              "shade_id": "BLP_001_003",
+              "shade_number": "03",
+              "shade_name": "Pumpkin Sorbet",
+              "hex": "#C86840",
+              "rgb": {
+                "r": 200,
+                "g": 104,
+                "b": 64
+              },
+              "lab": {
+                "L": 54.6,
+                "a": 34.9,
+                "b": 39.3
+              },
+              "undertone": "warm",
+              "color_source": "manual_reference",
+              "confidence": 78,
+              "verified": false
+            },
+            {
+              "shade_id": "BLP_001_004",
+              "shade_number": "04",
+              "shade_name": "Ginger Bread",
+              "hex": "#B06840",
+              "rgb": {
+                "r": 176,
+                "g": 104,
+                "b": 64
+              },
+              "lab": {
+                "L": 51.3,
+                "a": 25.1,
+                "b": 34.5
+              },
+              "undertone": "warm",
+              "color_source": "manual_reference",
+              "confidence": 78,
+              "verified": false
+            },
+            {
+              "shade_id": "BLP_001_005",
+              "shade_number": "05",
+              "shade_name": "Maple Waffle",
+              "hex": "#A07868",
+              "rgb": {
+                "r": 160,
+                "g": 120,
+                "b": 104
+              },
+              "lab": {
+                "L": 53.9,
+                "a": 13.3,
+                "b": 14.9
+              },
+              "undertone": "neutral",
+              "color_source": "manual_reference",
+              "confidence": 78,
+              "verified": false
+            },
+            {
+              "shade_id": "BLP_001_006",
+              "shade_number": "06",
+              "shade_name": "Candy Apple",
+              "hex": "#C83830",
+              "rgb": {
+                "r": 200,
+                "g": 56,
+                "b": 48
+              },
+              "lab": {
+                "L": 46.1,
+                "a": 56.0,
+                "b": 38.4
+              },
+              "undertone": "warm",
+              "color_source": "manual_reference",
+              "confidence": 78,
+              "verified": false
+            },
+            {
+              "shade_id": "BLP_001_007",
+              "shade_number": "07",
+              "shade_name": "Burnt Cinnamon",
+              "hex": "#904030",
+              "rgb": {
+                "r": 144,
+                "g": 64,
+                "b": 48
+              },
+              "lab": {
+                "L": 37.5,
+                "a": 32.6,
+                "b": 26.0
+              },
+              "undertone": "warm",
+              "color_source": "manual_reference",
+              "confidence": 78,
+              "verified": false
+            },
+            {
+              "shade_id": "BLP_001_008",
+              "shade_number": "08",
+              "shade_name": "Persimmon Pie",
+              "hex": "#C07870",
+              "rgb": {
+                "r": 192,
+                "g": 120,
+                "b": 112
+              },
+              "lab": {
+                "L": 57.9,
+                "a": 27.2,
+                "b": 16.3
+              },
+              "undertone": "neutral",
+              "color_source": "manual_reference",
+              "confidence": 78,
+              "verified": false
+            },
+            {
+              "shade_id": "BLP_001_009",
+              "shade_number": "09",
+              "shade_name": "Lavender Cream",
+              "hex": "#C090B0",
+              "rgb": {
+                "r": 192,
+                "g": 144,
+                "b": 176
+              },
+              "lab": {
+                "L": 65.2,
+                "a": 23.3,
+                "b": -9.7
+              },
+              "undertone": "cool",
+              "color_source": "manual_reference",
+              "confidence": 78,
+              "verified": false
+            },
+            {
+              "shade_id": "BLP_001_010",
+              "shade_number": "10",
+              "shade_name": "Peppermint Pink",
+              "hex": "#E090A0",
+              "rgb": {
+                "r": 224,
+                "g": 144,
+                "b": 160
+              },
+              "lab": {
+                "L": 68.3,
+                "a": 32.3,
+                "b": 4.3
+              },
+              "undertone": "cool",
+              "color_source": "manual_reference",
+              "confidence": 78,
+              "verified": false
+            },
+            {
+              "shade_id": "BLP_001_011",
+              "shade_number": "11",
+              "shade_name": "Bloody Mary",
+              "hex": "#781828",
+              "rgb": {
+                "r": 120,
+                "g": 24,
+                "b": 40
+              },
+              "lab": {
+                "L": 26.2,
+                "a": 41.5,
+                "b": 15.9
+              },
+              "undertone": "cool",
+              "color_source": "manual_reference",
+              "confidence": 78,
+              "verified": false
+            },
+            {
+              "shade_id": "BLP_001_012",
+              "shade_number": "12",
+              "shade_name": "Beet Me",
+              "hex": "#A02850",
+              "rgb": {
+                "r": 160,
+                "g": 40,
+                "b": 80
+              },
+              "lab": {
+                "L": 37.1,
+                "a": 51.4,
+                "b": 5.8
+              },
+              "undertone": "cool",
+              "color_source": "manual_reference",
+              "confidence": 78,
+              "verified": false
+            },
+            {
+              "shade_id": "BLP_001_013",
+              "shade_number": "13",
+              "shade_name": "Red Velvet",
+              "hex": "#901830",
+              "rgb": {
+                "r": 144,
+                "g": 24,
+                "b": 48
+              },
+              "lab": {
+                "L": 31.3,
+                "a": 49.3,
+                "b": 18.3
+              },
+              "undertone": "cool",
+              "color_source": "manual_reference",
+              "confidence": 78,
+              "verified": false
+            },
+            {
+              "shade_id": "BLP_001_014",
+              "shade_number": "14",
+              "shade_name": "Caramel Champagne",
+              "hex": "#C09080",
+              "rgb": {
+                "r": 192,
+                "g": 144,
+                "b": 128
+              },
+              "lab": {
+                "L": 63.9,
+                "a": 15.9,
+                "b": 15.6
+              },
+              "undertone": "neutral",
+              "color_source": "manual_reference",
+              "confidence": 78,
+              "verified": false
+            }
+          ]
+        },
+        {
+          "product_id": "BLP_LIP_002",
+          "brand_id": "BLP_001",
+          "product_name": "Lip Bullet",
+          "series": "Lip Bullet",
+          "finish": "satin",
+          "product_type": "lipstick_bullet",
+          "wear_time": "seharian",
+          "price_idr": 161000,
+          "key_ingredients": [
+            "Natural-inspired pigments"
+          ],
+          "source_url": "https://blpbeauty.com/collections/onthelips/lip-bullet",
+          "total_shades": 7,
+          "shades": [
+            {
+              "shade_id": "BLP_002_001",
+              "shade_number": "01",
+              "shade_name": "Pavlova",
+              "hex": "#D09880",
+              "rgb": {
+                "r": 208,
+                "g": 152,
+                "b": 128
+              },
+              "lab": {
+                "L": 67.6,
+                "a": 17.9,
+                "b": 20.9
+              },
+              "undertone": "warm",
+              "color_source": "manual_reference",
+              "confidence": 78,
+              "verified": false
+            },
+            {
+              "shade_id": "BLP_002_002",
+              "shade_number": "02",
+              "shade_name": "Licorice",
+              "hex": "#6A2838",
+              "rgb": {
+                "r": 106,
+                "g": 40,
+                "b": 56
+              },
+              "lab": {
+                "L": 26.4,
+                "a": 31.1,
+                "b": 5.0
+              },
+              "undertone": "cool",
+              "color_source": "manual_reference",
+              "confidence": 78,
+              "verified": false
+            },
+            {
+              "shade_id": "BLP_002_003",
+              "shade_number": "03",
+              "shade_name": "Biscotti",
+              "hex": "#D08060",
+              "rgb": {
+                "r": 208,
+                "g": 128,
+                "b": 96
+              },
+              "lab": {
+                "L": 61.4,
+                "a": 27.7,
+                "b": 30.4
+              },
+              "undertone": "warm",
+              "color_source": "manual_reference",
+              "confidence": 78,
+              "verified": false
+            },
+            {
+              "shade_id": "BLP_002_004",
+              "shade_number": "04",
+              "shade_name": "Carnation",
+              "hex": "#B83040",
+              "rgb": {
+                "r": 184,
+                "g": 48,
+                "b": 64
+              },
+              "lab": {
+                "L": 42.3,
+                "a": 54.7,
+                "b": 23.7
+              },
+              "undertone": "cool",
+              "color_source": "manual_reference",
+              "confidence": 78,
+              "verified": false
+            },
+            {
+              "shade_id": "BLP_002_005",
+              "shade_number": "05",
+              "shade_name": "River",
+              "hex": "#A07878",
+              "rgb": {
+                "r": 160,
+                "g": 120,
+                "b": 120
+              },
+              "lab": {
+                "L": 54.3,
+                "a": 15.6,
+                "b": 6.1
+              },
+              "undertone": "neutral",
+              "color_source": "manual_reference",
+              "confidence": 78,
+              "verified": false
+            },
+            {
+              "shade_id": "BLP_002_006",
+              "shade_number": "06",
+              "shade_name": "Pebble",
+              "hex": "#8B7068",
+              "rgb": {
+                "r": 139,
+                "g": 112,
+                "b": 104
+              },
+              "lab": {
+                "L": 49.6,
+                "a": 9.3,
+                "b": 8.5
+              },
+              "undertone": "warm",
+              "color_source": "manual_reference",
+              "confidence": 78,
+              "verified": false
+            },
+            {
+              "shade_id": "BLP_002_007",
+              "shade_number": "07",
+              "shade_name": "Hazel",
+              "hex": "#906050",
+              "rgb": {
+                "r": 144,
+                "g": 96,
+                "b": 80
+              },
+              "lab": {
+                "L": 45.5,
+                "a": 17.5,
+                "b": 17.1
+              },
+              "undertone": "warm",
+              "color_source": "manual_reference",
+              "confidence": 78,
+              "verified": false
+            }
+          ]
+        },
+        {
+          "product_id": "BLP_LIP_003",
+          "brand_id": "BLP_001",
+          "product_name": "Airy Tint",
+          "series": "Airy Tint",
+          "finish": "tint",
+          "product_type": "lip_tint",
+          "wear_time": "tahan lama",
+          "price_idr": 120000,
+          "key_ingredients": [
+            "Water-based formula"
+          ],
+          "source_url": "https://blpbeauty.com/collections/airy-tint",
+          "total_shades": 5,
+          "shades": [
+            {
+              "shade_id": "BLP_003_001",
+              "shade_number": "01",
+              "shade_name": "Magnolia",
+              "hex": "#E090A0",
+              "rgb": {
+                "r": 224,
+                "g": 144,
+                "b": 160
+              },
+              "lab": {
+                "L": 68.3,
+                "a": 32.3,
+                "b": 4.3
+              },
+              "undertone": "cool",
+              "color_source": "manual_reference",
+              "confidence": 78,
+              "verified": false
+            },
+            {
+              "shade_id": "BLP_003_002",
+              "shade_number": "02",
+              "shade_name": "Dahlia",
+              "hex": "#C06080",
+              "rgb": {
+                "r": 192,
+                "g": 96,
+                "b": 128
+              },
+              "lab": {
+                "L": 53.1,
+                "a": 41.9,
+                "b": 0.1
+              },
+              "undertone": "cool",
+              "color_source": "manual_reference",
+              "confidence": 78,
+              "verified": false
+            },
+            {
+              "shade_id": "BLP_003_003",
+              "shade_number": "03",
+              "shade_name": "Gardenia",
+              "hex": "#E0A090",
+              "rgb": {
+                "r": 224,
+                "g": 160,
+                "b": 144
+              },
+              "lab": {
+                "L": 71.6,
+                "a": 21.7,
+                "b": 17.8
+              },
+              "undertone": "warm",
+              "color_source": "manual_reference",
+              "confidence": 78,
+              "verified": false
+            },
+            {
+              "shade_id": "BLP_003_004",
+              "shade_number": "04",
+              "shade_name": "Aster",
+              "hex": "#A04060",
+              "rgb": {
+                "r": 160,
+                "g": 64,
+                "b": 96
+              },
+              "lab": {
+                "L": 41.2,
+                "a": 42.9,
+                "b": 1.7
+              },
+              "undertone": "cool",
+              "color_source": "manual_reference",
+              "confidence": 78,
+              "verified": false
+            },
+            {
+              "shade_id": "BLP_003_005",
+              "shade_number": "05",
+              "shade_name": "Iris",
+              "hex": "#8B3060",
+              "rgb": {
+                "r": 139,
+                "g": 48,
+                "b": 96
+              },
+              "lab": {
+                "L": 34.9,
+                "a": 43.5,
+                "b": -8.0
+              },
+              "undertone": "cool",
+              "color_source": "manual_reference",
+              "confidence": 78,
+              "verified": false
+            }
+          ]
+        },
+        {
+          "product_id": "BLP_LIP_004",
+          "brand_id": "BLP_001",
+          "product_name": "Lip Vinyl",
+          "series": "Lip Vinyl",
+          "finish": "gloss",
+          "product_type": "lip_gloss",
+          "wear_time": "tahan lama",
+          "price_idr": 90000,
+          "key_ingredients": [
+            "Sunflower Seed Oil",
+            "Macadamia Oil",
+            "Jojoba Oil",
+            "Vitamin E"
+          ],
+          "source_url": "https://blpbeauty.com/collections/onthelips/lip-vinyl",
+          "total_shades": 3,
+          "shades": [
+            {
+              "shade_id": "BLP_004_001",
+              "shade_number": "01",
+              "shade_name": "Caramel",
+              "hex": "#C08868",
+              "rgb": {
+                "r": 192,
+                "g": 136,
+                "b": 104
+              },
+              "lab": {
+                "L": 61.5,
+                "a": 17.5,
+                "b": 25.7
+              },
+              "undertone": "warm",
+              "color_source": "manual_reference",
+              "confidence": 78,
+              "verified": false
+            },
+            {
+              "shade_id": "BLP_004_002",
+              "shade_number": "02",
+              "shade_name": "Blossom",
+              "hex": "#D09090",
+              "rgb": {
+                "r": 208,
+                "g": 144,
+                "b": 144
+              },
+              "lab": {
+                "L": 66.0,
+                "a": 24.2,
+                "b": 9.8
+              },
+              "undertone": "cool",
+              "color_source": "manual_reference",
+              "confidence": 78,
+              "verified": false
+            },
+            {
+              "shade_id": "BLP_004_003",
+              "shade_number": "03",
+              "shade_name": "Cherry",
+              "hex": "#B03040",
+              "rgb": {
+                "r": 176,
+                "g": 48,
+                "b": 64
+              },
+              "lab": {
+                "L": 40.8,
+                "a": 52.2,
+                "b": 21.5
+              },
+              "undertone": "cool",
+              "color_source": "manual_reference",
+              "confidence": 78,
+              "verified": false
+            }
+          ]
+        },
+        {
+          "product_id": "BLP_LIP_005",
+          "brand_id": "BLP_001",
+          "product_name": "Lip Petals",
+          "series": "Lip Petals",
+          "finish": "glossy_tint",
+          "product_type": "lip_tint",
+          "wear_time": "tahan lama",
+          "price_idr": 135000,
+          "key_ingredients": [
+            "Rosehip Oil",
+            "Daisy Extract",
+            "Vegan Squalane"
+          ],
+          "source_url": "https://blpbeauty.com/collections/onthelips/lip-petals",
+          "total_shades": 3,
+          "shades": [
+            {
+              "shade_id": "BLP_005_001",
+              "shade_number": "01",
+              "shade_name": "Clay",
+              "hex": "#8B3038",
+              "rgb": {
+                "r": 139,
+                "g": 48,
+                "b": 56
+              },
+              "lab": {
+                "L": 33.8,
+                "a": 39.3,
+                "b": 16.1
+              },
+              "undertone": "cool",
+              "color_source": "manual_reference",
+              "confidence": 78,
+              "verified": false
+            },
+            {
+              "shade_id": "BLP_005_002",
+              "shade_number": "02",
+              "shade_name": "Coral",
+              "hex": "#D07060",
+              "rgb": {
+                "r": 208,
+                "g": 112,
+                "b": 96
+              },
+              "lab": {
+                "L": 57.9,
+                "a": 36.2,
+                "b": 25.8
+              },
+              "undertone": "warm",
+              "color_source": "manual_reference",
+              "confidence": 78,
+              "verified": false
+            },
+            {
+              "shade_id": "BLP_005_003",
+              "shade_number": "03",
+              "shade_name": "Nude",
+              "hex": "#C49880",
+              "rgb": {
+                "r": 196,
+                "g": 152,
+                "b": 128
+              },
+              "lab": {
+                "L": 66.3,
+                "a": 13.1,
+                "b": 19.0
+              },
+              "undertone": "warm",
+              "color_source": "manual_reference",
+              "confidence": 78,
+              "verified": false
+            }
+          ]
+        }
+      ],
+      "summary": {
+        "total_products": 5,
+        "total_shades": 32,
+        "verified_shades": 0,
+        "pending_verification": 32,
+        "finish_breakdown": {
+          "velvet_matte": 14,
+          "satin": 7,
+          "tint": 5,
+          "gloss": 3,
+          "glossy_tint": 3
+        }
+      }
+    }
+  ]
+}
