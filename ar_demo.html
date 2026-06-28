@@ -144,18 +144,43 @@ function drawLip() {
   const oc     = off.getContext('2d');
 
   if (finish === 'gloss') {
+    // Layer 1: base color
+    oc.globalCompositeOperation = 'source-over';
     oc.globalAlpha = opacity * 0.75;
     oc.fillStyle = `rgb(${rgb.r},${rgb.g},${rgb.b})`;
     drawPath(oc, upAdj); oc.fill();
     drawPath(oc, loAdj); oc.fill();
-    oc.globalAlpha = 0.28;
+
+    // Potong gigi DULU sebelum highlight
+    if (mouthH > 8) {
+      oc.globalCompositeOperation = 'destination-out';
+      oc.globalAlpha = 1;
+      drawPath(oc, inner); oc.fill();
+    }
+
+    // Layer 2: gloss highlight di offscreen kedua
+    const off2  = document.createElement('canvas');
+    off2.width  = canvas.width;
+    off2.height = canvas.height;
+    const oc2   = off2.getContext('2d');
+    oc2.globalAlpha = 0.28;
     const ctr = loAdj.reduce((s,p)=>({x:s.x+p.x,y:s.y+p.y}),{x:0,y:0});
     ctr.x /= loAdj.length; ctr.y /= loAdj.length;
-    const g = oc.createRadialGradient(ctr.x,ctr.y-2,1,ctr.x,ctr.y,22);
+    const g = oc2.createRadialGradient(ctr.x,ctr.y-2,1,ctr.x,ctr.y,22);
     g.addColorStop(0,'rgba(255,255,255,0.9)');
     g.addColorStop(1,'rgba(255,255,255,0)');
-    drawPath(oc, loAdj);
-    oc.fillStyle = g; oc.fill();
+    drawPath(oc2, loAdj);
+    oc2.fillStyle = g; oc2.fill();
+    // Potong gigi di highlight juga
+    if (mouthH > 8) {
+      oc2.globalCompositeOperation = 'destination-out';
+      oc2.globalAlpha = 1;
+      drawPath(oc2, inner); oc2.fill();
+    }
+    // Merge highlight ke offscreen utama
+    oc.globalCompositeOperation = 'source-over';
+    oc.globalAlpha = 1;
+    oc.drawImage(off2, 0, 0);
 
   } else if (finish === 'satin') {
     oc.globalAlpha = opacity * 0.72;
@@ -174,8 +199,8 @@ function drawLip() {
     drawPath(oc, loAdj); oc.fill();
   }
 
-  // Potong gigi di offscreen
-  if (mouthH > 8) {
+  // Potong gigi untuk satin dan matte
+  if (finish !== 'gloss' && mouthH > 8) {
     oc.globalCompositeOperation = 'destination-out';
     oc.globalAlpha = 1;
     drawPath(oc, inner);
