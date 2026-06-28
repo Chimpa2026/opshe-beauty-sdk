@@ -5,195 +5,157 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 <title>Opshe Beauty AR</title>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap');
-* { margin:0; padding:0; box-sizing:border-box; }
-body { background:#000; overflow:hidden; height:100vh; font-family:'Nunito',system-ui,sans-serif; color:#fff; }
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&display=swap");
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:#000;overflow:hidden;height:100vh;font-family:Nunito,system-ui,sans-serif;color:#fff;}
+#container{position:relative;width:100vw;height:100vh;}
+#video {position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform:scaleX(-1);}
+#canvas{position:absolute;inset:0;width:100%;height:100%;transform:scaleX(-1);}
+#loading{position:fixed;inset:0;background:linear-gradient(135deg,#1a0812,#0f0f1a);
+         display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:100;}
+#loading h2{font-size:22px;font-weight:900;color:#FF3D8F;margin-top:16px;}
+#loading p {color:#9878a0;font-size:13px;margin-top:6px;font-weight:600;}
+.spinner{width:52px;height:52px;border:3px solid rgba(255,61,143,.2);
+         border-top-color:#FF3D8F;border-right-color:#1ECFC0;
+         border-radius:50%;animation:spin .9s linear infinite;}
+@keyframes spin{to{transform:rotate(360deg);}}
 
-/* Warna tema dari logo OPSHE */
-:root {
-  --pink:    #FF3D8F;
-  --pink2:   #FF6BB3;
-  --teal:    #1ECFC0;
-  --purple:  #B88FE0;
-  --dark:    #12050F;
-  --dark2:   #1A0818;
-  --surface: rgba(255,255,255,.07);
+/* UI Panel */
+#ui{position:fixed;bottom:0;left:0;right:0;z-index:50;
+    background:linear-gradient(transparent,rgba(12,4,10,.96) 40%);
+    padding:14px 14px 26px;}
+.brand-scroll{display:flex;gap:8px;overflow-x:auto;padding-bottom:8px;
+              margin-bottom:10px;scrollbar-width:none;}
+.brand-scroll::-webkit-scrollbar{display:none;}
+.brand-btn{flex-shrink:0;padding:5px 16px;border-radius:100px;
+           border:1.5px solid rgba(255,255,255,.1);
+           background:rgba(255,255,255,.05);
+           color:#888;font-size:12px;font-weight:800;cursor:pointer;transition:all .22s;}
+.brand-btn.active{border-color:#FF3D8F;color:#FF3D8F;
+                  background:rgba(255,61,143,.12);
+                  box-shadow:0 0 14px rgba(255,61,143,.2);}
+.shade-scroll{display:flex;gap:10px;overflow-x:auto;
+              padding-bottom:8px;scrollbar-width:none;}
+.shade-scroll::-webkit-scrollbar{display:none;}
+.shade-item{flex-shrink:0;display:flex;flex-direction:column;
+            align-items:center;gap:5px;cursor:pointer;}
+.shade-circle{width:40px;height:40px;border-radius:50%;
+              border:2.5px solid transparent;transition:all .22s;
+              box-shadow:0 2px 8px rgba(0,0,0,.45);}
+.shade-circle.active{border-color:#fff;transform:scale(1.22);
+                     box-shadow:0 0 16px rgba(255,255,255,.3);}
+.shade-label{font-size:9px;color:#777;text-align:center;
+             max-width:46px;line-height:1.2;font-weight:700;}
+.controls{display:flex;align-items:center;gap:10px;margin-top:10px;flex-wrap:wrap;}
+.controls label{font-size:10px;color:#888;white-space:nowrap;
+                font-weight:800;text-transform:uppercase;letter-spacing:.6px;}
+input[type=range]{flex:1;accent-color:#FF3D8F;min-width:80px;}
+.oval{font-size:12px;color:#FF3D8F;width:32px;font-weight:800;}
+select{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);
+       color:#fff;border-radius:20px;padding:4px 10px;
+       font-size:12px;font-weight:800;font-family:Nunito,sans-serif;}
+
+/* Info Bar */
+#infoBar{position:fixed;top:0;left:0;right:0;z-index:50;padding:10px 14px;
+         background:linear-gradient(rgba(18,5,15,.75),transparent);
+         display:flex;justify-content:space-between;align-items:center;}
+.logo-bar{display:flex;align-items:center;gap:8px;}
+.logo-bar img{width:32px;height:32px;border-radius:50%;
+              box-shadow:0 2px 10px rgba(255,61,143,.4);}
+.logo-bar span{font-size:16px;font-weight:900;color:#FF3D8F;}
+#selInfo{font-size:10px;color:#ccc;text-align:right;line-height:1.6;font-weight:700;}
+#selInfo b{color:#FF3D8F;}
+
+/* Status */
+#statusDot{position:fixed;top:14px;left:50%;transform:translateX(-50%);
+           z-index:60;font-size:11px;color:#1ECFC0;
+           background:rgba(12,5,10,.7);padding:4px 14px;
+           border-radius:100px;display:none;font-weight:800;
+           border:1px solid rgba(30,207,192,.25);}
+
+/* Skin tone badge */
+#skinBadge{position:fixed;top:52px;left:50%;transform:translateX(-50%);
+           z-index:60;font-size:10px;color:#fff;
+           padding:3px 12px;border-radius:100px;display:none;
+           font-weight:700;letter-spacing:.3px;
+           border:1px solid rgba(255,255,255,.2);}
+
+/* Capture Button */
+#captureBtn{position:fixed;right:16px;top:50%;transform:translateY(-50%);
+            z-index:60;width:60px;height:60px;border-radius:50%;
+            background:linear-gradient(135deg,#FF3D8F,#FF6BB3);
+            border:3px solid rgba(255,255,255,.25);cursor:pointer;
+            font-size:26px;display:flex;align-items:center;justify-content:center;
+            box-shadow:0 4px 20px rgba(255,61,143,.55);
+            animation:pulse 2.2s ease-in-out infinite;transition:transform .15s;}
+#captureBtn:active{transform:translateY(-50%) scale(.88);}
+@keyframes pulse{
+  0%,100%{box-shadow:0 4px 20px rgba(255,61,143,.55),0 0 0 0 rgba(255,61,143,.25);}
+  50%{box-shadow:0 4px 24px rgba(255,61,143,.7),0 0 0 12px rgba(255,61,143,.0);}
 }
 
-#container { position:relative; width:100vw; height:100vh; }
-#video  { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; transform:scaleX(-1); }
-#canvas { position:absolute; inset:0; width:100%; height:100%; transform:scaleX(-1); }
+/* Flash & Modal */
+#flashEl{position:fixed;inset:0;background:white;z-index:200;
+         opacity:0;pointer-events:none;transition:opacity .1s;}
+#photoModal{display:none;position:fixed;inset:0;z-index:300;
+            flex-direction:column;align-items:center;justify-content:center;padding:20px;}
+#modalBg{position:absolute;inset:0;background:linear-gradient(160deg,rgba(18,5,15,.97),rgba(8,4,18,.97));
+         backdrop-filter:blur(16px);}
+.modal-inner{position:relative;z-index:1;display:flex;flex-direction:column;
+             align-items:center;width:100%;max-width:400px;}
+.modal-header{display:flex;align-items:center;gap:10px;margin-bottom:14px;width:100%;}
+.modal-header img{width:38px;height:38px;border-radius:50%;
+                  box-shadow:0 0 16px rgba(255,61,143,.4);}
+.modal-header-text h3{font-size:17px;font-weight:900;color:#FF3D8F;line-height:1;}
+.modal-header-text p {font-size:11px;color:#888;font-weight:600;margin-top:2px;}
+.modal-header-text{flex:1;}
+.modal-close-x{width:32px;height:32px;border-radius:50%;
+               background:rgba(255,255,255,.08);border:none;
+               color:#aaa;font-size:16px;cursor:pointer;
+               display:flex;align-items:center;justify-content:center;}
+.photo-frame{position:relative;border-radius:18px;overflow:hidden;width:100%;
+             box-shadow:0 0 0 1px rgba(255,61,143,.25),0 8px 40px rgba(255,61,143,.2);}
+#photoResult{width:100%;max-height:56vh;display:block;object-fit:cover;}
+.corner-tl{position:absolute;top:10px;left:10px;
+           background:rgba(18,5,15,.65);backdrop-filter:blur(6px);
+           border-radius:100px;padding:4px 10px;
+           display:flex;align-items:center;gap:6px;}
+.corner-tl img{width:18px;height:18px;border-radius:50%;}
+.corner-tl span{font-size:10px;font-weight:800;color:#FF3D8F;}
+.shade-pill{margin-top:12px;padding:7px 16px;border-radius:100px;
+            background:rgba(255,255,255,.06);border:1px solid rgba(255,61,143,.2);
+            display:flex;align-items:center;gap:8px;width:100%;}
+.shade-dot{width:16px;height:16px;border-radius:50%;flex-shrink:0;
+           border:2px solid rgba(255,255,255,.25);}
+.shade-pill-text{flex:1;font-size:12px;font-weight:700;color:#ddd;}
+.shade-pill-brand{font-size:10px;color:#888;font-weight:700;}
+.modal-hint{font-size:11px;color:#666;font-weight:700;margin-top:8px;text-align:center;}
+.modal-hint strong{color:#1ECFC0;}
+.modal-btns{display:flex;gap:10px;margin-top:12px;width:100%;}
+.btn-dl{flex:1;padding:13px;border:none;border-radius:14px;font-size:14px;
+        font-weight:800;cursor:pointer;font-family:Nunito,sans-serif;
+        background:linear-gradient(135deg,#FF3D8F,#FF6BB3);color:white;
+        box-shadow:0 4px 18px rgba(255,61,143,.4);transition:all .18s;
+        display:flex;align-items:center;justify-content:center;gap:6px;}
+.btn-dl:active{transform:scale(.96);}
+.btn-share{flex:0 0 52px;padding:13px;border:none;border-radius:14px;font-size:18px;
+           cursor:pointer;background:rgba(30,207,192,.12);
+           border:1px solid rgba(30,207,192,.2);color:#1ECFC0;transition:all .18s;}
+.btn-close{flex:0 0 52px;padding:13px;border:none;border-radius:14px;font-size:18px;
+           cursor:pointer;background:rgba(255,255,255,.08);
+           border:1px solid rgba(255,255,255,.1);color:#aaa;transition:all .18s;}
 
-/* ── Loading ── */
-#loading { position:fixed; inset:0;
-           background:linear-gradient(135deg, var(--dark), #0a0a18);
-           display:flex; flex-direction:column;
-           align-items:center; justify-content:center; z-index:100; }
-#loading img.logo-load { width:110px; height:110px; border-radius:50%;
-                          object-fit:cover; margin-bottom:16px;
-                          box-shadow:0 0 32px rgba(255,61,143,.4); }
-#loading h2 { font-size:22px; font-weight:900; color:#FF3D8F; letter-spacing:-.3px; }
-#loading p  { color:#9878a0; font-size:13px; margin-top:6px; font-weight:600; }
-.spinner { position:absolute; width:130px; height:130px;
-           border:3px solid rgba(255,61,143,.15);
-           border-top-color:#FF3D8F; border-right-color:#1ECFC0;
-           border-radius:50%; animation:spin .9s linear infinite; }
-.logo-wrap { position:relative; display:flex; align-items:center; justify-content:center;
-             width:130px; height:130px; margin-bottom:16px; }
-@keyframes spin { to { transform:rotate(360deg); } }
-
-/* ── Info Bar ── */
-#infoBar { position:fixed; top:0; left:0; right:0; z-index:50; padding:10px 14px;
-           background:linear-gradient(rgba(18,5,15,.75),transparent);
-           display:flex; justify-content:space-between; align-items:center; }
-.logo-bar { display:flex; align-items:center; gap:8px; }
-.logo-bar img { width:34px; height:34px; border-radius:50%; object-fit:cover;
-                box-shadow:0 2px 10px rgba(255,61,143,.4); }
-.logo-bar span { font-size:16px; font-weight:900; color:#FF3D8F; letter-spacing:-.3px; }
-#selInfo { font-size:10px; color:#ccc; text-align:right; line-height:1.6; font-weight:700; }
-#selInfo b { color:#FF3D8F; }
-
-/* ── Status ── */
-#statusDot { position:fixed; top:14px; left:50%; transform:translateX(-50%);
-             z-index:60; font-size:11px; color:#1ECFC0;
-             background:rgba(12,5,10,.7); padding:4px 14px;
-             border-radius:100px; display:none; font-weight:800;
-             border:1px solid rgba(30,207,192,.25); letter-spacing:.3px; }
-
-/* ── Capture Button ── */
-#captureBtn { position:fixed; right:16px; top:50%; transform:translateY(-50%);
-              z-index:60; width:62px; height:62px; border-radius:50%;
-              background:linear-gradient(135deg, #FF3D8F, #FF6BB3);
-              border:3px solid rgba(255,255,255,.25); cursor:pointer;
-              font-size:26px; display:flex; align-items:center; justify-content:center;
-              box-shadow:0 4px 20px rgba(255,61,143,.55);
-              animation:pulse 2.2s ease-in-out infinite; transition:transform .15s; }
-#captureBtn:active { transform:translateY(-50%) scale(.88); }
-@keyframes pulse {
-  0%,100% { box-shadow:0 4px 20px rgba(255,61,143,.55),0 0 0 0 rgba(255,61,143,.25); }
-  50%      { box-shadow:0 4px 24px rgba(255,61,143,.7),0 0 0 12px rgba(255,61,143,.0); }
-}
-
-/* ── UI Panel ── */
-#ui { position:fixed; bottom:0; left:0; right:0; z-index:50;
-      background:linear-gradient(transparent, rgba(12,4,10,.95) 40%);
-      padding:14px 14px 26px; }
-.brand-scroll { display:flex; gap:8px; overflow-x:auto; padding-bottom:8px;
-                margin-bottom:10px; scrollbar-width:none; }
-.brand-scroll::-webkit-scrollbar { display:none; }
-.brand-btn { flex-shrink:0; padding:5px 16px; border-radius:100px;
-             border:1.5px solid rgba(255,255,255,.1);
-             background:rgba(255,255,255,.05);
-             color:#888; font-size:12px; font-weight:800;
-             cursor:pointer; transition:all .22s; letter-spacing:.3px; }
-.brand-btn.active { border-color:#FF3D8F; color:#FF3D8F;
-                    background:rgba(255,61,143,.12);
-                    box-shadow:0 0 14px rgba(255,61,143,.2); }
-.shade-scroll { display:flex; gap:10px; overflow-x:auto;
-                padding-bottom:8px; scrollbar-width:none; }
-.shade-scroll::-webkit-scrollbar { display:none; }
-.shade-item { flex-shrink:0; display:flex; flex-direction:column;
-              align-items:center; gap:5px; cursor:pointer; }
-.shade-circle { width:40px; height:40px; border-radius:50%;
-                border:2.5px solid transparent; transition:all .22s;
-                box-shadow:0 2px 8px rgba(0,0,0,.45); }
-.shade-circle.active { border-color:#fff; transform:scale(1.22);
-                       box-shadow:0 0 16px rgba(255,255,255,.3); }
-.shade-label { font-size:9px; color:#777; text-align:center;
-               max-width:46px; line-height:1.2; font-weight:700; }
-.controls { display:flex; align-items:center; gap:10px; margin-top:10px; flex-wrap:wrap; }
-.controls label { font-size:10px; color:#888; white-space:nowrap;
-                  font-weight:800; text-transform:uppercase; letter-spacing:.6px; }
-input[type=range] { flex:1; accent-color:#FF3D8F; min-width:80px; }
-.oval { font-size:12px; color:#FF3D8F; width:32px; font-weight:800; }
-select { background:rgba(255,255,255,.07); border:1px solid rgba(255,255,255,.1);
-         color:#fff; border-radius:20px; padding:4px 10px;
-         font-size:12px; font-weight:800; font-family:'Nunito',sans-serif; }
-
-/* ── Flash ── */
-#flashEl { position:fixed; inset:0; background:white; z-index:200;
-           opacity:0; pointer-events:none; transition:opacity .1s; }
-
-/* ── Photo Modal ── */
-#photoModal { display:none; position:fixed; inset:0; z-index:300;
-              flex-direction:column; align-items:center; justify-content:center;
-              padding:20px; }
-#modalBg { position:absolute; inset:0;
-           background:linear-gradient(160deg,rgba(18,5,15,.97),rgba(8,4,18,.97));
-           backdrop-filter:blur(16px); }
-.modal-inner { position:relative; z-index:1; display:flex; flex-direction:column;
-               align-items:center; width:100%; max-width:400px; }
-
-/* Modal header dengan logo */
-.modal-header { display:flex; align-items:center; gap:10px; margin-bottom:14px; width:100%; }
-.modal-header img { width:40px; height:40px; border-radius:50%;
-                    box-shadow:0 0 16px rgba(255,61,143,.4); }
-.modal-header-text { flex:1; }
-.modal-header-text h3 { font-size:17px; font-weight:900; color:#FF3D8F;
-                         letter-spacing:-.2px; line-height:1; }
-.modal-header-text p  { font-size:11px; color:#888; font-weight:600; margin-top:2px; }
-.modal-close-x { width:32px; height:32px; border-radius:50%;
-                 background:rgba(255,255,255,.08); border:none;
-                 color:#aaa; font-size:16px; cursor:pointer;
-                 display:flex; align-items:center; justify-content:center; }
-
-/* Foto */
-.photo-frame { position:relative; border-radius:18px; overflow:hidden;
-               width:100%;
-               box-shadow:0 0 0 1px rgba(255,61,143,.25),
-                          0 8px 40px rgba(255,61,143,.2),
-                          0 0 60px rgba(184,143,224,.1); }
-#photoResult { width:100%; max-height:56vh; display:block; object-fit:cover; }
-
-/* Corner stickers di foto */
-.corner-tl { position:absolute; top:10px; left:10px;
-             background:rgba(18,5,15,.65); backdrop-filter:blur(6px);
-             border-radius:100px; padding:4px 10px;
-             display:flex; align-items:center; gap:6px; }
-.corner-tl img { width:18px; height:18px; border-radius:50%; }
-.corner-tl span { font-size:10px; font-weight:800; color:#FF3D8F; }
-
-/* Shade pill */
-.shade-pill { margin-top:12px; padding:7px 16px; border-radius:100px;
-              background:rgba(255,255,255,.06);
-              border:1px solid rgba(255,61,143,.2);
-              display:flex; align-items:center; gap:8px; width:100%; }
-.shade-dot   { width:16px; height:16px; border-radius:50%; flex-shrink:0;
-               border:2px solid rgba(255,255,255,.25); }
-.shade-pill-text { flex:1; font-size:12px; font-weight:700; color:#ddd; }
-.shade-pill-brand { font-size:10px; color:#888; font-weight:700; }
-
-/* Hint */
-.modal-hint { font-size:11px; color:#666; font-weight:700;
-              margin-top:8px; text-align:center; }
-.modal-hint strong { color:#1ECFC0; }
-
-/* Buttons */
-.modal-btns { display:flex; gap:10px; margin-top:12px; width:100%; }
-.btn-download { flex:1; padding:13px; border:none; border-radius:14px;
-                font-size:14px; font-weight:800; cursor:pointer;
-                font-family:'Nunito',sans-serif;
-                background:linear-gradient(135deg,#FF3D8F,#FF6BB3);
-                color:white; letter-spacing:.3px;
-                box-shadow:0 4px 18px rgba(255,61,143,.4);
-                transition:all .18s; display:flex;
-                align-items:center; justify-content:center; gap:6px; }
-.btn-download:active { transform:scale(.96); }
-.btn-share { flex:0 0 52px; padding:13px; border:none; border-radius:14px;
-             font-size:18px; cursor:pointer;
-             background:linear-gradient(135deg,rgba(30,207,192,.15),rgba(184,143,224,.15));
-             border:1px solid rgba(30,207,192,.2); color:#1ECFC0;
-             transition:all .18s; }
-.btn-share:active { transform:scale(.96); }
+/* Level indicator */
+#qualityBadge{position:fixed;bottom:180px;left:12px;z-index:60;
+              font-size:9px;color:#1ECFC0;font-weight:800;
+              background:rgba(0,0,0,.5);padding:3px 8px;
+              border-radius:100px;border:1px solid rgba(30,207,192,.2);}
 </style>
 </head>
 <body>
 
 <div id="loading">
-  <div class="logo-wrap">
-    <div class="spinner"></div>
-    <img class="logo-load" src="/logo" alt="Opshe" onerror="this.style.display='none'">
-  </div>
+  <div class="spinner"></div>
   <h2>Opshe Beauty AR</h2>
   <p id="loadTxt">Memuat face detection...</p>
 </div>
@@ -212,6 +174,8 @@ select { background:rgba(255,255,255,.07); border:1px solid rgba(255,255,255,.1)
 </div>
 
 <div id="statusDot">✦ Face detected</div>
+<div id="skinBadge"></div>
+<div id="qualityBadge">✦ Natural Blend v2</div>
 
 <button id="captureBtn" onclick="capturePhoto()">📸</button>
 
@@ -220,7 +184,6 @@ select { background:rgba(255,255,255,.07); border:1px solid rgba(255,255,255,.1)
 <div id="photoModal">
   <div id="modalBg" onclick="closePhoto()"></div>
   <div class="modal-inner">
-
     <div class="modal-header">
       <img src="/logo" alt="Opshe" onerror="this.style.display='none'">
       <div class="modal-header-text">
@@ -229,7 +192,6 @@ select { background:rgba(255,255,255,.07); border:1px solid rgba(255,255,255,.1)
       </div>
       <button class="modal-close-x" onclick="closePhoto()">✕</button>
     </div>
-
     <div class="photo-frame">
       <img id="photoResult" src="" alt="Foto">
       <div class="corner-tl">
@@ -237,26 +199,19 @@ select { background:rgba(255,255,255,.07); border:1px solid rgba(255,255,255,.1)
         <span>opshe.id</span>
       </div>
     </div>
-
-    <div class="shade-pill" id="shadePill">
+    <div class="shade-pill">
       <div class="shade-dot" id="shadeDot"></div>
       <div class="shade-pill-text">
-        <div id="shadeNameText">Opshe Beauty AR</div>
-        <div class="shade-pill-brand" id="shadeBrandText">Virtual Try-On</div>
+        <div id="shadeNameTxt">Opshe Beauty AR</div>
+        <div class="shade-pill-brand" id="shadeBrandTxt">Virtual Try-On</div>
       </div>
     </div>
-
     <p class="modal-hint">Tekan lama pada foto → <strong>Save Image 💾</strong></p>
-
     <div class="modal-btns">
-      <button class="btn-download" onclick="downloadPhoto()">
-        💾 Simpan Foto
-      </button>
-      <button class="btn-share" onclick="sharePhoto()" title="Share">
-        🔗
-      </button>
+      <button class="btn-dl" onclick="downloadPhoto()">💾 Simpan Foto</button>
+      <button class="btn-share" onclick="sharePhoto()">🔗</button>
+      <button class="btn-close" onclick="closePhoto()">✕</button>
     </div>
-
   </div>
 </div>
 
@@ -284,6 +239,16 @@ const UPPER = [61,185,40,39,37,0,267,269,270,409,291,375,321,405,314,17,84,181,9
 const LOWER = [78,95,88,178,87,14,317,402,318,324,308,415,310,311,312,13,82,81,80,191,78];
 const INNER = [78,191,80,81,82,13,312,311,310,415,308,324,318,402,317,14,87,178,88,95];
 
+// Landmark bibir untuk sampling warna kulit (di luar area lip)
+const SKIN_SAMPLE_PTS = [
+  [0.5, 0.08],   // atas bibir atas
+  [0.3, 0.08],
+  [0.7, 0.08],
+  [0.5, 0.92],   // bawah bibir bawah
+  [0.3, 0.92],
+  [0.7, 0.92],
+];
+
 const video     = document.getElementById('video');
 const canvas    = document.getElementById('canvas');
 const ctx       = canvas.getContext('2d');
@@ -296,6 +261,7 @@ const opVal     = document.getElementById('opVal');
 const finSel    = document.getElementById('finSel');
 const selInfo   = document.getElementById('selInfo');
 const statusDot = document.getElementById('statusDot');
+const skinBadge = document.getElementById('skinBadge');
 
 let shade         = null;
 let opacity       = 0.60;
@@ -306,14 +272,19 @@ let lastPhotoUrl  = null;
 let lastPhotoBlob = null;
 const SMOOTH      = 0.55;
 
+// ── Skin Tone State ───────────────────────────────────────────────────────────
+let skinTone   = null;   // {r,g,b} rata-rata kulit di sekitar bibir
+let skinSampled = false;
+let sampleFrameCount = 0;
+
 function hexRgb(hex) {
-  const h=hex.replace('#','');
+  const h = hex.replace('#','');
   return {r:parseInt(h.slice(0,2),16),g:parseInt(h.slice(2,4),16),b:parseInt(h.slice(4,6),16)};
 }
-function pts(lm,idx) {
+function pts(lm, idx) {
   return idx.map(i=>({x:lm[i].x*canvas.width,y:lm[i].y*canvas.height}));
 }
-function drawPath(c,p) {
+function drawPath(c, p) {
   c.beginPath(); c.moveTo(p[0].x,p[0].y);
   for(let i=1;i<p.length-1;i++){
     const xc=(p[i].x+p[i+1].x)/2,yc=(p[i].y+p[i+1].y)/2;
@@ -324,78 +295,277 @@ function drawPath(c,p) {
 function makeOff() {
   const o=document.createElement('canvas');
   o.width=canvas.width; o.height=canvas.height;
-  return [o,o.getContext('2d')];
+  return [o, o.getContext('2d')];
 }
 
+// ── Skin Tone Sampling ────────────────────────────────────────────────────────
+function sampleSkinTone(lm) {
+  // Ambil bounding box area bibir
+  const allPts = pts(lm, [...UPPER, ...LOWER]);
+  const minX = Math.min(...allPts.map(p=>p.x));
+  const maxX = Math.max(...allPts.map(p=>p.x));
+  const minY = Math.min(...allPts.map(p=>p.y));
+  const maxY = Math.max(...allPts.map(p=>p.y));
+  const W = maxX - minX;
+  const H = maxY - minY;
+
+  // Sample pixel di atas & bawah area bibir (bukan di dalam)
+  const samplePoints = [
+    {x: minX + W*0.5, y: minY - H*0.4},  // atas tengah
+    {x: minX + W*0.3, y: minY - H*0.35},
+    {x: minX + W*0.7, y: minY - H*0.35},
+    {x: minX + W*0.5, y: maxY + H*0.4},  // bawah tengah
+    {x: minX + W*0.3, y: maxY + H*0.35},
+    {x: minX + W*0.7, y: maxY + H*0.35},
+    {x: minX - W*0.2, y: minY + H*0.5},  // kiri
+    {x: maxX + W*0.2, y: minY + H*0.5},  // kanan
+  ];
+
+  // Baca dari video langsung (bukan canvas — karena canvas sudah ter-flip)
+  const offV = document.createElement('canvas');
+  offV.width = canvas.width; offV.height = canvas.height;
+  const octx = offV.getContext('2d');
+  // Video ter-flip di CSS, kita gambar normal dulu
+  octx.save();
+  octx.scale(-1,1);
+  octx.drawImage(video, -canvas.width, 0, canvas.width, canvas.height);
+  octx.restore();
+
+  let r=0,g=0,b=0,n=0;
+  for(const sp of samplePoints) {
+    const sx = Math.round(Math.max(0, Math.min(canvas.width-1, sp.x)));
+    const sy = Math.round(Math.max(0, Math.min(canvas.height-1, sp.y)));
+    if(sx>0 && sy>0 && sx<canvas.width && sy<canvas.height) {
+      try {
+        const px = octx.getImageData(sx, sy, 1, 1).data;
+        if(px[3] > 128) { // tidak transparan
+          r+=px[0]; g+=px[1]; b+=px[2]; n++;
+        }
+      } catch(e){}
+    }
+  }
+
+  if(n > 2) {
+    skinTone = {r:r/n, g:g/n, b:b/n};
+    updateSkinBadge();
+  }
+}
+
+function updateSkinBadge() {
+  if(!skinTone) return;
+  const {r,g,b} = skinTone;
+  const br = (r*299+g*587+b*114)/1000;
+  let label = '';
+  if(br < 80)       label = '🌑 Deep';
+  else if(br < 110) label = '🌒 Rich';
+  else if(br < 140) label = '🌓 Tan';
+  else if(br < 165) label = '🌔 Medium';
+  else if(br < 190) label = '🌕 Light';
+  else              label = '⬜ Fair';
+
+  skinBadge.textContent = `Skin: ${label}`;
+  skinBadge.style.background = `rgba(${Math.round(r)},${Math.round(g)},${Math.round(b)},.7)`;
+  skinBadge.style.display = 'block';
+}
+
+// ── Level 1: Edge Feathering ──────────────────────────────────────────────────
+// Buat gradient mask dari dalam ke luar path → tepi jadi soft/feather
+function applyEdgeFeathering(offCtx, upAdj, loAdj, featherSize) {
+  // Gambar inner glow (putih) untuk feather mask
+  offCtx.save();
+  offCtx.globalCompositeOperation = 'destination-in';
+
+  // Buat feather dengan multiple layers opacity
+  const steps = 4;
+  for(let i=0; i<steps; i++) {
+    const t = i/(steps-1); // 0..1
+    offCtx.globalAlpha = t;
+
+    // Scale path sedikit lebih besar dari dalam ke luar
+    const scale = 1 - (1-t) * (featherSize/100);
+    offCtx.save();
+
+    // Center of lip
+    const allPts = [...upAdj, ...loAdj];
+    const cx = allPts.reduce((s,p)=>s+p.x,0)/allPts.length;
+    const cy = allPts.reduce((s,p)=>s+p.y,0)/allPts.length;
+
+    offCtx.translate(cx, cy);
+    offCtx.scale(scale + (1-scale)*t, scale + (1-scale)*t);
+    offCtx.translate(-cx, -cy);
+
+    offCtx.fillStyle = `rgba(0,0,0,1)`;
+    drawPath(offCtx, upAdj); offCtx.fill();
+    drawPath(offCtx, loAdj); offCtx.fill();
+    offCtx.restore();
+  }
+  offCtx.restore();
+}
+
+// ── Level 1: Skin Tone Adaptive Blend ────────────────────────────────────────
+function getLipColor(shadeHex) {
+  if(!skinTone || !shadeHex) return hexRgb(shadeHex||'#C02030');
+
+  const lipColor = hexRgb(shadeHex);
+  const skin = skinTone;
+
+  // Blend lipstik dengan underlying skin tone
+  // Multiply blend simulation: L_result = L_lip * (skin/255)
+  // Ini membuat warna lipstik terasa lebih natural di atas kulit yang ada
+  const blend = 0.15; // 15% skin influence
+  return {
+    r: Math.round(lipColor.r * (1-blend) + lipColor.r * (skin.r/255) * blend),
+    g: Math.round(lipColor.g * (1-blend) + lipColor.g * (skin.g/255) * blend),
+    b: Math.round(lipColor.b * (1-blend) + lipColor.b * (skin.b/255) * blend),
+  };
+}
+
+function getAdaptiveOpacity() {
+  if(!skinTone) return opacity;
+  // Kulit lebih gelap → opacity sedikit lebih tinggi agar warna terlihat
+  const brightness = (skinTone.r*299+skinTone.g*587+skinTone.b*114)/1000;
+  const factor = brightness < 120 ? 1.12 : brightness > 180 ? 0.92 : 1.0;
+  return Math.min(0.92, opacity * factor);
+}
+
+// ── Draw Lip (Level 1 Enhanced) ───────────────────────────────────────────────
 function drawLip() {
   if(!shade||!landmarks) return;
-  const rgb   = hexRgb(shade.hex);
+
+  const adaptiveRgb  = getLipColor(shade.hex);
+  const adaptiveOpac = getAdaptiveOpacity();
   const upAdj = pts(landmarks,UPPER).map(p=>({x:p.x,y:p.y-1}));
   const loAdj = pts(landmarks,LOWER).map(p=>({x:p.x,y:p.y-1}));
   const inner = pts(landmarks,INNER);
-  const mouthH= Math.abs(landmarks[14].y-landmarks[13].y)*canvas.height;
-  const [off,oc]=makeOff();
+  const mouthH = Math.abs(landmarks[14].y-landmarks[13].y)*canvas.height;
 
-  const cutTeeth=(o)=>{
+  const {r,g,b} = adaptiveRgb;
+
+  // ── Offscreen: gambar warna lip + feathering ──
+  const [off, oc] = makeOff();
+
+  const cutTeeth = (o) => {
     if(mouthH>8){
       o.globalCompositeOperation='destination-out';
-      o.globalAlpha=1; drawPath(o,inner); o.fill();
+      o.globalAlpha=1;
+      drawPath(o,inner); o.fill();
     }
   };
 
-  if(finish==='gloss'){
+  if(finish==='gloss') {
+    // Base
     oc.globalCompositeOperation='source-over';
-    oc.globalAlpha=opacity*0.75;
-    oc.fillStyle=`rgb(${rgb.r},${rgb.g},${rgb.b})`;
+    oc.globalAlpha = adaptiveOpac * 0.75;
+    oc.fillStyle = `rgb(${r},${g},${b})`;
     drawPath(oc,upAdj); oc.fill();
     drawPath(oc,loAdj); oc.fill();
     cutTeeth(oc);
-    const [o2,oc2]=makeOff();
-    const ctr=loAdj.reduce((s,p)=>({x:s.x+p.x,y:s.y+p.y}),{x:0,y:0});
+    // Gloss highlight
+    const [o2,oc2] = makeOff();
+    const ctr = loAdj.reduce((s,p)=>({x:s.x+p.x,y:s.y+p.y}),{x:0,y:0});
     ctr.x/=loAdj.length; ctr.y/=loAdj.length;
-    const g=oc2.createRadialGradient(ctr.x,ctr.y-2,1,ctr.x,ctr.y,22);
-    g.addColorStop(0,'rgba(255,255,255,0.9)');
-    g.addColorStop(1,'rgba(255,255,255,0)');
+    const gl = oc2.createRadialGradient(ctr.x,ctr.y-2,1,ctr.x,ctr.y,22);
+    gl.addColorStop(0,'rgba(255,255,255,0.9)');
+    gl.addColorStop(1,'rgba(255,255,255,0)');
     oc2.globalAlpha=0.28; drawPath(oc2,loAdj);
-    oc2.fillStyle=g; oc2.fill();
+    oc2.fillStyle=gl; oc2.fill();
     cutTeeth(oc2);
     oc.globalCompositeOperation='source-over';
     oc.globalAlpha=1; oc.drawImage(o2,0,0);
-  } else if(finish==='satin'){
-    oc.globalAlpha=opacity*0.72;
-    oc.fillStyle=`rgb(${rgb.r},${rgb.g},${rgb.b})`;
+
+  } else if(finish==='satin') {
+    oc.globalAlpha = adaptiveOpac * 0.72;
+    oc.fillStyle = `rgb(${r},${g},${b})`;
     drawPath(oc,upAdj); oc.fill();
     drawPath(oc,loAdj); oc.fill();
-    oc.globalAlpha=0.08;
+    oc.globalAlpha=0.07;
     oc.fillStyle='rgba(255,255,255,0.5)';
     drawPath(oc,upAdj); oc.fill();
     drawPath(oc,loAdj); oc.fill();
     cutTeeth(oc);
+
   } else {
-    oc.globalAlpha=opacity*0.80;
-    oc.fillStyle=`rgb(${rgb.r},${rgb.g},${rgb.b})`;
+    // Matte
+    oc.globalAlpha = adaptiveOpac * 0.80;
+    oc.fillStyle = `rgb(${r},${g},${b})`;
     drawPath(oc,upAdj); oc.fill();
     drawPath(oc,loAdj); oc.fill();
     cutTeeth(oc);
   }
 
+  // ── LEVEL 1: Edge Feathering ──
+  // Apply soft feather mask di tepi bibir
+  // Caranya: gambar path yang sedikit lebih kecil di atas
+  // dengan destination-in untuk "clip" yang soft
+  const [softOff, softCtx] = makeOff();
+
+  // Copy lip render ke softOff
+  softCtx.drawImage(off, 0, 0);
+
+  // Buat feather mask
+  const [maskOff, maskCtx] = makeOff();
+
+  // Layer 1: solid fill path (inti)
+  maskCtx.globalAlpha = 1;
+  maskCtx.fillStyle = 'rgba(0,0,0,1)';
+  const scale1 = 0.88; // inner solid area 88% size
+  applyScaledPath(maskCtx, upAdj, scale1, 1.0);
+  applyScaledPath(maskCtx, loAdj, scale1, 1.0);
+
+  // Layer 2-4: feather layers (makin ke luar makin transparan)
+  const featherSteps = [
+    {scale: 0.92, alpha: 0.85},
+    {scale: 0.96, alpha: 0.55},
+    {scale: 1.00, alpha: 0.25},
+  ];
+  for(const {scale, alpha} of featherSteps) {
+    maskCtx.globalAlpha = alpha;
+    maskCtx.fillStyle = 'rgba(0,0,0,1)';
+    applyScaledPath(maskCtx, upAdj, scale, alpha);
+    applyScaledPath(maskCtx, loAdj, scale, alpha);
+  }
+
+  // Apply mask ke softOff
+  softCtx.globalCompositeOperation = 'destination-in';
+  softCtx.globalAlpha = 1;
+  softCtx.drawImage(maskOff, 0, 0);
+
+  // ── Tempel ke canvas utama ──
   ctx.save();
-  ctx.globalCompositeOperation='multiply';
-  ctx.drawImage(off,0,0);
+  ctx.globalCompositeOperation = 'multiply';
+  ctx.drawImage(softOff, 0, 0);
   ctx.restore();
 }
 
-function resize() { canvas.width=window.innerWidth; canvas.height=window.innerHeight; }
-window.addEventListener('resize',resize);
+function applyScaledPath(c, points, scale, alpha) {
+  if(points.length === 0) return;
+  const cx = points.reduce((s,p)=>s+p.x,0)/points.length;
+  const cy = points.reduce((s,p)=>s+p.y,0)/points.length;
+  c.save();
+  c.translate(cx,cy);
+  c.scale(scale,scale);
+  c.translate(-cx,-cy);
+  c.globalAlpha = alpha;
+  c.fillStyle = 'rgba(0,0,0,1)';
+  drawPath(c,points);
+  c.fill();
+  c.restore();
+}
+
+function resize() {
+  canvas.width  = window.innerWidth;
+  canvas.height = window.innerHeight;
+  skinSampled = false; // reset saat resize
+}
+window.addEventListener('resize', resize);
 resize();
 
-// ── Logo image untuk watermark ─────────────────────────────────────────────
+// ── Capture Photo ─────────────────────────────────────────────────────────────
 const logoImg = new Image();
 logoImg.src = '/logo';
 
-// ── Capture ────────────────────────────────────────────────────────────────
 function capturePhoto() {
-  const flash=document.getElementById('flashEl');
+  const flash = document.getElementById('flashEl');
   flash.style.opacity='1';
   setTimeout(()=>flash.style.opacity='0',120);
 
@@ -403,7 +573,6 @@ function capturePhoto() {
   out.width=canvas.width; out.height=canvas.height;
   const oc=out.getContext('2d');
 
-  // Video + AR
   oc.save(); oc.scale(-1,1);
   oc.drawImage(video,-out.width,0,out.width,out.height);
   oc.restore();
@@ -411,47 +580,36 @@ function capturePhoto() {
   oc.drawImage(canvas,-out.width,0,out.width,out.height);
   oc.restore();
 
-  // Gradient bottom
+  // Watermark
   const grad=oc.createLinearGradient(0,out.height-80,0,out.height);
   grad.addColorStop(0,'rgba(18,5,15,0)');
   grad.addColorStop(1,'rgba(18,5,15,0.8)');
   oc.fillStyle=grad; oc.fillRect(0,out.height-80,out.width,80);
 
-  // Logo bulat kiri bawah
-  const logoSize=44;
-  const logoX=14, logoY=out.height-logoSize-14;
-  oc.save();
-  oc.beginPath();
-  oc.arc(logoX+logoSize/2, logoY+logoSize/2, logoSize/2, 0, Math.PI*2);
-  oc.clip();
-  if(logoImg.complete && logoImg.naturalWidth>0) {
-    oc.drawImage(logoImg, logoX, logoY, logoSize, logoSize);
+  const lsz=44, lx=14, ly=out.height-lsz-14;
+  if(logoImg.complete&&logoImg.naturalWidth>0){
+    oc.save(); oc.beginPath();
+    oc.arc(lx+lsz/2,ly+lsz/2,lsz/2,0,Math.PI*2); oc.clip();
+    oc.drawImage(logoImg,lx,ly,lsz,lsz); oc.restore();
   }
-  oc.restore();
-
-  // Teks opshe.id
   oc.fillStyle='rgba(255,61,143,0.95)';
   oc.font='bold 14px system-ui';
-  oc.fillText('opshe.id', logoX+logoSize+8, logoY+logoSize/2+2);
-
-  // Shade name
+  oc.fillText('opshe.id', lx+lsz+8, ly+lsz/2+2);
   if(shade){
     oc.fillStyle='rgba(255,255,255,0.65)';
     oc.font='11px system-ui';
-    oc.fillText(shade.shade_name+' · '+shade.brand_name,
-                logoX+logoSize+8, logoY+logoSize/2+18);
+    oc.fillText(shade.shade_name+' · '+shade.brand_name, lx+lsz+8, ly+lsz/2+18);
   }
 
   out.toBlob(blob=>{
     if(lastPhotoUrl) URL.revokeObjectURL(lastPhotoUrl);
-    lastPhotoBlob = blob;
-    lastPhotoUrl  = URL.createObjectURL(blob);
-    document.getElementById('photoResult').src = lastPhotoUrl;
-
+    lastPhotoBlob=blob;
+    lastPhotoUrl=URL.createObjectURL(blob);
+    document.getElementById('photoResult').src=lastPhotoUrl;
     if(shade){
-      document.getElementById('shadeDot').style.background  = shade.hex;
-      document.getElementById('shadeNameText').textContent  = shade.shade_name;
-      document.getElementById('shadeBrandText').textContent = shade.brand_name;
+      document.getElementById('shadeDot').style.background=shade.hex;
+      document.getElementById('shadeNameTxt').textContent=shade.shade_name;
+      document.getElementById('shadeBrandTxt').textContent=shade.brand_name;
     }
     document.getElementById('photoModal').style.display='flex';
   },'image/jpeg',0.93);
@@ -461,29 +619,24 @@ function downloadPhoto() {
   if(!lastPhotoUrl) return;
   const link=document.createElement('a');
   link.href=lastPhotoUrl;
-  const name=shade ? shade.shade_name.replace(/\s+/g,'-') : 'look';
+  const name=shade?shade.shade_name.replace(/\s+/g,'-'):'look';
   link.download=`Opshe-${name}.jpg`;
-  document.body.appendChild(link);
-  link.click();
-  document.body.removeChild(link);
+  document.body.appendChild(link); link.click(); document.body.removeChild(link);
 }
 
 async function sharePhoto() {
   if(!lastPhotoBlob) return;
   const file=new File([lastPhotoBlob],'opshe-look.jpg',{type:'image/jpeg'});
-  if(navigator.canShare && navigator.canShare({files:[file]})){
-    try { await navigator.share({files:[file],title:'Opshe Beauty AR',text:'Check out my lip look! 💄 @opshe.id'}); }
-    catch(e){}
-  } else {
-    downloadPhoto();
-  }
+  if(navigator.canShare&&navigator.canShare({files:[file]})){
+    try{await navigator.share({files:[file],title:'Opshe Beauty AR',text:'Check out my lip look! 💄 @opshe.id'});}catch(e){}
+  } else { downloadPhoto(); }
 }
 
 function closePhoto() {
   document.getElementById('photoModal').style.display='none';
 }
 
-// ── Brands ────────────────────────────────────────────────────────────────
+// ── Brands ────────────────────────────────────────────────────────────────────
 async function loadBrands() {
   loadTxt.textContent='Memuat data brand...';
   try {
@@ -521,6 +674,8 @@ async function selectBrand(brandId) {
     `;
     item.onclick=()=>{
       shade=s;
+      skinSampled=false; // re-sample skin tone saat ganti shade
+      sampleFrameCount=0;
       document.querySelectorAll('.shade-circle').forEach(c=>
         c.classList.toggle('active',c.dataset.id===s.shade_id)
       );
@@ -540,12 +695,13 @@ opSlider.addEventListener('input',e=>{
 });
 finSel.addEventListener('change',e=>{finish=e.target.value;});
 
-// ── Face Mesh ──────────────────────────────────────────────────────────────
+// ── Face Mesh ─────────────────────────────────────────────────────────────────
 async function initFaceMesh() {
   loadTxt.textContent='Memuat AI face detection...';
   const fm=new FaceMesh({locateFile:f=>`https://cdn.jsdelivr.net/npm/@mediapipe/face_mesh/${f}`});
   fm.setOptions({maxNumFaces:1,refineLandmarks:true,
                  minDetectionConfidence:.5,minTrackingConfidence:.5});
+
   fm.onResults(res=>{
     ctx.clearRect(0,0,canvas.width,canvas.height);
     if(res.multiFaceLandmarks?.length>0){
@@ -558,18 +714,30 @@ async function initFaceMesh() {
         : raw;
       prevLandmarks=landmarks;
       statusDot.style.display='block';
+
+      // Sample skin tone tiap 30 frame setelah shade dipilih
+      if(shade && !skinSampled) {
+        sampleFrameCount++;
+        if(sampleFrameCount >= 30) {
+          sampleSkinTone(landmarks);
+          skinSampled=true;
+        }
+      }
+
       drawLip();
     } else {
       landmarks=null; prevLandmarks=null;
       statusDot.style.display='none';
     }
   });
+
   loadTxt.textContent='Mengaktifkan kamera...';
   const cam=new Camera(video,{
     onFrame:async()=>{await fm.send({image:video});},
     width:1280,height:720
   });
   await cam.start();
+
   loadTxt.textContent='Siap! 💄';
   setTimeout(()=>{
     loadEl.style.transition='opacity 0.6s';
