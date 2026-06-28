@@ -243,8 +243,15 @@ select{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);
 <script src="https://cdn.jsdelivr.net/npm/@mediapipe/face_mesh/face_mesh.js"></script>
 <script>
 const API   = window.location.origin + '/api/v1';
-const UPPER = [61,185,40,39,37,0,267,269,270,409,291,375,321,405,314,17,84,181,91,146,61];
-const LOWER = [78,95,88,178,87,14,317,402,318,324,308,415,310,311,312,13,82,81,80,191,78];
+// Outer lip landmarks — lebih tebal dan coverage lebih luas
+const UPPER = [
+  61,146,91,181,84,17,314,405,321,375,291,
+  409,270,269,267,0,37,39,40,185,61
+];
+const LOWER = [
+  61,185,40,39,37,0,267,269,270,409,291,
+  375,321,405,314,17,84,181,91,146,61
+];
 const INNER = [78,191,80,81,82,13,312,311,310,415,308,324,318,402,317,14,87,178,88,95];
 
 // Landmark bibir untuk sampling warna kulit (di luar area lip)
@@ -278,7 +285,7 @@ let landmarks     = null;
 let prevLandmarks = null;
 let lastPhotoUrl  = null;
 let lastPhotoBlob = null;
-const SMOOTH      = 0.55;
+const SMOOTH      = 0.75;
 
 // ── Skin Tone State ───────────────────────────────────────────────────────────
 let skinTone   = null;   // {r,g,b} rata-rata kulit di sekitar bibir
@@ -442,8 +449,18 @@ function drawLip() {
 
   const adaptiveRgb  = getLipColor(shade.hex);
   const adaptiveOpac = getAdaptiveOpacity();
-  const upAdj = pts(landmarks,UPPER).map(p=>({x:p.x,y:p.y-1}));
-  const loAdj = pts(landmarks,LOWER).map(p=>({x:p.x,y:p.y-1}));
+  // Expand lip area sedikit keluar agar lebih tebal dan natural
+const expand = 1.08; // 8% lebih besar dari landmark asli
+function expandPts(points, factor) {
+  const cx = points.reduce((s,p)=>s+p.x,0)/points.length;
+  const cy = points.reduce((s,p)=>s+p.y,0)/points.length;
+  return points.map(p=>({
+    x: cx + (p.x-cx)*factor,
+    y: cy + (p.y-cy)*factor - 1
+  }));
+}
+const upAdj = expandPts(pts(landmarks,UPPER), expand);
+const loAdj = expandPts(pts(landmarks,LOWER), expand);
   const inner = pts(landmarks,INNER);
   const mouthH = Math.abs(landmarks[14].y-landmarks[13].y)*canvas.height;
 
