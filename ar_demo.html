@@ -13,8 +13,13 @@ body{background:#000;overflow:hidden;height:100vh;font-family:Nunito,system-ui,s
 #canvas{position:absolute;inset:0;width:100%;height:100%;transform:scaleX(-1);}
 #loading{position:fixed;inset:0;background:linear-gradient(135deg,#1a0812,#0f0f1a);
          display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:100;}
-#loading h2{font-size:22px;font-weight:900;color:#FF3D8F;margin-top:16px;}
+#loading h2{font-size:22px;font-weight:900;color:#FF3D8F;margin-top:12px;}
 #loading p {color:#9878a0;font-size:13px;margin-top:6px;font-weight:600;}
+.logo-wrap-load{position:relative;width:110px;height:110px;
+                display:flex;align-items:center;justify-content:center;}
+.spinner-load{position:absolute;inset:0;border:3px solid rgba(255,61,143,.2);
+              border-top-color:#FF3D8F;border-right-color:#1ECFC0;
+              border-radius:50%;animation:spin .9s linear infinite;}
 .spinner{width:52px;height:52px;border:3px solid rgba(255,61,143,.2);
          border-top-color:#FF3D8F;border-right-color:#1ECFC0;
          border-radius:50%;animation:spin .9s linear infinite;}
@@ -155,7 +160,10 @@ select{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);
 <body>
 
 <div id="loading">
-  <div class="spinner"></div>
+  <div class="logo-wrap-load">
+    <div class="spinner-load"></div>
+    <img id="logoLoad" src="/logo" style="width:90px;height:90px;border-radius:50%;object-fit:cover;position:relative;z-index:1;box-shadow:0 0 30px rgba(255,61,143,.5);" onerror="this.style.display='none'">
+  </div>
   <h2>Opshe Beauty AR</h2>
   <p id="loadTxt">Memuat face detection...</p>
 </div>
