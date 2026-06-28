@@ -340,6 +340,57 @@ async function initFaceMesh() {
   }, 600);
 }
 
+function capturePhoto() {
+  const flash = document.getElementById('flashEl');
+  flash.style.opacity = '1';
+  setTimeout(() => flash.style.opacity = '0', 150);
+
+  const out    = document.createElement('canvas');
+  out.width    = canvas.width;
+  out.height   = canvas.height;
+  const outCtx = out.getContext('2d');
+
+  outCtx.save();
+  outCtx.scale(-1, 1);
+  outCtx.drawImage(video, -out.width, 0, out.width, out.height);
+  outCtx.restore();
+
+  outCtx.save();
+  outCtx.scale(-1, 1);
+  outCtx.drawImage(canvas, -out.width, 0, out.width, out.height);
+  outCtx.restore();
+
+  outCtx.fillStyle = 'rgba(0,0,0,0.4)';
+  outCtx.fillRect(0, out.height - 40, 160, 40);
+  outCtx.fillStyle = '#e8607a';
+  outCtx.font = 'bold 16px system-ui';
+  outCtx.fillText('⬡ OPSHE Beauty AR', 12, out.height - 14);
+
+  out.toBlob(blob => {
+    const url  = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href  = url;
+    const shadeName = shade ? shade.shade_name.replace(/\s+/g,'-') : 'look';
+    link.download = `OPSHE-${shadeName}.jpg`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+
+    if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
+      const w = window.open('');
+      w.document.write(`
+        <html><body style="margin:0;background:#000;text-align:center">
+        <img src="${url}" style="width:100%;max-width:100vw">
+        <p style="color:white;font-family:system-ui;padding:16px;font-size:14px">
+          📥 Tekan lama pada gambar → Save Image / Simpan Foto
+        </p>
+        </body></html>
+      `);
+    }
+  }, 'image/jpeg', 0.92);
+}
+
 async function init() {
   await loadBrands();
   await initFaceMesh();
