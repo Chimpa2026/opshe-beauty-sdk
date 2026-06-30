@@ -587,12 +587,12 @@ function applyPhotoLipFilter(){
       const i=(y*W+x)*4;
       let r=data[i],g=data[i+1],b=data[i+2];
 
-      // Lip mask
-      const lMask=ellipseDist(x,y,lcx,lcy,lrx,lry, fx.feather?0.25:0.08);
-      if(lMask<=0) continue;
-
-      // Only AFTER side (kanan dari split = after)
+      // Only AFTER side dulu (lebih efisien)
       if(x<splitX) continue;
+
+      // Lip mask — ketat hanya di area bibir
+      const lMask=ellipseDist(x,y,lcx,lcy,lrx,lry, fx.feather?0.20:0.06);
+      if(lMask<=0) continue;
 
       // Inner mouth mask (gigi) — kurangi efek di area gigi
       const iMask=ellipseDist(x,y,icx,icy,irx,iry,0.3);
