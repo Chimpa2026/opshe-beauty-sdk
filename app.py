@@ -20,11 +20,11 @@ app.register_blueprint(admin)
 
 @app.route("/")
 def index():
-    return send_from_directory(os.path.dirname(__file__), "index.html")
+    return redirect("/ar")
 
 @app.route("/ar")
-def ar_demo():
-    return send_from_directory(os.path.dirname(__file__), "ar_demo.html")
+def ar():
+    return send_from_directory(os.path.dirname(__file__), "index.html")
 
 @app.route("/lips")
 def lips_realtime():
