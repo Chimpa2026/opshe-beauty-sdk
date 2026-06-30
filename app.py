@@ -402,7 +402,7 @@ if __name__ == "__main__":
     # ── Somethinc ──
     ("SMT_LIP_001","SOMETHINC_001","Somethinc IDOL Blurry Soft Lip Matte","IDOL","liquid_lipstick","soft_matte",79000),
     ("SMT_LIP_002","SOMETHINC_001","Somethinc Transferproof Lipstick","Transferproof","lipstick_bullet","matte",89000),
-]""
+"""
 OPSHE Beauty AR SDK — Main Application
 Data di-embed langsung — tidak perlu file JSON eksternal
 """
