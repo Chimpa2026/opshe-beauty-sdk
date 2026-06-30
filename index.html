@@ -701,8 +701,89 @@ function loadPhoto(file){
   reader.readAsDataURL(file);
 }
 
-// ── Capture (realtime mode) ────────────────────────────────────
+// ── Watermark helper (shared realtime & photo) ────────────────
 const logoImg=new Image(); logoImg.src='/logo';
+
+// Info shade aktif saat ini
+function getShadeInfo(){
+  if(!activeBrand||!activeShade) return null;
+  const br=BRANDS_DATA.find(b=>b.brand_id===activeBrand);
+  // Cari dari currentShades
+  const sh=currentShades.find(s=>s.shade_id===activeShade);
+  if(!br||!sh) return null;
+  return{
+    brand: br.brand_name.replace(' New York',''),
+    product: sh.product_name,
+    shade: sh.shade_name,
+    hex: sh.hex
+  };
+}
+
+function drawWatermark(oc, W, H){
+  // Bar gradient bawah
+  const barH = Math.round(H * 0.18);
+  const grad = oc.createLinearGradient(0, H-barH, 0, H);
+  grad.addColorStop(0,'rgba(13,0,8,0)');
+  grad.addColorStop(1,'rgba(13,0,8,0.88)');
+  oc.fillStyle=grad;
+  oc.fillRect(0, H-barH, W, barH);
+
+  // Ukuran proporsional berdasarkan lebar gambar
+  const sc = W / 1080; // scale factor (base 1080px)
+  const lsz = Math.round(72 * sc);  // logo size
+  const pad = Math.round(20 * sc);  // padding
+  const lx = pad;
+  const ly = H - lsz - pad;
+
+  // Logo bulat
+  if(logoImg.complete && logoImg.naturalWidth > 0){
+    oc.save();
+    oc.beginPath();
+    oc.arc(lx + lsz/2, ly + lsz/2, lsz/2, 0, Math.PI*2);
+    oc.clip();
+    oc.drawImage(logoImg, lx, ly, lsz, lsz);
+    oc.restore();
+  }
+
+  // Teks info produk
+  const tx = lx + lsz + Math.round(16 * sc);
+  oc.save();
+  oc.shadowColor = 'rgba(0,0,0,0.8)';
+  oc.shadowBlur = Math.round(8 * sc);
+
+  const info = getShadeInfo();
+
+  // Line 1: opshe.id
+  oc.font = `600 ${Math.round(18 * sc)}px -apple-system,sans-serif`;
+  oc.fillStyle = 'rgba(255,107,174,1)';
+  oc.fillText('opshe.id', tx, ly + Math.round(22 * sc));
+
+  if(info){
+    // Line 2: Brand · Produk
+    oc.font = `bold ${Math.round(26 * sc)}px -apple-system,sans-serif`;
+    oc.fillStyle = '#ffffff';
+    oc.fillText(`${info.brand}  ${info.product}`, tx, ly + Math.round(56 * sc));
+
+    // Line 3: Shade name + color dot
+    const shadeY = ly + Math.round(86 * sc);
+    // Dot warna shade
+    oc.beginPath();
+    oc.arc(tx + Math.round(10*sc), shadeY - Math.round(8*sc), Math.round(10*sc), 0, Math.PI*2);
+    oc.fillStyle = info.hex;
+    oc.fill();
+    oc.strokeStyle = 'rgba(255,255,255,0.4)';
+    oc.lineWidth = Math.round(1.5*sc);
+    oc.stroke();
+    // Nama shade
+    oc.font = `500 ${Math.round(22 * sc)}px -apple-system,sans-serif`;
+    oc.fillStyle = 'rgba(255,255,255,0.85)';
+    oc.fillText(info.shade, tx + Math.round(28*sc), shadeY);
+  }
+
+  oc.restore();
+}
+
+// ── Capture (realtime mode) ────────────────────────────────────
 function capturePhoto(){
   flashEl.style.opacity='1';
   setTimeout(()=>flashEl.style.opacity='0',120);
@@ -715,29 +796,17 @@ function capturePhoto(){
   oc.save(); oc.scale(-1,1);
   oc.drawImage(canvas,-out.width,0,out.width,out.height);
   oc.restore();
-  // Watermark
-  const grad=oc.createLinearGradient(0,out.height-70,0,out.height);
-  grad.addColorStop(0,'rgba(13,0,8,0)'); grad.addColorStop(1,'rgba(13,0,8,0.8)');
-  oc.fillStyle=grad; oc.fillRect(0,out.height-70,out.width,70);
-  const lsz=40,lx=14,ly=out.height-lsz-12;
-  if(logoImg.complete&&logoImg.naturalWidth>0){
-    oc.save(); oc.beginPath(); oc.arc(lx+lsz/2,ly+lsz/2,lsz/2,0,Math.PI*2); oc.clip();
-    oc.drawImage(logoImg,lx,ly,lsz,lsz); oc.restore();
-  }
-  oc.fillStyle='rgba(240,40,122,0.95)';
-  oc.font='bold 13px system-ui';
-  oc.fillText('opshe.id', lx+lsz+8, ly+lsz/2+2);
-  if(activeShade){
-    oc.fillStyle='rgba(255,255,255,0.65)'; oc.font='10px system-ui';
-    oc.fillText((activeBrand||'')+'·'+(activeShade||''), lx+lsz+8, ly+lsz/2+16);
-  }
-  // Show modal / download
+
+  // Watermark proporsional
+  drawWatermark(oc, out.width, out.height);
+
   out.toBlob(blob=>{
     lastPhotoBlob=blob;
     const url=URL.createObjectURL(blob);
     const link=document.createElement('a');
     link.href=url;
-    link.download=`Opshe-Lips-${activeShade||'look'}.jpg`;
+    const nm = getShadeInfo();
+    link.download=`Opshe-${nm?nm.brand+'-'+nm.shade:'Lips'}.jpg`;
     document.body.appendChild(link); link.click(); document.body.removeChild(link);
     setTimeout(()=>URL.revokeObjectURL(url),1000);
   },'image/jpeg',0.93);
@@ -867,7 +936,7 @@ function renderProds(prods){
       renderProds(prods);
       renderShades(p.shades);
       selInfo.innerHTML='Pilih shade';
-      if(mode==='photo') applyPhotoLipFilter();
+      // Tidak panggil applyPhotoLipFilter di sini — tunggu shade dipilih
     };
     prodRow.appendChild(el);
   });
@@ -908,11 +977,21 @@ document.getElementById('photo-camera-btn').onclick=()=>{
 };
 document.getElementById('photo-download-btn').onclick=()=>{
   if(!photoCanvas.width) return;
-  photoCanvas.toBlob(blob=>{
+  // Buat canvas export dengan watermark
+  const out = document.createElement('canvas');
+  out.width = photoCanvas.width;
+  out.height = photoCanvas.height;
+  const oc = out.getContext('2d');
+  // Copy foto + filter yang sudah ada
+  oc.drawImage(photoCanvas, 0, 0);
+  // Tambah watermark proporsional
+  drawWatermark(oc, out.width, out.height);
+  out.toBlob(blob=>{
     const url=URL.createObjectURL(blob);
     const link=document.createElement('a');
     link.href=url;
-    link.download=`Opshe-Lips-${activeShade||'look'}.jpg`;
+    const nm = getShadeInfo();
+    link.download=`Opshe-${nm?nm.brand+'-'+nm.shade:'Lips'}.jpg`;
     document.body.appendChild(link); link.click(); document.body.removeChild(link);
     setTimeout(()=>URL.revokeObjectURL(url),1000);
   },'image/jpeg',0.93);
