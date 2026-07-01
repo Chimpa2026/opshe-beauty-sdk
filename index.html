@@ -403,7 +403,7 @@ let selectedHex = null;
 let faceOn = false;
 let fx = {feather:true, skinblend:true, gloss:false};
 let activeBrand = null, activeProd = null, activeShade = null;
-let photoOrigData = null, photoZones = null, photoW = 0, photoH = 0;
+let photoOrigData = null, photoZones = null, photoZonesBase = null, photoW = 0, photoH = 0;
 let faceMeshInstance = null, cameraInstance = null;
 let lastPhotoBlob = null;
 let BRANDS_DATA = [];
@@ -666,7 +666,8 @@ function detectFaceInPhoto(canvasEl){
   fm.onResults(res=>{
     loadEl.style.display='none';
     if(res.multiFaceLandmarks&&res.multiFaceLandmarks.length>0){
-      photoZones=computePhotoLipZones(res.multiFaceLandmarks[0],photoW,photoH);
+      photoZonesBase=computePhotoLipZones(res.multiFaceLandmarks[0],photoW,photoH);
+      photoZones={...photoZonesBase}; // copy zona asli
       facePill.textContent='✦ Wajah terdeteksi ✓'; facePill.classList.add('on');
       applyPhotoLipFilter();
     } else {
@@ -819,7 +820,7 @@ function showLanding(){
   panelEl.classList.remove('active');
   if(cameraInstance){cameraInstance.stop?.();cameraInstance=null;}
   mode=null; landmarks=null; faceOn=false;
-  photoOrigData=null; photoZones=null;
+  photoOrigData=null; photoZones=null; photoZonesBase=null;
 }
 
 async function startRealtime(){
@@ -1004,9 +1005,13 @@ document.getElementById('s-opacity').oninput=e=>{
 };
 document.getElementById('s-expand').oninput=e=>{
   expandFactor=1+(e.target.value/100)*0.15;
-  if(mode==='photo'&&photoZones){
-    photoZones.lrx=photoZones.lrx*(1+(e.target.value/100)*0.15);
-    photoZones.lry=photoZones.lry*(1+(e.target.value/100)*0.15);
+  if(mode==='photo'&&photoZonesBase){
+    // Hitung ulang dari zona BASE — identik dengan realtime
+    photoZones={
+      ...photoZonesBase,
+      lrx: photoZonesBase.lrx * expandFactor,
+      lry: photoZonesBase.lry * expandFactor,
+    };
     applyPhotoLipFilter();
   }
 };
